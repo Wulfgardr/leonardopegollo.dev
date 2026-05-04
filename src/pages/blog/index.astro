@@ -1,0 +1,36 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title="Blog" description="Note di lavoro su sanità pubblica, dati, software clinico locale.">
+  <section style="padding-top:80px">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Blog</div>
+        <h1 class="gradient-title">Note di lavoro.</h1>
+        <p class="lead">Italiano asciutto. Una cosa per volta. Niente lista della spesa.</p>
+        <p class="muted" style="font-size:13.5px; margin-top:14px">
+          Iscriviti al <a href="/rss.xml" style="color:var(--teal); text-decoration:underline">feed RSS</a> per non perderne uno.
+        </p>
+      </div>
+
+      <div class="post-list">
+        {posts.length === 0 && <p class="muted">Nessun post ancora pubblicato.</p>}
+        {posts.map((p) => (
+          <a class="post-link" href={`/blog/${p.slug}`}>
+            <div class="meta">{fmt(p.data.pubDate)}</div>
+            <h3>{p.data.title}</h3>
+            <p>{p.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

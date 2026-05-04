@@ -1,0 +1,110 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Ultimi tre post del blog, in ordine di data decrescente.
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+<BaseLayout
+  title="leonardopegollo.dev"
+  description="Sito personale di Leo Pegollo. Sanità pubblica, dati, software clinico locale, qualche riflessione."
+>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span> Aggiornato · Maggio 2026</span>
+      <h1 class="gradient-title" style="margin-top:18px">
+        Sanità pubblica, dati,<br/>software che resta a casa.
+      </h1>
+      <p class="lead" style="max-width:760px; margin-top:18px">
+        Mi chiamo Leo. Lavoro tra sanità pubblica territoriale, qualità e analisi dati.
+        Su questo sito raccolgo i progetti che mi sembrano avere senso e qualche nota su come ci sono arrivato.
+      </p>
+      <div style="display:flex; gap:12px; margin-top:30px; flex-wrap:wrap">
+        <a class="btn primary" href="/mediflow">Leggi il white paper di MediFlow →</a>
+        <a class="btn ghost" href="/blog">Vai al blog</a>
+        <a class="btn ghost" href="/about">Chi sono</a>
+      </div>
+
+      <div class="strip" aria-hidden="true">
+        <span><b>Local-first</b> · i dati clinici restano sul tuo computer</span>
+        <span class="sep">◇</span>
+        <span><b>Open source</b></span>
+        <span class="sep">◇</span>
+        <span><b>Niente analytics di terze parti</b> qui</span>
+        <span class="sep">◇</span>
+        <span><b>Niente sponsor</b></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="cosa-faccio">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="kicker">Cosa faccio</div>
+        <h2>Tre cose, niente di più.</h2>
+        <p class="lead">Ogni progetto qui presente nasce da un problema reale incontrato sul lavoro. Niente esercizi di stile.</p>
+      </div>
+
+      <div class="grid cols-3 reveal">
+        <a class="card" href="/mediflow" style="text-decoration:none">
+          <div class="icon">🩺</div>
+          <h3>MediFlow</h3>
+          <p>Cartella clinica locale, cifrata, con AI sul dispositivo. Standard ICD-11 e FHIR R4. Per il singolo professionista o piccoli ambulatori.</p>
+          <p class="muted" style="font-size:13px; margin-top:10px">Leggi il white paper →</p>
+        </a>
+        <div class="card">
+          <div class="icon">📊</div>
+          <h3>Analisi dati SSR</h3>
+          <p>Indicatori, query, dashboard per appropriatezza prescrittiva, farmaceutica territoriale e qualità dei dati. Note operative, non slide.</p>
+          <p class="muted" style="font-size:13px; margin-top:10px">In arrivo nel blog</p>
+        </div>
+        <div class="card">
+          <div class="icon">📝</div>
+          <h3>Note di lavoro</h3>
+          <p>Riflessioni asciutte su decisioni, audit, processi, accreditamento. Niente trend, niente buzz.</p>
+          <p class="muted" style="font-size:13px; margin-top:10px"><a href="/blog">Vai al blog →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section id="ultimi-post">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="kicker">Dal blog</div>
+          <h2>Ultimi appunti.</h2>
+        </div>
+        <div class="post-list reveal">
+          {posts.map((p) => (
+            <a class="post-link" href={`/blog/${p.slug}`}>
+              <div class="meta">{p.data.pubDate.toLocaleDateString('it-IT', { year:'numeric', month:'long', day:'numeric' })}</div>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.description}</p>
+            </a>
+          ))}
+        </div>
+        <div style="margin-top:20px">
+          <a class="btn ghost" href="/blog">Tutti i post →</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section id="chiusura">
+    <div class="wrap">
+      <div class="pull reveal" style="text-align:center">
+        «Scrivere quello che hai capito è il modo più rapido per scoprire cosa non avevi capito.»
+        <small>— Promemoria personale</small>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero{ padding:90px 0 60px; }
+  .hero h1{ margin:18px 0 18px; }
+</style>

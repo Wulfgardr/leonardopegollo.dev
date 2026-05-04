@@ -1,0 +1,26 @@
+# Dipendenze
+node_modules/
+
+# Output di build
+dist/
+.astro/
+
+# Variabili d'ambiente locali (non andranno in produzione)
+.env
+.env.production
+.env.local
+
+# Cache e log
+.cache/
+.tmp/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/

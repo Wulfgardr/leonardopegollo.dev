@@ -1,0 +1,64 @@
+---
+import '~/styles/global.css';
+import Scene from '~/components/Scene.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Se true non mostra footer (utile per landing molto pulite). */
+  hideFooter?: boolean;
+}
+
+const {
+  title,
+  description = 'Sito personale di Leo Pegollo. Note, progetti, white paper.',
+  hideFooter = false,
+} = Astro.props;
+
+const fullTitle = title.includes('leonardopegollo.dev') ? title : `${title} · leonardopegollo.dev`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+---
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#0a1018" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+  <Scene />
+  <Nav />
+
+  <main>
+    <slot />
+  </main>
+
+  {!hideFooter && <Footer />}
+
+  <script>
+    // Reveal-on-scroll condiviso. Si applica a qualunque .reveal nel sito.
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>

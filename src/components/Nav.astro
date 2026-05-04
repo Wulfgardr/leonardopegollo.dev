@@ -1,0 +1,22 @@
+---
+// Navigazione globale. Si chiarisce in base al pathname corrente.
+const path = Astro.url.pathname;
+function active(prefix: string) {
+  if (prefix === '/') return path === '/' ? 'page' : null;
+  return path.startsWith(prefix) ? 'page' : null;
+}
+---
+<header class="topbar">
+  <div class="nav">
+    <a class="brand" href="/">
+      <span class="brand-mark"></span>
+      <span class="brand-name">leonardopegollo<span class="muted">.dev</span></span>
+    </a>
+    <nav class="links" aria-label="Navigazione principale">
+      <a href="/" aria-current={active('/')}>Home</a>
+      <a href="/mediflow" aria-current={active('/mediflow')}>MediFlow</a>
+      <a href="/blog" aria-current={active('/blog')}>Blog</a>
+      <a href="/about" aria-current={active('/about')}>Chi sono</a>
+    </nav>
+  </div>
+</header>
