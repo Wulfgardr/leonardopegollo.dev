@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
   return rss({
-    title: 'leonardopegollo.dev — Blog',
+    title: 'leonardopegollo.dev · Blog',
     description: 'Note di lavoro su sanità pubblica, dati, software clinico locale.',
     site: context.site,
     items: posts

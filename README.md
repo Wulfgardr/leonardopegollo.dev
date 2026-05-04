@@ -2,7 +2,7 @@
 
 Sito personale. Home, white paper di MediFlow, blog. Statico, costruito con Astro, pubblicato su Cloudflare Pages.
 
-Dominio: **leonardopegollo.dev** (registrato su Cloudflare Registrar — la zona DNS è già gestita da Cloudflare).
+Dominio: **leonardopegollo.dev** (registrato su Cloudflare Registrar, zona DNS già gestita da Cloudflare).
 
 ---
 
