@@ -1,0 +1,105 @@
+---
+// Componente social links riutilizzabile.
+// Usa loghi SVG inline (no icone esterne) coerenti con lo stile liquid glass.
+
+interface Props {
+  /** Variante visiva: "pills" (pillole con handle), "icons" (solo icone tonde, compatto). */
+  variant?: 'pills' | 'icons';
+  /** Allineamento: "start" (default), "center". */
+  align?: 'start' | 'center';
+}
+
+const { variant = 'pills', align = 'start' } = Astro.props;
+
+const links = [
+  {
+    name: 'GitHub',
+    handle: '@Wulfgardr',
+    url: 'https://github.com/Wulfgardr',
+    aria: 'Apri il profilo GitHub di Leonardo Pegollo',
+  },
+  {
+    name: 'X',
+    handle: '@leonardopegollo',
+    url: 'https://x.com/leonardopegollo',
+    aria: 'Apri il profilo X di Leonardo Pegollo',
+  },
+  {
+    name: 'Email',
+    handle: 'hello@leonardopegollo.dev',
+    url: 'mailto:hello@leonardopegollo.dev',
+    aria: 'Scrivi una email',
+  },
+];
+---
+<ul class={`social-links social-links--${variant} social-links--${align}`} aria-label="Profili social e contatti">
+  {links.map((l) => (
+    <li>
+      <a href={l.url} target={l.url.startsWith('mailto:') ? undefined : '_blank'} rel="noopener noreferrer" aria-label={l.aria}>
+        <span class="icon" aria-hidden="true">
+          {l.name === 'GitHub' && (
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.16-.02-2.1-3.2.69-3.87-1.36-3.87-1.36-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.69.08-.69 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.24.72-1.52-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/>
+            </svg>
+          )}
+          {l.name === 'X' && (
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+              <path d="M18.244 2H21.5l-7.5 8.57L23 22h-6.594l-5.16-6.74L5.34 22H2.083l8.024-9.166L1.5 2h6.75l4.66 6.16L18.244 2zm-1.156 18h1.83L7.013 4h-1.96l12.035 16z"/>
+            </svg>
+          )}
+          {l.name === 'Email' && (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="M3 7l9 6 9-6"/>
+            </svg>
+          )}
+        </span>
+        {variant === 'pills' && <span class="label">{l.handle}</span>}
+        <span class="visually-hidden">{l.name}: {l.handle}</span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .social-links{
+    list-style:none; padding:0; margin:0;
+    display:flex; flex-wrap:wrap; gap:8px;
+  }
+  .social-links--center{ justify-content:center; }
+  .social-links a{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:9px 14px; border-radius:999px;
+    background:var(--glass);
+    border:1px solid var(--glass-edge);
+    color:var(--ink-1); text-decoration:none;
+    font-size:13.5px; line-height:1;
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    transition:.25s ease;
+  }
+  .social-links a:hover{
+    color:var(--ink-0);
+    background:var(--glass-strong);
+    border-color:var(--line-strong);
+    transform:translateY(-1px);
+  }
+  .social-links .icon{
+    display:inline-grid; place-items:center;
+    width:22px; height:22px;
+    color:var(--ink-1);
+    transition:color .25s ease;
+  }
+  .social-links a:hover .icon{ color:var(--teal); }
+
+  /* Variante "icons": solo icone tonde, compatte */
+  .social-links--icons a{
+    padding:0; width:42px; height:42px; justify-content:center;
+  }
+  .social-links--icons .label{ display:none; }
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+    clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+</style>

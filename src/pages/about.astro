@@ -1,51 +1,136 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import SocialLinks from '~/components/SocialLinks.astro';
 ---
 <BaseLayout
   title="Chi sono"
-  description="Bio di Leo Pegollo. Sanità pubblica territoriale, qualità, analisi dati, software clinico locale."
+  description="Leonardo Pegollo: medico di distretto a Milano, sanità territoriale, pazienti complessi, domiciliarità. E un applicativo clinico che vuole stare dalla parte di chi lavora."
 >
   <section style="padding-top:80px">
     <div class="wrap-narrow">
-      <div class="kicker">Chi sono</div>
-      <h1 class="gradient-title">Leo Pegollo</h1>
+
+      <!-- Intestazione -->
+      <div class="kicker">Bio</div>
+      <h1 class="gradient-title">Leonardo Pegollo</h1>
       <p class="lead">
-        Lavoro all'incrocio fra sanità pubblica territoriale, qualità clinica, analisi dati nel SSR
-        e software che aiuta il professionista a fare meno fatica senza chiedergli di affidare i dati a terzi.
+        Medico di distretto a Milano. Sanità territoriale, pazienti complessi,
+        domiciliarità. Le mani anche dentro il codice, perché alla fine
+        anche quello è un modo di curarsi del lavoro.
       </p>
+
+      <div class="meta-line">
+        <span>📍 Milano</span>
+        <span>·</span>
+        <span>🏥 Medico di distretto</span>
+        <span>·</span>
+        <span>🎓 Master gestione aziende sociosanitarie</span>
+      </div>
+
+      <div style="margin-top:20px">
+        <SocialLinks variant="pills" />
+      </div>
 
       <div class="divider"></div>
 
-      <h2>Quello che mi interessa davvero</h2>
+      <!-- Cosa faccio -->
+      <h2>Cosa faccio per lavoro</h2>
       <p>
-        Strumenti che restano sotto il controllo di chi li usa. Decisioni cliniche e organizzative
-        sostenute da dati verificabili, non da impressioni. Standard aperti come ICD-11 e FHIR.
-        Privacy come vincolo di progetto, non come banner sui cookie.
+        Faccio il medico di distretto. Da sempre lavoro su <b>sanità territoriale</b>,
+        <b>pazienti complessi</b> e <b>domiciliarità</b>: la parte di sistema dove la
+        cura non si esaurisce con la prescrizione, ma comincia lì. È un mestiere fatto
+        di percorsi, di reti, di transizioni fra ospedale e territorio, di tempo speso
+        a tenere insieme pezzi che altrove si parlano poco.
+      </p>
+      <p>
+        Sono fresco di <b>master in gestione delle aziende sociosanitarie</b>. Mi ha
+        lasciato addosso un certo modo di guardare i processi: cercare i punti dove
+        un servizio si rompe, capire chi paga davvero quel costo, provare a
+        ridisegnarlo prima che il costo diventi cronico.
       </p>
 
-      <h2>Quello su cui sto lavorando</h2>
+      <!-- La cosa che mi diverte di più -->
+      <h2>La cosa che mi diverte di più</h2>
       <p>
-        <a href="/mediflow">MediFlow</a> è il progetto di prodotto che curo da più tempo:
-        una cartella clinica locale, cifrata, con AI sul dispositivo. Il <a href="/mediflow">white paper</a>
-        racconta cosa è, come funziona e dove va.
+        C'è qualcosa di intrigante nel mettere le mani — contemporaneamente — nella
+        operatività clinica e dentro un applicativo. Ragionare su cosa fare, come
+        farlo, e <b>come renderlo pratico</b>. Inizialmente per me. Poi, se viene
+        bene, per chiunque voglia uno strumento per gestire la propria attività clinica.
       </p>
       <p>
-        Sul <a href="/blog">blog</a> raccolgo note operative su appropriatezza prescrittiva,
-        farmaceutica territoriale, qualità dei dati e progettazione di software clinico.
+        È anche il principio di una buona pratica di <em>service redesign</em>:
+        prototipi che giochi con chi ci lavora ogni giorno, in modo quasi ricorsivo.
+        Lo faccio anche con me stesso, e lo posso raccontare con cognizione di causa.
       </p>
 
+      <!-- Perché un sito -->
+      <h2>Perché un sito</h2>
+      <p>
+        Perché fermarsi a costruire l'applicativo "per sé" sarebbe un peccato.
+        Studiando si trovano riflessioni utili — qualche volta meravigliose — su
+        come gli applicativi medici vengano <b>pensati</b>, <b>sviluppati</b>,
+        <b>strutturati</b>, <b>distribuiti</b> e a volte <b>mal usati</b>.
+        Privacy, topologia delle app, flussistica dei dati, regole, agganci alle
+        infrastrutture regionali: la parte non glamour del codice in sanità.
+      </p>
+      <p>
+        Vorrei provare a scrivere di cosa significa fare sanità nell'epoca del
+        <b>«codice democratico»</b> — accessibile a chiunque lo voglia praticare —
+        e del <b>rigore poco democratico</b> ma necessario che deve circondarlo.
+        I dati clinici non sono opinioni. Le scelte di topologia non sono dettagli
+        di stile. Le regole non sono ostacoli al prodotto: sono il prodotto.
+      </p>
+
+      <!-- Cosa troverai qui -->
+      <h2>Cosa troverai qui</h2>
+      <p>
+        Per ora il <a href="/mediflow">white paper di MediFlow</a> (nome temporaneo,
+        lo so). Da qui in avanti il <a href="/blog">blog</a> raccoglierà note di
+        lavoro su privacy, topologia delle app cliniche, governance dei flussi,
+        prototipizzazione partecipata, qualità dei dati, integrazione con SISS/FSE,
+        e qualche pezzo più libero su come si studia, si decide e si sbaglia in
+        sanità territoriale.
+      </p>
+      <p>
+        Niente cadenza fissa. Niente clickbait. Quando ho qualcosa da dire che
+        regge alla rilettura, lo scrivo.
+      </p>
+
+      <!-- Strumenti -->
+      <h2>Strumenti che uso</h2>
+      <p>
+        SQL, Python e R per i dati. TypeScript, Next.js e Astro per quello che
+        finisce online. Markdown e cartelle ben ordinate per le note: niente
+        strumenti proprietari di nicchia, niente lock-in se posso evitarlo.
+      </p>
+
+      <!-- Come scrivermi -->
       <h2>Come scrivermi</h2>
       <p>
-        Mi trovi all'indirizzo <a href="mailto:hello@leonardopegollo.dev">hello@leonardopegollo.dev</a>.
-        Se hai una domanda specifica vai dritto al punto, scrivimi anche solo due righe.
+        Tre canali, in ordine di formalità decrescente: email, X, GitHub.
+      </p>
+      <div style="margin-top:14px">
+        <SocialLinks variant="pills" />
+      </div>
+      <p style="margin-top:18px">
+        Vai dritto al punto: due righe vanno bene quanto venti, basta che si
+        capisca cosa cerchi. Rispondo nel giro di pochi giorni quando non sono
+        in trincea operativa.
       </p>
 
       <div class="divider"></div>
-
-      <p class="muted" style="font-size:13.5px">
-        Questa pagina è un segnaposto: sostituiscila con la tua versione definitiva
-        modificando il file <code>src/pages/about.astro</code>.
+      <p class="muted" style="font-size:13px">
+        Questa pagina è scritta in prima persona da me e poi riasciugata.
+        Se trovi un'inesattezza nei dettagli professionali, scrivimi.
       </p>
+
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .meta-line{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin:18px 0 0;
+    font-size:13.5px; color:var(--ink-2);
+  }
+</style>

@@ -1,4 +1,5 @@
 ---
+import SocialLinks from '~/components/SocialLinks.astro';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
@@ -10,9 +11,13 @@ const year = new Date().getFullYear();
           <span class="brand-name">leonardopegollo<span class="muted">.dev</span></span>
         </a>
         <p style="max-width:480px; margin-top:14px">
-          Sito personale. Note, progetti, white paper, qualche riflessione.
-          Nessun cookie di tracciamento. Nessun analytics di terze parti.
+          Sito personale di Leonardo Pegollo. Medico di distretto a Milano,
+          mani anche dentro il codice. Nessun cookie di tracciamento, nessun
+          analytics di terze parti.
         </p>
+        <div style="margin-top:18px">
+          <SocialLinks variant="pills" />
+        </div>
       </div>
       <div>
         <h5>Sezioni</h5>
@@ -22,14 +27,12 @@ const year = new Date().getFullYear();
         <p><a href="/about">Chi sono</a></p>
       </div>
       <div>
-        <h5>Altrove</h5>
-        <p><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></p>
-        <p><a href="mailto:hello@leonardopegollo.dev">Email</a></p>
+        <h5>Sottoscrivi</h5>
         <p><a href="/rss.xml">RSS del blog</a></p>
       </div>
     </div>
     <div class="bottom">
-      <span>© {year} Leo Pegollo · contenuti distribuiti come progetto personale</span>
+      <span>© {year} Leonardo Pegollo · contenuti distribuiti come progetto personale</span>
       <span>Costruito con Astro · pubblicato su Cloudflare Pages</span>
     </div>
   </div>

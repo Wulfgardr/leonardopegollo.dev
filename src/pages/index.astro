@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import SocialLinks from '~/components/SocialLinks.astro';
 import { getCollection } from 'astro:content';
 
 // Ultimi tre post del blog, in ordine di data decrescente.
@@ -10,32 +11,85 @@ const posts = (await getCollection('blog'))
 ---
 <BaseLayout
   title="leonardopegollo.dev"
-  description="Sito personale di Leo Pegollo. Sanità pubblica, dati, software clinico locale, qualche riflessione."
+  description="Leonardo Pegollo: medico di distretto a Milano, mani anche dentro il codice. Sanità territoriale, dati, prodotto clinico locale."
 >
   <section class="hero">
     <div class="wrap">
-      <span class="eyebrow"><span class="dot"></span> Aggiornato · Maggio 2026</span>
+      <span class="eyebrow"><span class="dot"></span> Leonardo Pegollo · Milano · Maggio 2026</span>
       <h1 class="gradient-title" style="margin-top:18px">
-        Sanità pubblica, dati,<br/>software che resta a casa.
+        Medico di distretto, mani anche dentro il codice.
       </h1>
       <p class="lead" style="max-width:760px; margin-top:18px">
-        Mi chiamo Leo. Lavoro tra sanità pubblica territoriale, qualità e analisi dati.
-        Su questo sito raccolgo i progetti che mi sembrano avere senso e qualche nota su come ci sono arrivato.
+        Mi chiamo Leo. Faccio il medico di distretto a Milano: sanità territoriale,
+        pazienti complessi, domiciliarità — la parte di sistema dove la cura non finisce
+        con la prescrizione, ma comincia lì. In parallelo metto le mani dentro
+        <a href="/mediflow" style="color:var(--teal); text-decoration:underline; text-decoration-color:rgba(95,227,199,.4); text-underline-offset:3px">MediFlow</a>
+        (nome temporaneo), un applicativo clinico nato per me e — aspirazionalmente — per
+        chiunque voglia uno strumento di lavoro che non chieda di affidare i dati a terzi.
+      </p>
+      <p class="lead muted" style="max-width:760px; margin-top:8px">
+        Qui scrivo di cosa sia la sanità nell'epoca del «codice democratico»,
+        e del rigore poco democratico che deve circondarla.
       </p>
       <div style="display:flex; gap:12px; margin-top:30px; flex-wrap:wrap">
         <a class="btn primary" href="/mediflow">Leggi il white paper di MediFlow →</a>
         <a class="btn ghost" href="/blog">Vai al blog</a>
-        <a class="btn ghost" href="/about">Chi sono</a>
+        <a class="btn ghost" href="/about">Bio completa</a>
+      </div>
+
+      <div style="margin-top:24px">
+        <SocialLinks variant="pills" />
       </div>
 
       <div class="strip" aria-hidden="true">
-        <span><b>Local-first</b> · i dati clinici restano sul tuo computer</span>
+        <span><b>Local-first</b> · i dati clinici restano sul dispositivo</span>
         <span class="sep">◇</span>
         <span><b>Open source</b></span>
         <span class="sep">◇</span>
         <span><b>Niente analytics di terze parti</b> qui</span>
         <span class="sep">◇</span>
         <span><b>Niente sponsor</b></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="bio">
+    <div class="wrap">
+      <div class="bio-grid reveal">
+        <div class="bio-side">
+          <img class="bio-photo" src="/avatar.svg" alt="Foto di Leonardo Pegollo" width="200" height="200" loading="lazy" />
+          <p class="bio-role">Leonardo Pegollo</p>
+          <p class="bio-tag">Medico di distretto · Milano</p>
+          <ul class="bio-meta">
+            <li><span class="muted">Mestiere</span> sanità territoriale</li>
+            <li><span class="muted">Studi</span> master gestione aziende sociosanitarie</li>
+            <li><span class="muted">Strumenti</span> SQL · Python · R · Astro</li>
+          </ul>
+          <div style="margin-top:18px">
+            <SocialLinks variant="icons" align="center" />
+          </div>
+        </div>
+        <div class="bio-body">
+          <div class="kicker">Bio</div>
+          <h2>In due paragrafi.</h2>
+          <p>
+            Faccio il medico di distretto a Milano. Da sempre lavoro su sanità
+            territoriale, pazienti complessi e domiciliarità: la parte di sistema dove
+            la cura non si esaurisce nella prescrizione, ma comincia lì. Sono fresco di
+            master in <em>gestione delle aziende sociosanitarie</em> — un master che mi
+            ha lasciato addosso un certo modo di guardare i processi.
+          </p>
+          <p>
+            C'è qualcosa di intrigante nel mettere le mani contemporaneamente
+            nell'operatività clinica e dentro un applicativo: ragionare su cosa fare,
+            come farlo, e come renderlo pratico. Per me, e — se viene bene — per chi
+            voglia uno strumento simile per la propria attività clinica. Da qui
+            <a href="/mediflow">MediFlow</a> e da qui questo sito.
+          </p>
+          <p class="muted" style="font-size:14.5px">
+            La <a href="/about">versione lunga della bio</a> è nella pagina dedicata.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -107,4 +161,59 @@ const posts = (await getCollection('blog'))
 <style>
   .hero{ padding:90px 0 60px; }
   .hero h1{ margin:18px 0 18px; }
+
+  /* === Sezione bio (home) === */
+  .bio-grid{
+    display:grid;
+    grid-template-columns: 280px 1fr;
+    gap:36px;
+    align-items:start;
+    padding:32px;
+    border-radius:var(--r-3);
+    background:var(--glass);
+    border:1px solid var(--glass-edge);
+    backdrop-filter:blur(28px) saturate(160%);
+    -webkit-backdrop-filter:blur(28px) saturate(160%);
+  }
+  @media (max-width:780px){
+    .bio-grid{ grid-template-columns:1fr; gap:24px; padding:24px; }
+  }
+  .bio-side{ text-align:center; }
+  @media (max-width:780px){ .bio-side{ text-align:left; } }
+  .bio-photo{
+    width:160px; height:160px; border-radius:50%;
+    margin:0 auto 18px; display:block;
+    object-fit:cover;
+    background:#0a1018;
+    padding:3px;
+    background-image:linear-gradient(#0a1018, #0a1018), conic-gradient(from 220deg, #5fe3c7, #7cc7ff, #b59bff, #5fe3c7);
+    background-origin:border-box;
+    background-clip:content-box, border-box;
+    box-shadow:0 0 60px rgba(124,199,255,.25), 0 20px 50px -20px rgba(0,0,0,.6);
+  }
+  @media (max-width:780px){ .bio-photo{ margin:0 0 18px; } }
+  .bio-role{
+    font-size:18px; font-weight:600; color:var(--ink-0); margin:0 0 4px;
+  }
+  .bio-tag{
+    font-size:13px; color:var(--ink-2); margin:0 0 18px; letter-spacing:.2px;
+  }
+  .bio-meta{
+    list-style:none; padding:0; margin:0;
+    text-align:left; display:flex; flex-direction:column; gap:8px;
+    font-size:13.5px; color:var(--ink-1);
+    border-top:1px solid var(--line);
+    padding-top:18px;
+  }
+  .bio-meta span{
+    display:inline-block; min-width:78px;
+    font-size:11.5px; text-transform:uppercase; letter-spacing:1.2px;
+    margin-right:6px;
+  }
+  .bio-body h2{ margin-top:8px; }
+  .bio-body p{ margin-bottom:14px; }
+  .bio-body a{
+    color:var(--teal); text-decoration:underline;
+    text-decoration-color:rgba(95,227,199,.4); text-underline-offset:3px;
+  }
 </style>

@@ -1,5 +1,8 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+// import sitemap from '@astrojs/sitemap';
+// Sitemap temporaneamente disabilitato: bug noto in @astrojs/sitemap@3.2.x con Astro 4
+// (Cannot read properties of undefined reading 'reduce').
+// Si riattiva quando si aggiorna a @astrojs/sitemap@^3.5.0.
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,9 +14,9 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
   integrations: [
-    sitemap({
-      changefreq: 'monthly',
-      priority: 0.7,
-    }),
+    // sitemap({
+    //   changefreq: 'monthly',
+    //   priority: 0.7,
+    // }),
   ],
 });
