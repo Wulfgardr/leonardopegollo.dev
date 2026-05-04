@@ -1,0 +1,16 @@
+{
+  // Configurazione Cloudflare Workers per leonardopegollo.dev
+  // Questo file dice a Cloudflare di servire il sito come Static Assets
+  // dalla cartella `dist/` generata da `astro build`.
+  // Documentazione: https://developers.cloudflare.com/workers/static-assets/
+
+  "name": "leonardopegollo-dev",
+  "compatibility_date": "2024-12-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
