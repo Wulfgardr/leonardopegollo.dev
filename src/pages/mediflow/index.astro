@@ -29,8 +29,8 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
         Una cartella clinica<br/>che resta a casa tua.
       </h1>
       <p class="lead" style="max-width:760px; margin-top:18px">
-        MediFlow è una cartella clinica per il singolo professionista e per piccoli ambulatori.
-        I dati restano sul computer del medico, cifrati. L'intelligenza artificiale gira sullo stesso
+        MediFlow è una cartella clinica per chi esercita in autonomia e per piccoli ambulatori.
+        I dati restano sul computer di chi cura, cifrati. L'intelligenza artificiale gira sullo stesso
         dispositivo, senza chiamare servizi remoti. Lo standard clinico è quello internazionale:
         ICD-11 per le diagnosi, FHIR per l'esportazione.
       </p>
@@ -69,8 +69,8 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
         <div class="kicker">Cos'è</div>
         <h2>Una cartella clinica, niente di più. Niente di meno.</h2>
         <p class="lead">
-          MediFlow gestisce anagrafica, diario clinico, terapie, controlli, osservazioni e documenti dei pazienti.
-          Lo fa senza chiedere al professionista di affidare i dati a un servizio remoto e senza promettere
+          MediFlow gestisce anagrafica, diario clinico, terapie, controlli, osservazioni e documenti delle persone in cura.
+          Lo fa senza chiedere a chi cura di affidare i dati a un servizio remoto e senza promettere
           miracoli che non può mantenere.
         </p>
       </div>
@@ -80,14 +80,14 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
         <div class="card"><div class="icon">🧠</div><h3>AI che lavora con te</h3><p>Riassunti documentali, suggerimenti di codifica ICD-11 a partire dai referti, lettura testuale dei PDF. Sempre revisionabile, mai automatica al buio.</p></div>
         <div class="card"><div class="icon">🔒</div><h3>Una serratura sola: il PIN</h3><p>Senza il tuo PIN il database non è leggibile. Nemmeno per chi ha scritto il software.</p></div>
         <div class="card"><div class="icon">📦</div><h3>Salvataggi automatici</h3><p>Backup notturno governato, ritenzione configurabile, manifesto e controllo preliminare prima del ripristino.</p></div>
-        <div class="card"><div class="icon">🏥</div><h3>Multi-ambulatorio</h3><p>Più sedi e reparti distinguibili a colpo d'occhio. Permette al singolo medico di gestire più contesti senza confondere i pazienti.</p></div>
+        <div class="card"><div class="icon">🏥</div><h3>Multi-ambulatorio</h3><p>Più sedi e reparti distinguibili a colpo d'occhio. Permette di gestire più contesti senza confondere le persone in cura.</p></div>
         <div class="card"><div class="icon">🔁</div><h3>Esci quando vuoi</h3><p>Esportazione FHIR R4 della storia clinica. Niente trappola: i tuoi dati restano riusabili anche fuori da MediFlow.</p></div>
       </div>
 
       <div class="divider"></div>
 
       <div class="pull reveal">
-        «MediFlow è uno strumento. Il titolare del trattamento resta il professionista.
+        «MediFlow è uno strumento. Il titolare del trattamento resta chi cura.
         Il software non sostituisce le sue responsabilità: gli dà solo gli attrezzi giusti per esercitarle.»
         <small>Principio operativo</small>
       </div>
@@ -112,7 +112,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 
         <div class="panel active" data-panel="medico">
           <div class="grid cols-2">
-            <div class="card"><h3>Cosa vede ogni giorno</h3><p>La scheda del paziente con la storia coerente: diagnosi codificate, terapie con principio attivo e ATC, controlli passati e in agenda, osservazioni con unità di misura standard, allegati con riassunto.</p></div>
+            <div class="card"><h3>Cosa vede ogni giorno</h3><p>La scheda clinica con la storia coerente: diagnosi codificate, terapie con principio attivo e ATC, controlli passati e in agenda, osservazioni con unità di misura standard, allegati con riassunto.</p></div>
             <div class="card"><h3>Cosa cambia rispetto al solito</h3><p>I dati non sono in un servizio remoto: sono nel suo computer. L'AI lo aiuta ma non scrive nulla in scheda senza una sua conferma esplicita, soprattutto su diagnosi e terapie.</p></div>
             <div class="card"><h3>Cosa non gli viene chiesto</h3><p>Niente account su servizi terzi, niente abbonamenti per usare l'AI, niente caricamento di referti sul cloud. Il PIN è l'unica credenziale che deve ricordare.</p></div>
             <div class="card"><h3>Cosa porta via se cambia idea</h3><p>Un pacchetto FHIR R4 con anagrafica, diagnosi, visite, terapie e osservazioni. Standard riconosciuto, leggibile da altri sistemi.</p></div>
@@ -121,7 +121,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 
         <div class="panel" data-panel="paziente">
           <div class="grid cols-2">
-            <div class="card"><h3>Dove finiscono i suoi dati</h3><p>Sul computer del professionista che ha in cura il paziente, cifrati. Non vengono condivisi con servizi remoti né usati per addestrare modelli.</p></div>
+            <div class="card"><h3>Dove finiscono i suoi dati</h3><p>Sul computer di chi ha in carico la persona, cifrati. Non vengono condivisi con servizi remoti né usati per addestrare modelli.</p></div>
             <div class="card"><h3>Quali diritti restano garantiti</h3><p>Diritto all'oblio (Art. 17 GDPR) con cancellazione governata. Portabilità dei dati (Art. 20) tramite esportazione in formato standard.</p></div>
             <div class="card"><h3>Cosa succede se il computer viene rubato</h3><p>Il database resta cifrato a riposo. Senza il PIN nessuno può leggerlo, nemmeno con il file in mano. La chiave non è sul disco.</p></div>
             <div class="card"><h3>Chi è responsabile</h3><p>Il professionista resta titolare del trattamento. MediFlow è lo strumento, non l'esecutore.</p></div>
@@ -153,7 +153,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
         <div class="card"><h3>① Locale prima di tutto <span class="tag">default</span></h3><p>I dati clinici non escono dal computer per impostazione predefinita. Niente telemetria, niente sincronizzazione automatica, niente chiamate AI verso servizi esterni. Se una funzione richiedesse un canale remoto, viene aggiunta in modo esplicito, documentata e disattivabile.</p></div>
         <div class="card"><h3>② Zero conoscenza a riposo <span class="tag">cifratura</span></h3><p>I campi sensibili sono cifrati lato client con AES-256-GCM prima della scrittura. Il PIN non viene mai salvato. La chiave principale viene derivata dal PIN, custodita in memoria solo durante la sessione e mai sul disco. Nessun ripristino possibile in caso di smarrimento del PIN: è una garanzia, non un bug.</p></div>
         <div class="card"><h3>③ Standard aperti <span class="tag">interoperabilità</span></h3><p>ICD-11 per le diagnosi, ATC e AIC per i farmaci, LOINC e UCUM per le osservazioni, FHIR R4 per l'esportazione. Niente formato proprietario quando esiste un formato condiviso a livello internazionale.</p></div>
-        <div class="card"><h3>④ AI revisionabile <span class="tag">no automatismi</span></h3><p>I modelli locali aiutano nella sintesi, nell'OCR e nei suggerimenti. Non scrivono mai diagnosi o terapie senza una conferma esplicita del professionista. L'unica eccezione documentata è l'autofill su codici ICD letteralmente presenti nel documento sorgente.</p></div>
+        <div class="card"><h3>④ AI revisionabile <span class="tag">no automatismi</span></h3><p>I modelli locali aiutano nella sintesi, nell'OCR e nei suggerimenti. Non scrivono mai diagnosi o terapie senza una conferma esplicita di chi esercita. L'unica eccezione documentata è l'autofill su codici ICD letteralmente presenti nel documento sorgente.</p></div>
       </div>
     </div>
   </section>
@@ -165,7 +165,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
         <div class="kicker">Topologia</div>
         <h2>Dove vivono i dati. Chi parla con chi.</h2>
         <p class="lead">
-          Il sistema gira sul Mac del professionista. Il browser e i client Apple parlano con un'unica
+          Il sistema gira sul Mac di chi cura. Il browser e i client Apple parlano con un'unica
           applicazione locale. I servizi opzionali (AI, ricerca diagnosi, redazione) sono sempre su localhost.
         </p>
       </div>
@@ -306,7 +306,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
       </div>
 
       <div class="grid cols-3 reveal" style="margin-top:30px">
-        <div class="card"><h3>Un nodo, non un servizio</h3><p>Il Mac del professionista è il nodo autorevole: contiene il database, espone l'API e orchestra l'AI. Niente server centrale.</p></div>
+        <div class="card"><h3>Un nodo, non un servizio</h3><p>Il Mac di chi cura è il nodo autorevole: contiene il database, espone l'API e orchestra l'AI. Niente server centrale.</p></div>
         <div class="card"><h3>Tre superfici API distinte</h3><p>Web API per il browser (sessione), Native API versionata per i client Apple (token), Network API opzionale per i client paired in LAN fidata (capability + versione).</p></div>
         <div class="card"><h3>Servizi locali allowlisted</h3><p>I proxy verso AI e ICD-11 accettano solo destinazioni localhost. Nessun rischio di SSRF verso indirizzi remoti.</p></div>
       </div>
@@ -326,7 +326,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
         <div class="flow"><div class="step">FLUSSO · 01</div><div class="body"><h4>Sblocco e attivazione delle chiavi</h4><p>Il professionista inserisce il PIN. Dal PIN si deriva una chiave intermedia, che a sua volta sblocca la chiave principale, mantenuta in memoria solo per la sessione attiva. Nessuna delle due viene salvata sul disco.</p></div></div>
         <div class="flow"><div class="step">FLUSSO · 02</div><div class="body"><h4>Scrittura clinica dal browser</h4><p>I campi sensibili (note, allegati, riassunti AI) vengono cifrati nel browser prima di partire verso l'API. Sul disco arrivano solo stringhe nella forma <code>ENC:iv:cipher</code>. Il server non vede mai il testo in chiaro.</p></div></div>
         <div class="flow"><div class="step">FLUSSO · 03</div><div class="body"><h4>Lettura/scrittura dal client macOS nativo</h4><p>Il client Apple cifra in locale, parla in HTTPS verso il proxy TLS sulla porta 3443, presenta un token bearer su un'API versionata <code>/api/v1/*</code>. Niente scraping della UI, niente dipendenza dai dettagli interni del web.</p></div></div>
-        <div class="flow"><div class="step">FLUSSO · 04</div><div class="body"><h4>Documento → OCR → sintesi → archivio</h4><p>Il referto caricato passa al servizio OCR locale (Ollama), che lo rende testo. Un secondo passaggio AI estrae sintesi, qualità del segnale e codici ICD esplicitamente presenti. Il risultato viene cifrato e attaccato al paziente come allegato + artefatto di evidenza.</p></div></div>
+        <div class="flow"><div class="step">FLUSSO · 04</div><div class="body"><h4>Documento → OCR → sintesi → archivio</h4><p>Il referto caricato passa al servizio OCR locale (Ollama), che lo rende testo. Un secondo passaggio AI estrae sintesi, qualità del segnale e codici ICD esplicitamente presenti. Il risultato viene cifrato e attaccato alla scheda clinica come allegato + artefatto di evidenza.</p></div></div>
         <div class="flow"><div class="step">FLUSSO · 05</div><div class="body"><h4>Smart import revisionabile</h4><p>Dal profilo paziente l'AI propone diagnosi e terapie a partire dalle fonti già presenti (note, diario, allegati analizzati). Le proposte sono associate a evidenze e attendono conferma esplicita. Nessuna scrittura in scheda senza un click consapevole.</p></div></div>
         <div class="flow"><div class="step">FLUSSO · 06</div><div class="body"><h4>Modalità Mac home-base con client paired</h4><p>Se attivata in modo esplicito, la modalità rete consente a un iPhone o iPad accoppiato di consultare e aggiornare in modo limitato profilo, diario, terapie, controlli e osservazioni. Ogni scrittura richiede capability dedicate, sessione operatore e numero di versione: in caso di conflitto il server risponde con un esplicito errore di versione.</p></div></div>
       </div>
@@ -404,7 +404,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 
       <div class="grid cols-2 reveal">
         <div class="card"><h3>Niente sincronizzazione cloud completa</h3><p>Non sincronizziamo le cartelle attraverso Internet con un servizio centrale. La modalità Mac home-base copre solo la rete locale fidata, in opt-in, con scrittura limitata e versionata.</p></div>
-        <div class="card"><h3>Niente multi-tenant centralizzato</h3><p>MediFlow non è un servizio condiviso fra strutture. È un'app per il singolo professionista o per piccoli ambulatori che operano sotto la sua responsabilità.</p></div>
+        <div class="card"><h3>Niente multi-tenant centralizzato</h3><p>MediFlow non è un servizio condiviso fra strutture. È un'app per chi esercita in autonomia o per piccoli ambulatori che operano sotto la responsabilità di chi cura.</p></div>
         <div class="card"><h3>Niente AI cloud di default</h3><p>L'unica eccezione documentata è una lane interna di valutazione comparativa, opt-in, mai usata come runtime clinico, mai con dati paziente non redatti.</p></div>
         <div class="card"><h3>Niente integrazione regionale fuori boundary</h3><p>Verso SISS/FSE oggi MediFlow prepara il contesto e richiama i percorsi ufficiali in modalità assistita. Niente UI regionale custom dentro il prodotto fino a una qualifica documentata.</p></div>
         <div class="card"><h3>Niente automatismi clinici al buio</h3><p>L'AI non scrive diagnosi e terapie senza conferma. L'unico autofill ammesso è su codici ICD letteralmente presenti nel documento sorgente.</p></div>
@@ -423,20 +423,20 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
       </div>
 
       <div class="reveal">
-        <details class="term"><summary>Local-first / Locale prima di tutto</summary><p>Il software funziona prima di tutto sul dispositivo del professionista. La rete è opzionale e governata. Il contrario è "cloud-first": app che hanno bisogno di un server centrale per funzionare e mandano lì i dati.</p></details>
-        <details class="term"><summary>Zero-knowledge a riposo</summary><p>I dati clinici sul disco sono illeggibili senza il PIN. Nemmeno chi ha scritto il software o gestisce il computer può leggerli senza inserire il PIN. Niente backdoor di recupero: questa è la garanzia, ma anche la responsabilità del professionista.</p></details>
+        <details class="term"><summary>Local-first / Locale prima di tutto</summary><p>Il software funziona prima di tutto sul dispositivo di chi lo usa. La rete è opzionale e governata. Il contrario è "cloud-first": app che hanno bisogno di un server centrale per funzionare e mandano lì i dati.</p></details>
+        <details class="term"><summary>Zero-knowledge a riposo</summary><p>I dati clinici sul disco sono illeggibili senza il PIN. Nemmeno chi ha scritto il software o gestisce il computer può leggerli senza inserire il PIN. Niente backdoor di recupero: questa è la garanzia, ma anche la responsabilità di chi cura.</p></details>
         <details class="term"><summary>AES-256-GCM</summary><p>L'algoritmo di cifratura usato. È uno standard internazionale considerato robusto. Il numero 256 si riferisce alla lunghezza della chiave in bit; più alto, più difficile da forzare.</p></details>
-        <details class="term"><summary>PIN, KEK, master key</summary><p>Il PIN è quello che il professionista inserisce. Da lì si deriva una "chiave intermedia" (KEK) che serve a proteggere la "chiave principale" (master key). La master key è quella che cifra davvero i dati clinici e vive solo in memoria durante la sessione.</p></details>
+        <details class="term"><summary>PIN, KEK, master key</summary><p>Il PIN è quello che chi cura inserisce. Da lì si deriva una "chiave intermedia" (KEK) che serve a proteggere la "chiave principale" (master key). La master key è quella che cifra davvero i dati clinici e vive solo in memoria durante la sessione.</p></details>
         <details class="term"><summary>FHIR R4</summary><p>Standard internazionale (HL7 FHIR, versione R4) per scambiare dati sanitari tra sistemi. MediFlow lo usa per esportare la storia clinica in un formato che altri sistemi sono in grado di leggere.</p></details>
         <details class="term"><summary>ICD-11</summary><p>Classificazione internazionale delle malattie, undicesima edizione, curata dall'OMS. Permette di codificare una diagnosi con un identificativo univoco (ad esempio <code>5A10</code>), invece che con un testo libero soggetto a interpretazione.</p></details>
         <details class="term"><summary>ATC, AIC</summary><p>Codici per i farmaci. ATC è la classificazione anatomico-terapeutica (a cosa serve il principio attivo); AIC è il codice che identifica un singolo medicinale autorizzato in Italia.</p></details>
         <details class="term"><summary>LOINC, UCUM</summary><p>LOINC è un vocabolario standard per identificare osservazioni di laboratorio e cliniche. UCUM è uno standard per le unità di misura. Insieme rendono confrontabili i parametri tra sistemi diversi.</p></details>
         <details class="term"><summary>SQLite</summary><p>Un database che vive in un singolo file sul disco, senza bisogno di un server. Per MediFlow è il file <code>medical.db</code>, sempre cifrato.</p></details>
-        <details class="term"><summary>Ollama</summary><p>Un programma che permette di eseguire modelli di intelligenza artificiale direttamente sul computer del professionista, senza chiamare servizi remoti.</p></details>
+        <details class="term"><summary>Ollama</summary><p>Un programma che permette di eseguire modelli di intelligenza artificiale direttamente sul computer di chi usa l'applicativo, senza chiamare servizi remoti.</p></details>
         <details class="term"><summary>Audit append-only</summary><p>Un registro di eventi (chi ha fatto cosa, quando, con che esito) a cui si può solo aggiungere, mai modificare o cancellare. Serve per ricostruire le azioni in caso di necessità clinica o normativa.</p></details>
         <details class="term"><summary>SISS / FSE</summary><p>SISS è il Sistema Informativo Socio-Sanitario; FSE è il Fascicolo Sanitario Elettronico. MediFlow oggi non li sostituisce: prepara i dati per i percorsi ufficiali e richiama i flussi assistiti, restando dentro un confine dichiarato.</p></details>
-        <details class="term"><summary>Mac home-base</summary><p>La modalità in cui il computer del professionista fa da nodo locale: gli altri dispositivi Apple (iPhone, iPad) si accoppiano in modo esplicito e possono leggere e scrivere in modo limitato attraverso una rete locale fidata.</p></details>
-        <details class="term"><summary>Paired client</summary><p>Un dispositivo accoppiato in modo esplicito al Mac home-base. Senza accoppiamento e senza una sessione attiva del professionista, non può accedere ai dati.</p></details>
+        <details class="term"><summary>Mac home-base</summary><p>La modalità in cui il computer di chi cura fa da nodo locale: gli altri dispositivi Apple (iPhone, iPad) si accoppiano in modo esplicito e possono leggere e scrivere in modo limitato attraverso una rete locale fidata.</p></details>
+        <details class="term"><summary>Paired client</summary><p>Un dispositivo accoppiato in modo esplicito al Mac home-base. Senza accoppiamento e senza una sessione attiva di chi cura, non può accedere ai dati.</p></details>
       </div>
     </div>
   </section>
@@ -445,7 +445,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
   <section id="chiusura">
     <div class="wrap">
       <div class="pull reveal" style="text-align:center">
-        «Un software clinico utile è uno che il professionista può capire, controllare e abbandonare quando vuole.
+        «Un software clinico utile è uno che chi lo usa può capire, controllare e abbandonare quando vuole.
         MediFlow è scritto per essere usato così, non per trattenere chi lo usa.»
         <small>Visione di prodotto</small>
       </div>
