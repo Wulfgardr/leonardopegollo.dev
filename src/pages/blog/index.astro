@@ -10,14 +10,17 @@ const fmt = (d: Date) =>
   d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <BaseLayout title="Blog" description="Note di lavoro su sanità pubblica, dati, software clinico locale.">
-  <section style="padding-top:80px">
+  <section style="padding-top:90px">
     <div class="wrap">
       <div class="section-head">
-        <div class="kicker">Blog</div>
-        <h1 class="gradient-title">Note di lavoro.</h1>
-        <p class="lead">Italiano asciutto. Una cosa per volta. Niente lista della spesa.</p>
-        <p class="muted" style="font-size:13.5px; margin-top:14px">
-          Iscriviti al <a href="/rss.xml" style="color:var(--teal); text-decoration:underline">feed RSS</a> per non perderne uno.
+        <div class="kicker">Blog · note di lavoro</div>
+        <h1 class="gradient-title">Una cosa per volta.</h1>
+        <p class="lead">Italiano asciutto. Niente lista della spesa. Niente cadenza fissa: pubblico quando un'idea regge alla rilettura.</p>
+        <p class="muted rss-line">
+          <span class="sym" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 4a16 16 0 0 1 16 16"/><path d="M4 11a9 9 0 0 1 9 9"/><circle cx="5.5" cy="18.5" r="1.5" fill="currentColor"/></svg>
+          </span>
+          Iscriviti al <a href="/rss.xml" class="link-ink">feed RSS</a> per non perderne uno.
         </p>
       </div>
 
@@ -26,11 +29,30 @@ const fmt = (d: Date) =>
         {posts.map((p) => (
           <a class="post-link" href={`/blog/${p.slug}`}>
             <div class="meta">{fmt(p.data.pubDate)}</div>
-            <h3>{p.data.title}</h3>
-            <p>{p.data.description}</p>
+            <div>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.description}</p>
+            </div>
+            <div class="arrow" aria-hidden="true">→</div>
           </a>
         ))}
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .rss-line{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13.5px; margin-top:18px;
+  }
+  .rss-line .sym{ color:var(--amber); width:16px; height:16px; }
+  :global(.link-ink){
+    color:var(--ink-0);
+    text-decoration:underline;
+    text-decoration-color:rgba(134,211,177,.55);
+    text-decoration-thickness:1px;
+    text-underline-offset:3px;
+  }
+  :global(.link-ink:hover){ text-decoration-color:var(--mint); }
+</style>

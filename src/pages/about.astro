@@ -10,7 +10,7 @@ import SocialLinks from '~/components/SocialLinks.astro';
     <div class="wrap-narrow">
 
       <!-- Intestazione -->
-      <div class="kicker">Bio</div>
+      <div class="kicker">Bio · versione lunga</div>
       <h1 class="gradient-title">Leonardo Pegollo</h1>
       <p class="lead">
         Medico di distretto a Milano. Sanità territoriale, pazienti complessi,
@@ -18,15 +18,13 @@ import SocialLinks from '~/components/SocialLinks.astro';
         anche quello è un modo di curarsi del lavoro.
       </p>
 
-      <div class="meta-line">
-        <span>📍 Milano</span>
-        <span>·</span>
-        <span>🏥 Medico di distretto</span>
-        <span>·</span>
-        <span>🎓 Master gestione aziende sociosanitarie</span>
-      </div>
+      <dl class="meta-line">
+        <div><dt>Luogo</dt><dd>Milano</dd></div>
+        <div><dt>Ruolo</dt><dd>Medico di distretto</dd></div>
+        <div><dt>Formazione</dt><dd>Master gestione aziende sociosanitarie</dd></div>
+      </dl>
 
-      <div style="margin-top:20px">
+      <div style="margin-top:22px">
         <SocialLinks variant="pills" />
       </div>
 
@@ -128,9 +126,41 @@ import SocialLinks from '~/components/SocialLinks.astro';
 </BaseLayout>
 
 <style>
+  /* Riga meta tipo intestazione di scheda: definizione + valore */
   .meta-line{
-    display:flex; flex-wrap:wrap; gap:8px;
-    margin:18px 0 0;
-    font-size:13.5px; color:var(--ink-2);
+    margin:24px 0 0;
+    padding:18px 0;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:18px;
   }
+  .meta-line > div{
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .meta-line dt{
+    font-family:var(--mono);
+    font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--ink-2);
+    margin:0;
+  }
+  .meta-line dd{
+    margin:0; color:var(--ink-0); font-size:14.5px;
+  }
+  @media (max-width:680px){
+    .meta-line{ grid-template-columns:1fr; gap:12px; padding:16px 0; }
+  }
+
+  /* link interni in stile editoriale */
+  p a{
+    color:var(--ink-0);
+    text-decoration:underline;
+    text-decoration-color:rgba(134,211,177,.5);
+    text-decoration-thickness:1px;
+    text-underline-offset:3px;
+  }
+  p a:hover{ text-decoration-color:var(--mint); }
+
+  h2{ margin-top:40px; }
 </style>
