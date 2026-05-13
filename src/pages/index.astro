@@ -8,6 +8,9 @@ const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <BaseLayout
   title="leonardopegollo.dev"
@@ -15,39 +18,37 @@ const posts = (await getCollection('blog'))
 >
   <section class="hero">
     <div class="wrap">
-      <span class="eyebrow"><span class="dot"></span> Leonardo Pegollo · Milano · Maggio 2026</span>
+      <span class="eyebrow"><span class="dot"></span> Milano · Maggio 2026 · Vol. 1</span>
       <h1 class="gradient-title" style="margin-top:18px">
-        Medico di distretto, mani anche dentro il codice.
+        Medico di distretto,<br/>
+        <em>mani anche dentro il codice.</em>
       </h1>
-      <p class="lead" style="max-width:760px; margin-top:18px">
+      <p class="lead" style="max-width:680px; margin-top:24px">
         Mi chiamo Leo. Faccio il medico di distretto a Milano: sanità territoriale,
-        pazienti complessi, domiciliarità: la parte di sistema dove la cura non finisce
-        con la prescrizione, ma comincia lì. In parallelo metto le mani dentro
-        <a href="/mediflow" style="color:var(--teal); text-decoration:underline; text-decoration-color:rgba(95,227,199,.4); text-underline-offset:3px">MediFlow</a>
-        (nome temporaneo), un applicativo clinico nato per me e, aspirazionalmente, per
-        chiunque voglia uno strumento di lavoro che non chieda di affidare i dati a terzi.
+        pazienti complessi, domiciliarità. La parte di sistema dove la cura non
+        finisce con la prescrizione, ma comincia lì. In parallelo metto le mani
+        dentro <a href="/mediflow" class="link-ink">MediFlow</a> (nome temporaneo),
+        un applicativo clinico nato per me e, aspirazionalmente, per chiunque
+        voglia uno strumento di lavoro che non chieda di affidare i dati a terzi.
       </p>
-      <p class="lead muted" style="max-width:760px; margin-top:8px">
+      <p class="lead muted" style="max-width:680px; margin-top:4px">
         Qui scrivo di cosa sia la sanità nell'epoca del «codice democratico»,
         e del rigore poco democratico che deve circondarla.
       </p>
-      <div style="display:flex; gap:12px; margin-top:30px; flex-wrap:wrap">
-        <a class="btn primary" href="/mediflow">Leggi il white paper di MediFlow →</a>
+      <div class="cta-row">
+        <a class="btn primary" href="/mediflow">White paper di MediFlow <span aria-hidden="true">→</span></a>
         <a class="btn ghost" href="/blog">Vai al blog</a>
         <a class="btn ghost" href="/about">Bio completa</a>
       </div>
 
-      <div style="margin-top:24px">
+      <div style="margin-top:28px">
         <SocialLinks variant="pills" />
       </div>
 
       <div class="strip" aria-hidden="true">
-        <span><b>Local-first</b> · i dati clinici restano sul dispositivo</span>
-        <span class="sep">◇</span>
+        <span><b>Local-first</b></span>
         <span><b>Open source</b></span>
-        <span class="sep">◇</span>
-        <span><b>Niente analytics di terze parti</b> qui</span>
-        <span class="sep">◇</span>
+        <span><b>Niente analytics di terze parti</b></span>
         <span><b>Niente sponsor</b></span>
       </div>
     </div>
@@ -60,10 +61,10 @@ const posts = (await getCollection('blog'))
           <img class="bio-photo" src="/avatar.svg" alt="Foto di Leonardo Pegollo" width="200" height="200" loading="lazy" />
           <p class="bio-role">Leonardo Pegollo</p>
           <p class="bio-tag">Medico di distretto · Milano</p>
-          <ul class="bio-meta">
-            <li><span class="muted">Digitali</span> SQL · Python · R · Astro</li>
-            <li><span class="muted">Analogici</span> Eko Health 500 · abbassalingua</li>
-          </ul>
+          <dl class="bio-meta">
+            <div><dt>Digitali</dt><dd>SQL · Python · R · Astro</dd></div>
+            <div><dt>Analogici</dt><dd>Eko Health 500 · abbassalingua</dd></div>
+          </dl>
           <div style="margin-top:18px">
             <SocialLinks variant="icons" align="center" />
           </div>
@@ -83,10 +84,10 @@ const posts = (await getCollection('blog'))
             nell'operatività clinica e dentro un applicativo: ragionare su cosa fare,
             come farlo, e come renderlo pratico. Per me, e poi (se viene bene) per chi
             voglia uno strumento simile per la propria attività clinica. Da qui
-            <a href="/mediflow">MediFlow</a> e da qui questo sito.
+            <a href="/mediflow" class="link-ink">MediFlow</a> e da qui questo sito.
           </p>
           <p class="muted" style="font-size:14.5px">
-            La <a href="/about">versione lunga della bio</a> è nella pagina dedicata.
+            La <a href="/about" class="link-ink">versione lunga della bio</a> è nella pagina dedicata.
           </p>
         </div>
       </div>
@@ -103,22 +104,43 @@ const posts = (await getCollection('blog'))
 
       <div class="grid cols-3 reveal">
         <a class="card" href="/mediflow" style="text-decoration:none">
-          <div class="icon">🩺</div>
+          <span class="ord">01</span>
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 3v6a4 4 0 0 0 8 0V3"/>
+              <path d="M9 13v3a4 4 0 0 0 8 0v-2"/>
+              <circle cx="17" cy="11" r="2"/>
+            </svg>
+          </div>
           <h3>MediFlow</h3>
           <p>Cartella clinica locale, cifrata, con AI sul dispositivo. Standard ICD-11 e FHIR R4. Per chi esercita in autonomia o piccoli ambulatori.</p>
-          <p class="muted" style="font-size:13px; margin-top:10px">Leggi il white paper →</p>
+          <p class="card-cta">Leggi il white paper <span aria-hidden="true">→</span></p>
         </a>
         <div class="card">
-          <div class="icon">📊</div>
+          <span class="ord">02</span>
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 18h18"/>
+              <rect x="5" y="12" width="3" height="6"/>
+              <rect x="10.5" y="8" width="3" height="10"/>
+              <rect x="16" y="4" width="3" height="14"/>
+            </svg>
+          </div>
           <h3>Note dal territorio</h3>
           <p>Letture dei dati territoriali che si possono discutere insieme. Grandi e piccoli temi della clinica quotidiana nella gestione della cronicità: indicatori, appropriatezza, aspettative di chi è in cura. Tono informale, mai approssimativo.</p>
-          <p class="muted" style="font-size:13px; margin-top:10px">In arrivo nel blog. Qualche slide ci sta.</p>
+          <p class="card-cta muted">In arrivo nel blog. Qualche slide ci sta.</p>
         </div>
         <div class="card">
-          <div class="icon">📝</div>
+          <span class="ord">03</span>
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 4h11l3 3v13H5z"/>
+              <path d="M8 9h8M8 13h8M8 17h5"/>
+            </svg>
+          </div>
           <h3>Note di lavoro</h3>
           <p>Riflessioni asciutte su decisioni, audit, processi, accreditamento. Niente trend, niente buzz.</p>
-          <p class="muted" style="font-size:13px; margin-top:10px"><a href="/blog">Vai al blog →</a></p>
+          <p class="card-cta"><a href="/blog" class="link-ink">Vai al blog →</a></p>
         </div>
       </div>
     </div>
@@ -134,13 +156,16 @@ const posts = (await getCollection('blog'))
         <div class="post-list reveal">
           {posts.map((p) => (
             <a class="post-link" href={`/blog/${p.slug}`}>
-              <div class="meta">{p.data.pubDate.toLocaleDateString('it-IT', { year:'numeric', month:'long', day:'numeric' })}</div>
-              <h3>{p.data.title}</h3>
-              <p>{p.data.description}</p>
+              <div class="meta">{fmt(p.data.pubDate)}</div>
+              <div>
+                <h3>{p.data.title}</h3>
+                <p>{p.data.description}</p>
+              </div>
+              <div class="arrow" aria-hidden="true">→</div>
             </a>
           ))}
         </div>
-        <div style="margin-top:20px">
+        <div style="margin-top:24px">
           <a class="btn ghost" href="/blog">Tutti i post →</a>
         </div>
       </div>
@@ -148,8 +173,8 @@ const posts = (await getCollection('blog'))
   )}
 
   <section id="chiusura">
-    <div class="wrap">
-      <div class="pull reveal" style="text-align:center">
+    <div class="wrap-narrow">
+      <div class="pull reveal">
         «Scrivere quello che hai capito è il modo più rapido per scoprire cosa non avevi capito.»
         <small>Promemoria personale</small>
       </div>
@@ -158,61 +183,102 @@ const posts = (await getCollection('blog'))
 </BaseLayout>
 
 <style>
-  .hero{ padding:90px 0 60px; }
+  .hero{ padding:100px 0 64px; }
   .hero h1{ margin:18px 0 18px; }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--paper);
+    -webkit-text-fill-color:var(--paper);
+    background:none;
+  }
+
+  .cta-row{
+    display:flex; gap:10px; margin-top:32px; flex-wrap:wrap;
+  }
+
+  /* Link in linea con sottolineatura tipo penna */
+  :global(.link-ink){
+    color:var(--ink-0);
+    text-decoration:underline;
+    text-decoration-color:rgba(134,211,177,.55);
+    text-decoration-thickness:1px;
+    text-underline-offset:4px;
+    transition:text-decoration-color .2s ease;
+  }
+  :global(.link-ink:hover){
+    text-decoration-color:var(--mint);
+  }
+
+  .card-cta{
+    font-size:13px; margin-top:14px; color:var(--mint);
+    font-family:var(--mono); letter-spacing:.3px;
+  }
+  .card-cta a{ color:var(--mint); text-decoration:none; }
 
   /* === Sezione bio (home) === */
   .bio-grid{
     display:grid;
-    grid-template-columns: 280px 1fr;
-    gap:36px;
+    grid-template-columns: 260px 1fr;
+    gap:48px;
     align-items:start;
-    padding:32px;
-    border-radius:var(--r-3);
-    background:var(--glass);
-    border:1px solid var(--glass-edge);
-    backdrop-filter:blur(28px) saturate(160%);
-    -webkit-backdrop-filter:blur(28px) saturate(160%);
+    padding:0;
+    background:transparent; border:none;
+    backdrop-filter:none; -webkit-backdrop-filter:none;
   }
   @media (max-width:780px){
-    .bio-grid{ grid-template-columns:1fr; gap:24px; padding:24px; }
+    .bio-grid{ grid-template-columns:1fr; gap:32px; }
   }
-  .bio-side{ text-align:center; }
-  @media (max-width:780px){ .bio-side{ text-align:left; } }
+  .bio-side{
+    text-align:center;
+    padding:28px 24px;
+    border:1px solid var(--rule);
+    border-radius:var(--r-2);
+    background:rgba(241,234,217,.025);
+  }
+  @media (max-width:780px){ .bio-side{ text-align:left; padding:24px; } }
   .bio-photo{
-    width:160px; height:160px; border-radius:50%;
+    width:144px; height:144px; border-radius:50%;
     margin:0 auto 18px; display:block;
     object-fit:cover;
     background:#0a1018;
     padding:3px;
-    background-image:linear-gradient(#0a1018, #0a1018), conic-gradient(from 220deg, #5fe3c7, #7cc7ff, #b59bff, #5fe3c7);
+    background-image:linear-gradient(#0d1217, #0d1217), linear-gradient(135deg, var(--mint) 0%, var(--paper) 60%, var(--amber) 100%);
     background-origin:border-box;
     background-clip:content-box, border-box;
-    box-shadow:0 0 60px rgba(124,199,255,.25), 0 20px 50px -20px rgba(0,0,0,.6);
+    box-shadow:0 0 0 1px rgba(241,234,217,.06), 0 18px 36px -18px rgba(0,0,0,.6);
   }
   @media (max-width:780px){ .bio-photo{ margin:0 0 18px; } }
   .bio-role{
-    font-size:18px; font-weight:600; color:var(--ink-0); margin:0 0 4px;
+    font-family:var(--serif);
+    font-size:20px; font-weight:500; color:var(--ink-0); margin:0 0 4px;
   }
   .bio-tag{
-    font-size:13px; color:var(--ink-2); margin:0 0 18px; letter-spacing:.2px;
+    font-family:var(--mono);
+    font-size:12px; color:var(--ink-2); margin:0 0 20px;
+    letter-spacing:.5px;
   }
   .bio-meta{
-    list-style:none; padding:0; margin:0;
-    text-align:left; display:flex; flex-direction:column; gap:8px;
-    font-size:13.5px; color:var(--ink-1);
-    border-top:1px solid var(--line);
-    padding-top:18px;
+    list-style:none; padding:18px 0 0; margin:0;
+    text-align:left;
+    border-top:1px solid var(--rule);
+    display:flex; flex-direction:column; gap:10px;
   }
-  .bio-meta span{
-    display:inline-block; min-width:78px;
-    font-size:11.5px; text-transform:uppercase; letter-spacing:1.2px;
-    margin-right:6px;
+  .bio-meta div{
+    display:grid;
+    grid-template-columns:80px 1fr;
+    gap:10px;
+    font-size:13.5px;
+    color:var(--ink-1);
   }
-  .bio-body h2{ margin-top:8px; }
+  .bio-meta dt{
+    font-family:var(--mono);
+    font-size:11px; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--ink-2);
+    margin:0; padding-top:2px;
+  }
+  .bio-meta dd{ margin:0; }
+
+  .bio-body h2{ margin-top:0; }
   .bio-body p{ margin-bottom:14px; }
-  .bio-body a{
-    color:var(--teal); text-decoration:underline;
-    text-decoration-color:rgba(95,227,199,.4); text-underline-offset:3px;
-  }
+  .bio-body a{ color:var(--ink-0); }
 </style>

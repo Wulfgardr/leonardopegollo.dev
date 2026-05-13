@@ -6,16 +6,16 @@ const year = new Date().getFullYear();
   <div class="wrap">
     <div class="cols">
       <div>
-        <a class="brand" href="/" style="margin-bottom:14px; display:inline-flex">
-          <span class="brand-mark"></span>
+        <a class="brand" href="/" style="display:inline-flex">
+          <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-name">leonardopegollo<span class="muted">.dev</span></span>
         </a>
-        <p style="max-width:480px; margin-top:14px">
+        <p style="max-width:480px; margin-top:18px; color:var(--ink-2)">
           Sito personale di Leonardo Pegollo. Medico di distretto a Milano,
           mani anche dentro il codice. Nessun cookie di tracciamento, nessun
           analytics di terze parti.
         </p>
-        <div style="margin-top:18px">
+        <div style="margin-top:20px">
           <SocialLinks variant="pills" />
         </div>
       </div>
@@ -32,8 +32,8 @@ const year = new Date().getFullYear();
       </div>
     </div>
     <div class="bottom">
-      <span>© {year} Leonardo Pegollo · contenuti distribuiti come progetto personale</span>
-      <span>Costruito con Astro · pubblicato su Cloudflare Pages</span>
+      <span>© {year} · Leonardo Pegollo · progetto personale</span>
+      <span>Astro · Cloudflare Pages · scritto a mano</span>
     </div>
   </div>
 </footer>

@@ -17,21 +17,47 @@ const fmt = (d: Date) =>
   d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <section style="padding-top:30px">
+  <section style="padding-top:50px">
     <div class="wrap-narrow">
-      <p style="margin-top:20px"><a href="/blog" style="color:var(--ink-2); text-decoration:none">← Tutti i post</a></p>
+      <p style="margin:0 0 24px"><a class="back" href="/blog">← Tutti i post</a></p>
 
       <article class="article">
         <header>
-          <h1>{post.data.title}</h1>
           <div class="meta">
             {fmt(post.data.pubDate)}
             {post.data.updatedDate && <span> · aggiornato {fmt(post.data.updatedDate)}</span>}
             {post.data.tags.length > 0 && <span> · {post.data.tags.join(' · ')}</span>}
           </div>
+          <h1>{post.data.title}</h1>
+          {post.data.description && <p class="standfirst">{post.data.description}</p>}
         </header>
         <Content />
       </article>
+
+      <div class="divider"></div>
+      <p style="margin-top:8px"><a class="back" href="/blog">← Torna a tutti i post</a></p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .back{
+    color:var(--ink-2); text-decoration:none;
+    font-family:var(--mono); font-size:13px; letter-spacing:.4px;
+    transition:color .2s ease;
+  }
+  .back:hover{ color:var(--ink-0); }
+
+  .article header .meta{ margin-bottom:18px; }
+  .article header .meta + h1{ margin-top:0; }
+
+  .standfirst{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:19px;
+    line-height:1.55;
+    color:var(--ink-1);
+    margin:6px 0 0;
+    max-width:60ch;
+  }
+</style>
