@@ -61,10 +61,13 @@ const fmt = (d: Date) =>
     max-width:60ch;
   }
 
+</style>
+
+<style is:global>
   .mermaid{
     margin:28px 0;
     padding:28px 36px;
-    background:#f1ead9;            /* paper warm, coerente col sito */
+    background:#f1ead9;
     border:1px solid rgba(0,0,0,.15);
     border-radius:10px;
     overflow:auto;
@@ -82,7 +85,6 @@ const fmt = (d: Date) =>
   }
   .mermaid svg{ max-width:100%; height:auto; }
 
-  /* Lightbox modale per diagrammi */
   .mermaid-modal{
     position:fixed; inset:0; z-index:9999;
     background:rgba(8,11,16,.94);
@@ -182,8 +184,8 @@ const fmt = (d: Date) =>
     }
   });
 
-  // Trasforma i blocchi <pre><code class="language-mermaid">
-  const nodes = document.querySelectorAll('pre > code.language-mermaid');
+  // Astro/Shiki annota il linguaggio sul <pre>, non sul <code>.
+  const nodes = document.querySelectorAll('pre[data-language="mermaid"] > code');
   let i = 0;
   for (const code of nodes) {
     const pre = code.parentElement;
