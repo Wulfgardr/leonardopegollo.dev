@@ -543,7 +543,67 @@ pre code{ background:none; color:inherit; padding:0; border-radius:0; }
   background:transparent;
   border-radius:0;
 }
+.article table{
+  width:min(980px, calc(100vw - 48px));
+  margin:30px 0 34px 50%;
+  transform:translateX(-50%);
+  border-collapse:separate;
+  border-spacing:0;
+  table-layout:fixed;
+  color:var(--ink-1);
+  font-size:15.5px;
+  line-height:1.55;
+  background:rgba(241,234,217,.035);
+  border:1px solid var(--rule);
+  border-radius:8px;
+  overflow:hidden;
+}
+.article th,
+.article td{
+  padding:16px 18px;
+  vertical-align:top;
+  border-right:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.article th:last-child,
+.article td:last-child{ border-right:none; }
+.article tr:last-child td{ border-bottom:none; }
+.article th{
+  color:var(--ink-0);
+  background:rgba(134,211,177,.09);
+  font-family:var(--sans);
+  font-weight:700;
+  text-align:left;
+}
+.article th:first-child,
+.article td:first-child{
+  width:22%;
+  color:var(--ink-0);
+  font-weight:650;
+}
+.article td code{
+  font-size:.92em;
+  white-space:nowrap;
+}
 .article hr{ border:none; height:1px; background:var(--rule); margin:36px 0; }
+
+@media (max-width:760px){
+  .article table{
+    display:block;
+    width:100%;
+    min-width:0;
+    margin-left:0;
+    transform:none;
+    overflow-x:auto;
+    table-layout:auto;
+  }
+  .article th,
+  .article td{
+    min-width:210px;
+    padding:14px 16px;
+  }
+  .article td:first-child{ min-width:170px; }
+}
 
 /* === Symboli inline riusabili ===================================== */
 .sym{
