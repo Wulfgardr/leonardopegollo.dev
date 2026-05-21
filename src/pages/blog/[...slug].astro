@@ -60,4 +60,167 @@ const fmt = (d: Date) =>
     margin:6px 0 0;
     max-width:60ch;
   }
+
+  .mermaid{
+    margin:28px 0;
+    padding:28px 36px;
+    background:#f1ead9;            /* paper warm, coerente col sito */
+    border:1px solid rgba(0,0,0,.15);
+    border-radius:10px;
+    overflow:auto;
+    text-align:center;
+    cursor:zoom-in;
+    position:relative;
+    transition:border-color .2s ease;
+  }
+  .mermaid:hover{ border-color:rgba(0,0,0,.32); }
+  .mermaid::after{
+    content:"⤢  clicca per ingrandire";
+    position:absolute; bottom:8px; right:12px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.5px;
+    color:rgba(0,0,0,.45); pointer-events:none;
+  }
+  .mermaid svg{ max-width:100%; height:auto; }
+
+  /* Lightbox modale per diagrammi */
+  .mermaid-modal{
+    position:fixed; inset:0; z-index:9999;
+    background:rgba(8,11,16,.94);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    opacity:0; visibility:hidden;
+    transition:opacity .2s ease, visibility .2s ease;
+    cursor:zoom-out;
+  }
+  .mermaid-modal.open{ opacity:1; visibility:visible; }
+  .mermaid-modal-inner{
+    background:#f1ead9;
+    border-radius:14px;
+    padding:32px;
+    width:96vw; height:92vh;
+    max-width:96vw; max-height:92vh;
+    overflow:auto;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+  }
+  .mermaid-modal-inner svg{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    max-width:none !important;
+    max-height:none !important;
+  }
+  .mermaid-modal-close{
+    position:absolute; top:18px; right:22px;
+    width:38px; height:38px; border-radius:50%;
+    background:rgba(241,234,217,.12);
+    border:1px solid rgba(241,234,217,.3);
+    color:#f1ead9;
+    font-size:20px; line-height:1;
+    display:grid; place-items:center;
+    cursor:pointer;
+  }
+  .mermaid-modal-close:hover{ background:rgba(241,234,217,.22); }
 </style>
+
+<script type="module" is:inline>
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  // Tema custom ad alto contrasto, coerente col sito
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: 'loose',
+    fontFamily: 'ui-sans-serif, system-ui, -apple-system, sans-serif',
+    theme: 'base',
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis',
+      padding: 18,
+      nodeSpacing: 60,
+      rankSpacing: 70
+    },
+    sequence: {
+      diagramMarginX: 60,
+      diagramMarginY: 24,
+      actorMargin: 110,
+      width: 210,
+      boxMargin: 14,
+      messageMargin: 38,
+      actorFontSize: 15,
+      actorFontWeight: 600,
+      noteFontSize: 13,
+      messageFontSize: 14,
+      bottomMarginAdj: 30
+    },
+    themeVariables: {
+      fontSize: '15px',
+      background: '#f1ead9',
+      primaryColor: '#ffffff',
+      primaryTextColor: '#1a1612',
+      primaryBorderColor: '#1a1612',
+      secondaryColor: '#e9dcc1',
+      tertiaryColor: '#dccfb0',
+      lineColor: '#2a2620',
+      textColor: '#1a1612',
+      mainBkg: '#ffffff',
+      nodeBorder: '#1a1612',
+      clusterBkg: '#e9dcc1',
+      clusterBorder: '#1a1612',
+      edgeLabelBackground: '#f1ead9',
+      actorBkg: '#ffffff',
+      actorBorder: '#1a1612',
+      actorTextColor: '#1a1612',
+      actorLineColor: '#2a2620',
+      signalColor: '#1a1612',
+      signalTextColor: '#1a1612',
+      labelBoxBkgColor: '#ffffff',
+      labelBoxBorderColor: '#1a1612',
+      noteBkgColor: '#e3b072',
+      noteBorderColor: '#7a5224',
+      noteTextColor: '#1a1612',
+      activationBkgColor: '#86d3b1',
+      activationBorderColor: '#1a1612',
+    }
+  });
+
+  // Trasforma i blocchi <pre><code class="language-mermaid">
+  const nodes = document.querySelectorAll('pre > code.language-mermaid');
+  let i = 0;
+  for (const code of nodes) {
+    const pre = code.parentElement;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'mermaid';
+    wrapper.id = 'mermaid-' + (++i);
+    wrapper.textContent = code.textContent;
+    pre.replaceWith(wrapper);
+  }
+  if (i > 0) {
+    try { await mermaid.run(); } catch (e) { console.warn('mermaid render', e); }
+  }
+
+  // Lightbox: click su un diagramma → modal full-screen
+  const modal = document.createElement('div');
+  modal.className = 'mermaid-modal';
+  modal.innerHTML = '<button class="mermaid-modal-close" aria-label="Chiudi">✕</button><div class="mermaid-modal-inner"></div>';
+  document.body.appendChild(modal);
+  const modalInner = modal.querySelector('.mermaid-modal-inner');
+  const closeModal = () => { modal.classList.remove('open'); modalInner.innerHTML = ''; };
+  modal.addEventListener('click', (e) => { if (e.target === modal || e.target.classList.contains('mermaid-modal-close')) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  document.querySelectorAll('.mermaid').forEach((el) => {
+    el.addEventListener('click', () => {
+      const svg = el.querySelector('svg');
+      if (!svg) return;
+      const clone = svg.cloneNode(true);
+      // Rimuove width/height inline imposti da Mermaid così l'SVG scala col container
+      clone.removeAttribute('width');
+      clone.removeAttribute('height');
+      clone.removeAttribute('style');
+      // Forza viewBox come unico determinante delle proporzioni e abilita preserveAspectRatio
+      clone.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      modalInner.innerHTML = '';
+      modalInner.appendChild(clone);
+      modal.classList.add('open');
+    });
+  });
+</script>
