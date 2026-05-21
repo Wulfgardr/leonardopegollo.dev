@@ -1,6 +1,6 @@
 ---
 title: "L'integrazione con SISS in MediFlow: architettura e trade-off"
-description: "Una ricostruzione osservazionale del flusso prescrittivo lombardo: come si autentica chi prescrive, come la firma remota apre alla possibilità di UI dedicate per i gestionali, e cosa cambia rispetto all'attuale portale SISS."
+description: "Una ricostruzione osservazionale del flusso prescrittivo lombardo: autenticazione, firma remota, possibilità di UI dedicate per i gestionali e differenze rispetto all'attuale portale SISS."
 pubDate: 2026-05-21
 tags: ["mediflow", "sanità", "architettura"]
 draft: false
