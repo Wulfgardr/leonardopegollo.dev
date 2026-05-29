@@ -1,22 +1,62 @@
 ---
-// Navigazione globale. Barra editoriale sottile, evidenzia la voce corrente.
 const path = Astro.url.pathname;
 function active(prefix: string) {
-  if (prefix === '/') return path === '/' ? 'page' : null;
-  return path.startsWith(prefix) ? 'page' : null;
+  if (prefix === '/') return path === '/' ? 'page' : undefined;
+  return path.startsWith(prefix) ? 'page' : undefined;
 }
 ---
-<header class="topbar">
-  <div class="nav">
-    <a class="brand" href="/" aria-label="leonardopegollo.dev · home">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-name">leonardopegollo<span class="muted">.dev</span></span>
+<aside class="sidebar" aria-label="Navigazione sito">
+  <a class="brand" href="/" aria-label="leonardopegollo.dev · home">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">leonardopegollo<span class="muted">.dev</span></span>
+  </a>
+
+  <nav class="links" aria-label="Navigazione principale">
+    <a class="nav-row" href="/" aria-current={active('/')}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3.5 11.5 12 4l8.5 7.5" />
+        <path d="M5.5 10.5V20h13v-9.5" />
+        <path d="M10 20v-5h4v5" />
+      </svg>
+      <span>Home</span>
     </a>
-    <nav class="links" aria-label="Navigazione principale">
-      <a href="/" aria-current={active('/')}>Home</a>
-      <a href="/mediflow" aria-current={active('/mediflow')}>MediFlow</a>
-      <a href="/blog" aria-current={active('/blog')}>Blog</a>
-      <a href="/about" aria-current={active('/about')}>Chi sono</a>
-    </nav>
+    <a class="nav-row" href="/mediflow" aria-current={active('/mediflow')}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 12h4l2 5 3-10 2 5h7" />
+      </svg>
+      <span>MediFlow</span>
+    </a>
+    <a class="nav-row" href="/blog" aria-current={active('/blog')}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="5" y="3.5" width="14" height="17" rx="2" />
+        <path d="M8.5 8h7" />
+        <path d="M8.5 12h7" />
+        <path d="M8.5 16h5" />
+      </svg>
+      <span>Blog</span>
+    </a>
+    <a class="nav-row" href="/about" aria-current={active('/about')}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="8" r="3.4" />
+        <path d="M5 20c1.5-4 12.5-4 14 0" />
+      </svg>
+      <span>Chi sono</span>
+    </a>
+  </nav>
+
+  <div class="side-cta" aria-label="Azioni rapide">
+    <a class="btn btn-primary" href="/mediflow">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 12h4l2 5 3-10 2 5h7" />
+      </svg>
+      <span>MediFlow</span>
+    </a>
+    <a class="btn btn-ghost" href="mailto:hello@leonardopegollo.dev">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+        <path d="m5 8 7 5 7-5" />
+      </svg>
+      <span>Scrivimi</span>
+    </a>
   </div>
-</header>
+</aside>

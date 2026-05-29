@@ -1,12 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#5fe3c7"/>
-      <stop offset="55%" stop-color="#7cc7ff"/>
-      <stop offset="100%" stop-color="#b59bff"/>
-    </linearGradient>
-  </defs>
-  <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#g)"/>
-  <rect x="14" y="14" width="36" height="36" rx="9" fill="#0a1018"/>
-  <circle cx="32" cy="32" r="9" fill="url(#g)" opacity="0.85"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="leonardopegollo.dev">
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#f7f8f6"/>
+  <rect x="9" y="9" width="46" height="46" rx="10" fill="#ffffff" stroke="#d8ddd8" stroke-width="2"/>
+  <path d="M27 18v28h14" fill="none" stroke="#0e6e5c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

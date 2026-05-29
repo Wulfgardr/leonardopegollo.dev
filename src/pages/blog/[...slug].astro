@@ -28,7 +28,7 @@ const fmt = (d: Date) =>
             {post.data.updatedDate && <span> · aggiornato {fmt(post.data.updatedDate)}</span>}
             {post.data.tags.length > 0 && <span> · {post.data.tags.join(' · ')}</span>}
           </div>
-          <h1>{post.data.title}</h1>
+          <h1 transition:name={`post-title-${post.slug}`}>{post.data.title}</h1>
           {post.data.description && <p class="standfirst">{post.data.description}</p>}
         </header>
         <Content />
@@ -43,8 +43,8 @@ const fmt = (d: Date) =>
 <style>
   .back{
     color:var(--ink-2); text-decoration:none;
-    font-family:var(--mono); font-size:13px; letter-spacing:.4px;
-    transition:color .2s ease;
+    font-family:var(--font-technical); font-size:13px;
+    transition:color var(--dur-1) var(--ease);
   }
   .back:hover{ color:var(--ink-0); }
 
@@ -52,10 +52,10 @@ const fmt = (d: Date) =>
   .article header .meta + h1{ margin-top:0; }
 
   .standfirst{
-    font-family:var(--serif);
-    font-style:italic;
-    font-size:19px;
-    line-height:1.55;
+    font-family:var(--font-body);
+    font-style:normal;
+    font-size:18px;
+    line-height:1.62;
     color:var(--ink-1);
     margin:6px 0 0;
     max-width:60ch;
@@ -66,28 +66,55 @@ const fmt = (d: Date) =>
 <style is:global>
   .mermaid{
     margin:28px 0;
-    padding:28px 36px;
-    background:#f1ead9;
-    border:1px solid rgba(0,0,0,.15);
-    border-radius:10px;
+    padding:14px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--r-media);
     overflow:auto;
     text-align:center;
     cursor:zoom-in;
     position:relative;
-    transition:border-color .2s ease;
+    box-shadow:var(--sh-card);
+    transition:border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
   }
-  .mermaid:hover{ border-color:rgba(0,0,0,.32); }
+  .mermaid:hover{
+    border-color:var(--line-strong);
+    box-shadow:var(--sh-surface);
+    transform:translateY(-2px);
+  }
   .mermaid::after{
-    content:"⤢  clicca per ingrandire";
-    position:absolute; bottom:8px; right:12px;
-    font-family:var(--mono); font-size:11px; letter-spacing:.5px;
-    color:rgba(0,0,0,.45); pointer-events:none;
+    content:"clicca per ingrandire";
+    position:absolute; top:24px; right:28px;
+    padding:6px 9px;
+    border-radius:999px;
+    background:rgba(13,17,23,.72);
+    border:1px solid rgba(230,237,243,.14);
+    font-family:var(--font-technical); font-size:10.5px;
+    color:#a8b0b8; pointer-events:none;
   }
-  .mermaid svg{ max-width:100%; height:auto; }
+  .mermaid svg{
+    display:block;
+    max-width:100%;
+    height:auto;
+    margin:0 auto;
+    padding:18px;
+    background:#0d1117;
+    border-radius:14px;
+  }
+  .mermaid svg p{
+    color:inherit !important;
+    font-weight:inherit;
+    line-height:1.3;
+  }
+  .mermaid svg .label,
+  .mermaid svg .nodeLabel,
+  .mermaid svg .edgeLabel{
+    color:inherit;
+  }
 
   .mermaid-modal{
     position:fixed; inset:0; z-index:9999;
-    background:rgba(8,11,16,.94);
+    background:rgba(17,20,23,.88);
     display:flex; align-items:center; justify-content:center;
     padding:24px;
     opacity:0; visibility:hidden;
@@ -96,9 +123,10 @@ const fmt = (d: Date) =>
   }
   .mermaid-modal.open{ opacity:1; visibility:visible; }
   .mermaid-modal-inner{
-    background:#f1ead9;
-    border-radius:14px;
-    padding:32px;
+    background:var(--surface);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:var(--r-media);
+    padding:14px;
     width:96vw; height:92vh;
     max-width:96vw; max-height:92vh;
     overflow:auto;
@@ -110,31 +138,39 @@ const fmt = (d: Date) =>
     height:auto !important;
     max-width:none !important;
     max-height:none !important;
+    padding:24px !important;
+    background:#0d1117 !important;
+    border-radius:14px !important;
   }
   .mermaid-modal-close{
     position:absolute; top:18px; right:22px;
     width:38px; height:38px; border-radius:50%;
-    background:rgba(241,234,217,.12);
-    border:1px solid rgba(241,234,217,.3);
-    color:#f1ead9;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.32);
+    color:#fff;
     font-size:20px; line-height:1;
     display:grid; place-items:center;
     cursor:pointer;
   }
-  .mermaid-modal-close:hover{ background:rgba(241,234,217,.22); }
+  .mermaid-modal-close:hover{ background:rgba(255,255,255,.22); }
+  @media (max-width:560px){
+    .mermaid::after{ display:none; }
+    .mermaid{ padding:10px; }
+    .mermaid svg{ padding:14px; border-radius:12px; }
+  }
 </style>
 
 <script type="module" is:inline>
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
-  // Tema custom ad alto contrasto, coerente col sito
+  // Tema custom coerente con la console visuale del sito.
   mermaid.initialize({
     startOnLoad: false,
     securityLevel: 'loose',
     fontFamily: 'ui-sans-serif, system-ui, -apple-system, sans-serif',
     theme: 'base',
     flowchart: {
-      htmlLabels: true,
+      htmlLabels: false,
       curve: 'basis',
       padding: 18,
       nodeSpacing: 60,
@@ -145,42 +181,42 @@ const fmt = (d: Date) =>
       diagramMarginY: 24,
       actorMargin: 110,
       width: 210,
-      boxMargin: 14,
+      boxMargin: 16,
       messageMargin: 38,
       actorFontSize: 15,
-      actorFontWeight: 600,
+      actorFontWeight: 700,
       noteFontSize: 13,
       messageFontSize: 14,
       bottomMarginAdj: 30
     },
     themeVariables: {
       fontSize: '15px',
-      background: '#f1ead9',
-      primaryColor: '#ffffff',
-      primaryTextColor: '#1a1612',
-      primaryBorderColor: '#1a1612',
-      secondaryColor: '#e9dcc1',
-      tertiaryColor: '#dccfb0',
-      lineColor: '#2a2620',
-      textColor: '#1a1612',
-      mainBkg: '#ffffff',
-      nodeBorder: '#1a1612',
-      clusterBkg: '#e9dcc1',
-      clusterBorder: '#1a1612',
-      edgeLabelBackground: '#f1ead9',
-      actorBkg: '#ffffff',
-      actorBorder: '#1a1612',
-      actorTextColor: '#1a1612',
-      actorLineColor: '#2a2620',
-      signalColor: '#1a1612',
-      signalTextColor: '#1a1612',
-      labelBoxBkgColor: '#ffffff',
-      labelBoxBorderColor: '#1a1612',
-      noteBkgColor: '#e3b072',
-      noteBorderColor: '#7a5224',
-      noteTextColor: '#1a1612',
-      activationBkgColor: '#86d3b1',
-      activationBorderColor: '#1a1612',
+      background: '#0d1117',
+      primaryColor: '#111820',
+      primaryTextColor: '#e6edf3',
+      primaryBorderColor: '#2d3a44',
+      secondaryColor: '#14252d',
+      tertiaryColor: '#0e6e5c',
+      lineColor: '#52616d',
+      textColor: '#e6edf3',
+      mainBkg: '#111820',
+      nodeBorder: '#2d3a44',
+      clusterBkg: '#111820',
+      clusterBorder: '#2d3a44',
+      edgeLabelBackground: '#0d1117',
+      actorBkg: '#111820',
+      actorBorder: '#2d3a44',
+      actorTextColor: '#e6edf3',
+      actorLineColor: '#52616d',
+      signalColor: '#a8b0b8',
+      signalTextColor: '#e6edf3',
+      labelBoxBkgColor: '#111820',
+      labelBoxBorderColor: '#2d3a44',
+      noteBkgColor: '#14252d',
+      noteBorderColor: '#426b7f',
+      noteTextColor: '#e6edf3',
+      activationBkgColor: '#0e6e5c',
+      activationBorderColor: '#15c47a',
     }
   });
 

@@ -30,7 +30,7 @@ const fmt = (d: Date) =>
           <a class="post-link" href={`/blog/${p.slug}`}>
             <div class="meta">{fmt(p.data.pubDate)}</div>
             <div>
-              <h3>{p.data.title}</h3>
+                <h3 transition:name={`post-title-${p.slug}`}>{p.data.title}</h3>
               <p>{p.data.description}</p>
             </div>
             <div class="arrow" aria-hidden="true">→</div>
@@ -50,7 +50,7 @@ const fmt = (d: Date) =>
   :global(.link-ink){
     color:var(--ink-0);
     text-decoration:underline;
-    text-decoration-color:rgba(134,211,177,.55);
+    text-decoration-color:rgba(14,110,92,.45);
     text-decoration-thickness:1px;
     text-underline-offset:3px;
   }

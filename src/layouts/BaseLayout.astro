@@ -1,5 +1,6 @@
 ---
 import '~/styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 import Scene from '~/components/Scene.astro';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
@@ -27,7 +28,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
-  <meta name="theme-color" content="#0a1018" />
+  <meta name="theme-color" content="#f7f8f6" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href={canonicalURL} />
 
@@ -37,28 +38,94 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonicalURL} />
   <meta name="twitter:card" content="summary_large_image" />
+  <ViewTransitions />
 </head>
 <body>
   <Scene />
-  <Nav />
+  <div class="shell">
+    <Nav />
 
-  <main>
-    <slot />
-  </main>
-
-  {!hideFooter && <Footer />}
+    <main class="surface">
+      <slot />
+      {!hideFooter && <Footer />}
+    </main>
+  </div>
 
   <script>
-    // Reveal-on-scroll condiviso. Si applica a qualunque .reveal nel sito.
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in');
-          io.unobserve(e.target);
-        }
+    const applyChromeState = () => {
+      document.body.classList.toggle('is-scrolled', window.scrollY > 8);
+    };
+
+    const setupReveal = () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+        return;
+      }
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -44px 0px' });
+
+      document.querySelectorAll('.reveal').forEach((el, index) => {
+        if (el.classList.contains('in')) return;
+        (el as HTMLElement).style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 45}ms`);
+        io.observe(el);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    };
+
+    const activateTab = (button: HTMLButtonElement) => {
+      const target = button.dataset.tab;
+      const group = button.closest('.tabs')?.parentElement;
+      if (!target || !group) return;
+      group.querySelectorAll('.tabs button').forEach((item) => {
+        const selected = item === button;
+        item.classList.toggle('active', selected);
+        item.setAttribute('aria-selected', selected ? 'true' : 'false');
+        item.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      group.querySelectorAll('.panel').forEach((panel) => {
+        panel.classList.toggle('active', (panel as HTMLElement).dataset.panel === target);
+      });
+    };
+
+    const setupTabs = () => {
+      document.querySelectorAll('.tabs button').forEach((button) => {
+        const tab = button as HTMLButtonElement;
+        if (tab.dataset.bound === 'true') return;
+        tab.dataset.bound = 'true';
+        tab.setAttribute('tabindex', tab.classList.contains('active') ? '0' : '-1');
+        tab.addEventListener('click', () => activateTab(tab));
+        tab.addEventListener('keydown', (event) => {
+          if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          const groupTabs = Array.from(tab.closest('.tabs')!.querySelectorAll('button')) as HTMLButtonElement[];
+          const current = groupTabs.indexOf(tab);
+          const next =
+            event.key === 'Home' ? 0 :
+            event.key === 'End' ? groupTabs.length - 1 :
+            event.key === 'ArrowRight' ? (current + 1) % groupTabs.length :
+            (current - 1 + groupTabs.length) % groupTabs.length;
+          groupTabs[next].focus();
+          activateTab(groupTabs[next]);
+        });
+      });
+    };
+
+    const setupPage = () => {
+      applyChromeState();
+      setupReveal();
+      setupTabs();
+    };
+
+    window.addEventListener('scroll', applyChromeState, { passive: true });
+    document.addEventListener('astro:page-load', setupPage);
+    setupPage();
   </script>
 </body>
 </html>

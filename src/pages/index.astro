@@ -17,40 +17,97 @@ const fmt = (d: Date) =>
   description="Leonardo Pegollo: medico di distretto a Milano, mani anche dentro il codice. Sanità territoriale, dati, prodotto clinico locale."
 >
   <section class="hero">
-    <div class="wrap">
-      <span class="eyebrow"><span class="dot"></span> Milano · Maggio 2026 · Vol. 1</span>
-      <h1 class="gradient-title" style="margin-top:18px">
-        Medico di distretto,<br/>
-        <em>mani anche dentro il codice.</em>
-      </h1>
-      <p class="lead" style="max-width:680px; margin-top:24px">
-        Mi chiamo Leo. Faccio il medico di distretto a Milano: sanità territoriale,
-        pazienti complessi, domiciliarità. La parte di sistema dove la cura non
-        finisce con la prescrizione, ma comincia lì. In parallelo metto le mani
-        dentro <a href="/mediflow" class="link-ink">MediFlow</a> (nome temporaneo),
-        un applicativo clinico nato per me e, aspirazionalmente, per chiunque
-        voglia uno strumento di lavoro che non chieda di affidare i dati a terzi.
-      </p>
-      <p class="lead muted" style="max-width:680px; margin-top:4px">
-        Qui scrivo di cosa sia la sanità nell'epoca del «codice democratico»,
-        e del rigore poco democratico che deve circondarla.
-      </p>
-      <div class="cta-row">
-        <a class="btn primary" href="/mediflow">White paper di MediFlow <span aria-hidden="true">→</span></a>
-        <a class="btn ghost" href="/blog">Vai al blog</a>
-        <a class="btn ghost" href="/about">Bio completa</a>
+    <div class="wrap hero-grid">
+      <div class="hero-copy reveal">
+        <p class="role-line">Medico di distretto · Milano</p>
+        <h1 class="gradient-title">Leonardo Pegollo <span class="h-mute">medico, dati e qualche riga di codice.</span></h1>
+        <p class="lead">
+          Faccio il medico di distretto. Lavoro con pazienti complessi,
+          domiciliarità e sanità territoriale; quando un problema ritorna spesso,
+          provo a capirlo anche con il codice. Da lì nasce
+          <a href="/mediflow" class="link-ink">MediFlow</a>, una cartella clinica
+          <span class="sig">locale</span> che tiene i dati sul computer di chi cura.
+        </p>
+        <p class="lead muted">
+          Qui tengo appunti su lavoro clinico, dati, processi e piccoli pezzi di
+          software che possono aiutare, senza far finta che risolvano tutto.
+        </p>
+        <div class="chip-row hero-chips" aria-label="Principi tecnici">
+          <span class="chip">Dati in locale</span>
+          <span class="chip">Niente analytics</span>
+          <span class="chip">Standard aperti</span>
+          <span class="chip">AI sul dispositivo</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/mediflow">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2 5 3-10 2 5h7" /></svg>
+            Leggi MediFlow
+          </a>
+          <a class="btn btn-ghost" href="/blog">Blog</a>
+          <a class="btn btn-ghost" href="/about">Bio</a>
+        </div>
+        <div class="social-row">
+          <SocialLinks variant="pills" />
+        </div>
       </div>
 
-      <div style="margin-top:28px">
-        <SocialLinks variant="pills" />
-      </div>
-
-      <div class="strip" aria-hidden="true">
-        <span><b>Local-first</b></span>
-        <span><b>Open source</b></span>
-        <span><b>Niente analytics di terze parti</b></span>
-        <span><b>Niente sponsor</b></span>
-      </div>
+      <aside class="media-frame hero-frame reveal" aria-label="Promemoria sintetico MediFlow">
+        <div class="inner hero-system clinical-monitor">
+          <div class="system-head">
+            <span>MediFlow</span>
+            <span>in breve</span>
+          </div>
+          <svg viewBox="0 0 520 420" role="img" aria-labelledby="system-title system-desc">
+            <title id="system-title">Promemoria locale di MediFlow</title>
+            <desc id="system-desc">I dati restano sul Mac, cifrati, con AI locale e uscita in formati standard.</desc>
+            <defs>
+              <linearGradient id="flowSignal" x1="0" x2="1" y1="0" y2="1">
+                <stop stop-color="var(--mint)" />
+                <stop offset="1" stop-color="var(--signal)" />
+              </linearGradient>
+            </defs>
+            <g class="rail">
+              <path d="M260 86v248"/>
+              <path d="M152 158h216"/>
+              <path d="M152 260h216"/>
+            </g>
+            <g class="node primary-node">
+              <rect x="184" y="34" width="152" height="72" rx="12"/>
+              <text x="260" y="66" text-anchor="middle">Sul Mac</text>
+              <text x="260" y="86" text-anchor="middle">dati cifrati</text>
+            </g>
+            <g class="node">
+              <rect x="44" y="132" width="152" height="72" rx="12"/>
+              <text x="120" y="164" text-anchor="middle">Scheda</text>
+              <text x="120" y="184" text-anchor="middle">nel browser</text>
+            </g>
+            <g class="node">
+              <rect x="324" y="132" width="152" height="72" rx="12"/>
+              <text x="400" y="164" text-anchor="middle">AI locale</text>
+              <text x="400" y="184" text-anchor="middle">se serve</text>
+            </g>
+            <g class="node">
+              <rect x="44" y="234" width="152" height="72" rx="12"/>
+              <text x="120" y="266" text-anchor="middle">Export</text>
+              <text x="120" y="286" text-anchor="middle">FHIR R4</text>
+            </g>
+            <g class="node">
+              <rect x="324" y="234" width="152" height="72" rx="12"/>
+              <text x="400" y="266" text-anchor="middle">SISS/FSE</text>
+              <text x="400" y="286" text-anchor="middle">a mano</text>
+            </g>
+            <g class="node primary-node">
+              <rect x="184" y="332" width="152" height="54" rx="12"/>
+              <text x="260" y="364" text-anchor="middle">niente invii nascosti</text>
+            </g>
+          </svg>
+          <div class="system-foot">
+            <span>No analytics</span>
+            <span>No cloud clinico</span>
+            <span>Codice aperto</span>
+          </div>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -102,46 +159,25 @@ const fmt = (d: Date) =>
         <p class="lead">Ogni progetto qui presente nasce da un problema reale incontrato sul lavoro. Niente esercizi di stile.</p>
       </div>
 
-      <div class="grid cols-3 reveal">
-        <a class="card" href="/mediflow" style="text-decoration:none">
-          <span class="ord">01</span>
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 3v6a4 4 0 0 0 8 0V3"/>
-              <path d="M9 13v3a4 4 0 0 0 8 0v-2"/>
-              <circle cx="17" cy="11" r="2"/>
-            </svg>
-          </div>
-          <h3>MediFlow</h3>
-          <p>Cartella clinica locale, cifrata, con AI sul dispositivo. Standard ICD-11 e FHIR R4. Per chi esercita in autonomia o piccoli ambulatori.</p>
-          <p class="card-cta">Leggi il white paper <span aria-hidden="true">→</span></p>
+      <div class="editorial-list reveal">
+        <a class="editorial-row" href="/mediflow">
+          <span class="idx">01</span>
+          <span class="row-title">MediFlow</span>
+          <span class="row-body">Cartella clinica locale, cifrata, con AI sul dispositivo. Standard ICD-11 e FHIR R4.</span>
+          <span class="row-action">White paper →</span>
         </a>
-        <div class="card">
-          <span class="ord">02</span>
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 18h18"/>
-              <rect x="5" y="12" width="3" height="6"/>
-              <rect x="10.5" y="8" width="3" height="10"/>
-              <rect x="16" y="4" width="3" height="14"/>
-            </svg>
-          </div>
-          <h3>Note dal territorio</h3>
-          <p>Letture dei dati territoriali che si possono discutere insieme. Grandi e piccoli temi della clinica quotidiana nella gestione della cronicità: indicatori, appropriatezza, aspettative di chi è in cura. Tono informale, mai approssimativo.</p>
-          <p class="card-cta muted">In arrivo nel blog. Qualche slide ci sta.</p>
+        <div class="editorial-row">
+          <span class="idx">02</span>
+          <span class="row-title">Note dal territorio</span>
+          <span class="row-body">Letture dei dati territoriali, cronicità, appropriatezza e aspettative di chi è in cura.</span>
+          <span class="row-action muted">In arrivo</span>
         </div>
-        <div class="card">
-          <span class="ord">03</span>
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 4h11l3 3v13H5z"/>
-              <path d="M8 9h8M8 13h8M8 17h5"/>
-            </svg>
-          </div>
-          <h3>Note di lavoro</h3>
-          <p>Riflessioni asciutte su decisioni, audit, processi, accreditamento. Niente trend, niente buzz.</p>
-          <p class="card-cta"><a href="/blog" class="link-ink">Vai al blog →</a></p>
-        </div>
+        <a class="editorial-row" href="/blog">
+          <span class="idx">03</span>
+          <span class="row-title">Note di lavoro</span>
+          <span class="row-body">Decisioni, audit, processi, accreditamento. Niente trend, niente buzz.</span>
+          <span class="row-action">Blog →</span>
+        </a>
       </div>
     </div>
   </section>
@@ -183,37 +219,127 @@ const fmt = (d: Date) =>
 </BaseLayout>
 
 <style>
-  .hero{ padding:100px 0 64px; }
-  .hero h1{ margin:18px 0 18px; }
-  .hero h1 em{
-    font-style:italic;
-    color:var(--paper);
-    -webkit-text-fill-color:var(--paper);
-    background:none;
+  .hero{ padding:0 0 64px; }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) minmax(360px, 500px);
+    gap:52px;
+    align-items:center;
   }
-
+  .hero-copy{
+    position:relative;
+    padding:0;
+  }
+  .hero-copy::before{ display:none; }
+  .role-line{
+    margin:0 0 18px;
+    font-family:var(--font-technical);
+    color:var(--ink-2);
+    font-size:.82rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .hero h1{ margin:0 0 24px; max-width:10ch; }
+  .hero h1 .h-mute{ display:block; max-width:12ch; }
+  .hero .lead{ max-width:620px; margin-top:0; font-size:1.18rem; }
+  .hero-chips{ margin-top:22px; }
   .cta-row{
-    display:flex; gap:10px; margin-top:32px; flex-wrap:wrap;
+    display:flex;
+    gap:10px;
+    margin-top:26px;
+    flex-wrap:wrap;
   }
+  .social-row{ margin-top:24px; }
 
-  /* Link in linea con sottolineatura tipo penna */
-  :global(.link-ink){
+  .hero-system{
+    border:0;
+    border-radius:14px;
+    background:#0d1117;
+    box-shadow:none;
+    overflow:hidden;
+  }
+  .system-head,
+  .system-foot{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 16px;
+    font-family:var(--font-technical);
+    font-size:.75rem;
+    color:#a8b0b8;
+    text-transform:uppercase;
+    border-bottom:1px solid rgba(230,237,243,.14);
+  }
+  .system-head span:first-child{ color:#e6edf3; font-weight:700; }
+  .system-foot{
+    border-top:1px solid rgba(230,237,243,.14);
+    border-bottom:0;
+    flex-wrap:wrap;
+  }
+  .hero-system svg{ width:100%; height:auto; display:block; padding:26px 18px 18px; }
+  .rail path{
+    fill:none;
+    stroke:rgba(230,237,243,.18);
+    stroke-width:1.2;
+  }
+  .node rect{
+    fill:#111820;
+    stroke:rgba(230,237,243,.18);
+    stroke-width:1;
+    filter:drop-shadow(0 8px 18px rgba(0,0,0,.16));
+  }
+  .primary-node rect{
+    fill:url(#flowSignal);
+    stroke:rgba(21,196,122,.72);
+  }
+  .node text{
+    font-family:var(--font);
+    font-size:13px;
+    fill:#e6edf3;
+  }
+  .node text + text{
+    font-family:var(--font-technical);
+    font-size:11px;
+    fill:#a8b0b8;
+  }
+  .primary-node text,
+  .primary-node text + text{ fill:#fff; }
+
+  .editorial-list{ display:grid; gap:10px; }
+  .editorial-row{
+    display:grid;
+    grid-template-columns:56px minmax(140px, 220px) minmax(0, 1fr) auto;
+    gap:22px;
+    align-items:start;
+    padding:18px;
+    border:1px solid var(--line);
+    border-radius:var(--r-card);
+    background:var(--surface);
+    box-shadow:var(--sh-pill);
+    color:inherit;
+    text-decoration:none;
+    transition:transform var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+  }
+  a.editorial-row:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--sh-card);
+    border-color:var(--line-strong);
+  }
+  .editorial-row .idx,
+  .editorial-row .row-action{
+    font-family:var(--font-technical);
+    font-size:.8rem;
+    color:var(--ink-2);
+  }
+  .editorial-row .row-title{
     color:var(--ink-0);
-    text-decoration:underline;
-    text-decoration-color:rgba(134,211,177,.55);
-    text-decoration-thickness:1px;
-    text-underline-offset:4px;
-    transition:text-decoration-color .2s ease;
+    font-weight:700;
   }
-  :global(.link-ink:hover){
-    text-decoration-color:var(--mint);
+  .editorial-row .row-body{
+    color:var(--ink-1);
+    max-width:62ch;
   }
-
-  .card-cta{
-    font-size:13px; margin-top:14px; color:var(--mint);
-    font-family:var(--mono); letter-spacing:.3px;
-  }
-  .card-cta a{ color:var(--mint); text-decoration:none; }
+  .editorial-row .row-action{ color:var(--mint); white-space:nowrap; }
 
   /* === Sezione bio (home) === */
   .bio-grid{
@@ -232,30 +358,30 @@ const fmt = (d: Date) =>
     text-align:center;
     padding:28px 24px;
     border:1px solid var(--rule);
-    border-radius:var(--r-2);
-    background:rgba(241,234,217,.025);
+    border-radius:var(--r-card);
+    background:var(--surface);
+    box-shadow:var(--sh-card);
   }
   @media (max-width:780px){ .bio-side{ text-align:left; padding:24px; } }
   .bio-photo{
     width:144px; height:144px; border-radius:50%;
     margin:0 auto 18px; display:block;
     object-fit:cover;
-    background:#0a1018;
+    background:#fff;
     padding:3px;
-    background-image:linear-gradient(#0d1217, #0d1217), linear-gradient(135deg, var(--mint) 0%, var(--paper) 60%, var(--amber) 100%);
+    background-image:linear-gradient(#fff, #fff), linear-gradient(135deg, var(--mint) 0%, var(--bg-3) 100%);
     background-origin:border-box;
     background-clip:content-box, border-box;
-    box-shadow:0 0 0 1px rgba(241,234,217,.06), 0 18px 36px -18px rgba(0,0,0,.6);
+    box-shadow:var(--shadow-1);
   }
   @media (max-width:780px){ .bio-photo{ margin:0 0 18px; } }
   .bio-role{
-    font-family:var(--serif);
+    font-family:var(--font-display);
     font-size:20px; font-weight:500; color:var(--ink-0); margin:0 0 4px;
   }
   .bio-tag{
-    font-family:var(--mono);
+    font-family:var(--font-technical);
     font-size:12px; color:var(--ink-2); margin:0 0 20px;
-    letter-spacing:.5px;
   }
   .bio-meta{
     list-style:none; padding:18px 0 0; margin:0;
@@ -271,8 +397,8 @@ const fmt = (d: Date) =>
     color:var(--ink-1);
   }
   .bio-meta dt{
-    font-family:var(--mono);
-    font-size:11px; text-transform:uppercase; letter-spacing:1.5px;
+    font-family:var(--font-technical);
+    font-size:11px; text-transform:uppercase;
     color:var(--ink-2);
     margin:0; padding-top:2px;
   }
@@ -281,4 +407,21 @@ const fmt = (d: Date) =>
   .bio-body h2{ margin-top:0; }
   .bio-body p{ margin-bottom:14px; }
   .bio-body a{ color:var(--ink-0); }
+
+  @media (max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; gap:36px; }
+    .hero-system{ max-width:560px; }
+  }
+  @media (max-width:720px){
+    .editorial-row{
+      grid-template-columns:42px 1fr;
+      gap:8px 14px;
+    }
+    .editorial-row .row-body,
+    .editorial-row .row-action{
+      grid-column:2;
+    }
+    .system-head,
+    .system-foot{ font-size:.7rem; }
+  }
 </style>

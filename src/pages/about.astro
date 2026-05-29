@@ -127,6 +127,12 @@ import SocialLinks from '~/components/SocialLinks.astro';
 
 <style>
   /* Riga meta tipo intestazione di scheda: definizione + valore */
+  section p:not(.lead):not(.muted){
+    font-family:var(--font-body);
+    font-size:1.02rem;
+    line-height:1.7;
+  }
+
   .meta-line{
     margin:24px 0 0;
     padding:18px 0;
@@ -140,8 +146,8 @@ import SocialLinks from '~/components/SocialLinks.astro';
     display:flex; flex-direction:column; gap:4px;
   }
   .meta-line dt{
-    font-family:var(--mono);
-    font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+    font-family:var(--font-technical);
+    font-size:11px; text-transform:uppercase;
     color:var(--ink-2);
     margin:0;
   }
@@ -156,7 +162,7 @@ import SocialLinks from '~/components/SocialLinks.astro';
   p a{
     color:var(--ink-0);
     text-decoration:underline;
-    text-decoration-color:rgba(134,211,177,.5);
+    text-decoration-color:rgba(14,110,92,.45);
     text-decoration-thickness:1px;
     text-underline-offset:3px;
   }

@@ -56,11 +56,11 @@ La scelta adottata in MediFlow è un **disaccoppiamento esplicito**: il gestiona
 
 ```mermaid
 graph TD
-    classDef clinical fill:#1a4d7d,stroke:#1a1612,stroke-width:3px,color:#ffffff,font-weight:700;
-    classDef handoff  fill:#7a5224,stroke:#1a1612,stroke-width:3px,color:#ffffff,font-weight:700;
-    classDef siss     fill:#1f5a3d,stroke:#1a1612,stroke-width:3px,color:#ffffff,font-weight:700;
-    classDef decision fill:#ffffff,stroke:#1a1612,stroke-width:3px,color:#1a1612,font-weight:700;
-    classDef stop     fill:#7a2a2a,stroke:#1a1612,stroke-width:3px,color:#ffffff,font-weight:700;
+    classDef clinical fill:#0e6e5c,stroke:#15c47a,stroke-width:2px,color:#ffffff,font-weight:700;
+    classDef handoff  fill:#14252d,stroke:#426b7f,stroke-width:2px,color:#e6edf3,font-weight:700;
+    classDef siss     fill:#111820,stroke:#15c47a,stroke-width:2px,color:#e6edf3,font-weight:700;
+    classDef decision fill:#f4f6f7,stroke:#cfd7dd,stroke-width:2px,color:#111417,font-weight:700;
+    classDef stop     fill:#63363b,stroke:#9f4f56,stroke-width:2px,color:#ffffff,font-weight:700;
 
     A[MediFlow: Preparazione Bozza]:::clinical --> B{Paziente valido?}:::decision
     B -- No --> D[Blocco]:::stop
