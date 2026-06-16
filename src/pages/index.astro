@@ -21,7 +21,6 @@ const fmt = (d: Date) =>
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy reveal">
-        <p class="role-line">Medico di distretto · Milano</p>
         <h1 class="gradient-title">Leonardo Pegollo <span class="h-mute">medico, dati e lavoro clinico oggi.</span></h1>
         <p class="lead">
           Faccio il medico di distretto. Lavoro con pazienti complessi,
@@ -37,12 +36,6 @@ const fmt = (d: Date) =>
           dati, persone e decisioni, ma chiedono umiltà e revisione. Se servono
           solo a produrre contenuto, hanno già perso il punto.
         </p>
-        <div class="hero-notes" aria-label="Coordinate del sito">
-          <span>Lavoro clinico</span>
-          <span>Dati</span>
-          <span>Software locale</span>
-          <span>Note tecniche</span>
-        </div>
         <div class="cta-row">
           <a class="btn btn-primary" href="/mediflow">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2 5 3-10 2 5h7" /></svg>
@@ -74,7 +67,6 @@ const fmt = (d: Date) =>
           </div>
         </div>
         <div class="bio-body">
-          <div class="kicker">Bio</div>
           <h2>In due paragrafi.</h2>
           <p>
             Faccio il medico di distretto a Milano. Da sempre lavoro su sanità
@@ -100,7 +92,6 @@ const fmt = (d: Date) =>
   <section id="cosa-faccio">
     <div class="wrap">
       <SectionHead
-        kicker="Cosa faccio"
         heading="Tre cose, niente di più."
         lead="Ogni progetto qui presente nasce da un problema reale incontrato sul lavoro. Niente esercizi di stile."
       />
@@ -131,7 +122,7 @@ const fmt = (d: Date) =>
   {posts.length > 0 && (
     <section id="ultimi-post">
       <div class="wrap">
-        <SectionHead kicker="Dal blog" heading="Ultimi appunti." />
+        <SectionHead heading="Ultimi appunti." />
         <div class="post-list reveal">
           {posts.map((p) => (
             <a class="post-link" href={`/blog/${p.slug}`}>
@@ -166,29 +157,9 @@ const fmt = (d: Date) =>
     position:relative;
     padding:0;
   }
-  .role-line{
-    margin:0 0 18px;
-    font-family:var(--font-technical);
-    color:var(--ink-2);
-    font-size:.82rem;
-    text-transform:uppercase;
-    letter-spacing:.08em;
-  }
   .hero h1{ margin:0 0 24px; max-width:10ch; }
   .hero h1 .h-mute{ display:block; max-width:12ch; }
   .hero .lead{ max-width:620px; margin-top:0; font-size:1.18rem; }
-  .hero-notes{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px 18px;
-    margin-top:22px;
-    color:var(--ink-2);
-    font:700 .76rem/1.2 var(--font-technical);
-    text-transform:uppercase;
-  }
-  .hero-notes span{
-    white-space:nowrap;
-  }
   .cta-row{
     display:flex;
     gap:10px;

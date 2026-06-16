@@ -77,7 +77,7 @@ const boundary = [
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <span class="eyebrow"><span class="dot"></span> White paper · v0.6.0 · Maggio 2026</span>
+      <span class="eyebrow">White paper · v0.7.0 · Giugno 2026</span>
       <h1 class="gradient-title" style="margin-top:18px">
         MediFlow <span class="h-mute">è una cartella clinica</span><br/><span class="sig">locale</span>, per lavorare senza spedire i dati altrove.
       </h1>
@@ -114,7 +114,6 @@ const boundary = [
   <section id="cosa">
     <div class="wrap">
       <SectionHead
-        kicker="Cos'è"
         heading="Una cartella clinica, niente di più. Niente di meno."
         lead="MediFlow gestisce anagrafica, diario clinico, terapie, controlli, osservazioni e documenti delle persone in cura. Lo fa senza chiedere a chi cura di affidare i dati a un servizio remoto e senza promettere miracoli che non può mantenere."
       />
@@ -174,7 +173,6 @@ const boundary = [
   <section id="perchi">
     <div class="wrap">
       <SectionHead
-        kicker="Per chi è"
         heading="Tre punti di vista, una stessa cartella."
         lead="Il prodotto cambia di significato a seconda di chi lo guarda. Ecco cosa cambia per ciascuno."
       />
@@ -211,7 +209,6 @@ const boundary = [
   <section id="principi">
     <div class="wrap">
       <SectionHead
-        kicker="Principi"
         heading="Quattro promesse non negoziabili."
         lead="Sono quattro vincoli che pesano sulle scelte tecniche e di prodotto. Quando entrano in conflitto con la velocità di sviluppo, vincono i vincoli."
       />
@@ -226,7 +223,6 @@ const boundary = [
   <section id="topologia">
     <div class="wrap">
       <SectionHead
-        kicker="Topologia"
         heading="Dove vivono i dati. Chi parla con chi."
         lead="Il sistema gira sul Mac di chi cura. Il browser e i client Apple parlano con un'unica applicazione locale. I servizi opzionali (AI, ricerca diagnosi, redazione) sono sempre su localhost."
       />
@@ -243,7 +239,6 @@ const boundary = [
   <section id="flussi">
     <div class="wrap">
       <SectionHead
-        kicker="Flussistica"
         heading="Cosa succede davvero quando lavori in scheda."
         lead="Sei flussi essenziali, in ordine di vita di una giornata clinica. Ogni passo è verificabile dal codice e dagli ADR pubblici."
       />
@@ -263,7 +258,6 @@ const boundary = [
   <section id="sicurezza">
     <div class="wrap">
       <SectionHead
-        kicker="Sicurezza & Privacy"
         heading="Cosa proteggiamo. Da chi. Come."
         lead="Il modello di minaccia è esplicito: descriviamo cosa copriamo e cosa non copriamo. La sicurezza non è una promessa, è un perimetro."
       />
@@ -287,7 +281,6 @@ const boundary = [
   <section id="interop">
     <div class="wrap">
       <SectionHead
-        kicker="Interoperabilità"
         heading="Standard veri, non promesse."
         lead="Ogni dato clinico ha un codice riconosciuto a livello internazionale. Niente vincoli proprietari sui formati di esportazione."
       />
@@ -302,7 +295,6 @@ const boundary = [
   <section id="tappe">
     <div class="wrap">
       <SectionHead
-        kicker="Tappe del prodotto"
         heading="Da dove veniamo. Dove andiamo."
         lead="Una linea del tempo onesta: distinguiamo ciò che è in produzione da ciò che è ancora in disegno."
       />
@@ -311,8 +303,9 @@ const boundary = [
         <div class="tl-item"><div class="ver"><b>v0.3.0</b> · fondamenta</div><h4>Le radici tecniche</h4><ul><li>Migrazione a SQLite cifrato (addio storage browser)</li><li>Cifratura zero-knowledge attiva</li><li>AI locale: Qwen per testo, DeepSeek per OCR via Ollama</li><li>Diagnosi standardizzate ICD-11</li><li>Multi-ambulatorio con identificazione visiva</li></ul></div>
         <div class="tl-item"><div class="ver"><b>v0.4.0</b> · contratti più solidi</div><h4>Governance API e flussi documentali</h4><ul><li>API locale governata: baseline OpenAPI <code>/api/v1</code> e guardrail anti-deriva</li><li>Pipeline OCR-first con import revisionabile</li><li>Archivio intelligente operabile (pulizia, persistenza farmaci, allineamento insight)</li><li>Audit append-only, lockout autenticazione, cambio PIN zero-knowledge</li><li>Backup automatico, scheduler notturno, retention</li></ul></div>
         <div class="tl-item"><div class="ver"><b>v0.5.0</b> · interfaccia e governance AI</div><h4>Stabilizzazione web e onestà narrativa</h4><ul><li>Scheda paziente, lista, form e impostazioni con gerarchia visiva più leggibile</li><li>Task contract AI condiviso e benchmark headless</li><li>Separazione netta tra runtime operativo e lane "solo benchmark"</li><li>Boundary SISS/FSE raccontati per quello che sono</li></ul></div>
-        <div class="tl-item"><div class="ver"><b>v0.6.0</b> · release corrente · Maggio 2026</div><h4>Mac home-base e famiglia Apple</h4><ul><li>Mac come nodo autorevole: pairing, capability discovery, primi write versionati</li><li>iPhone/iPad paired non-AI, cache cifrata degradabile, workflow online limitati</li><li>Document intelligence artifact-first: parse/evidence cifrato sugli allegati</li><li>SISS/FSE più maturo ma onesto: corpus locale, scenari, boundary <em>webapp-assisted</em></li><li>Coda Linear azzerata: governance operativa chiusa</li></ul></div>
-        <div class="tl-item future"><div class="ver"><b>post-v0.6</b> <span class="pill">in corso</span></div><h4>Network home-base più ampia, nuova shell macOS, vocale</h4><ul><li>Replica e fallback offline tra dispositivi con riconciliazione esplicita</li><li>Runtime AI centralizzabile per client meno potenti, senza egress</li><li>Decision layer documentale separato (governance, recency, esclusioni)</li><li>Nuova shell macOS home-base, packaged, indipendente dal terminale</li><li>Dettatura locale (Whisper) e chat conversazionale con la cartella</li></ul></div>
+        <div class="tl-item"><div class="ver"><b>v0.6.0</b> · Maggio 2026</div><h4>Mac home-base e famiglia Apple</h4><ul><li>Mac come nodo autorevole: pairing, capability discovery, primi write versionati</li><li>iPhone/iPad paired non-AI, cache cifrata degradabile, workflow online limitati</li><li>Document intelligence artifact-first: parse/evidence cifrato sugli allegati</li><li>SISS/FSE più maturo ma onesto: corpus locale, scenari, boundary <em>webapp-assisted</em></li><li>Coda Linear azzerata: governance operativa chiusa</li></ul></div>
+        <div class="tl-item"><div class="ver"><b>v0.7.0</b> · release corrente · Giugno 2026</div><h4>Hardening clinico e pubblicazione onesta</h4><ul><li>Soft-delete paziente reversibile e ciclo di vita unificato delle sotto-risorse su <code>/api/v1</code> (diario, terapie, controlli, osservazioni)</li><li>Token dei client paired inerti a modalità rete spenta; hardening su allegati, controlli, impostazioni e riparazione del database</li><li>Safety gate AI più solidi (kill-switch e readiness) su Patient Insight, Smart Import e document synthesis</li><li>Interfaccia più leggibile: copy asciutto, dark mode completa, palette semantica più chiara, flusso a un clic verso la scheda</li><li>Documentazione e facciata OSS riallineate al prodotto reale, senza overclaim su SISS/FSE, cloud o automazione clinica</li></ul></div>
+        <div class="tl-item future"><div class="ver"><b>post-v0.7</b> <span class="pill">in corso</span></div><h4>Rete più ampia, shell nativa, voce</h4><ul><li>Replica e fallback offline tra dispositivi con riconciliazione esplicita</li><li>Runtime AI locale centralizzabile per i client meno potenti, senza egress</li><li>Decision layer documentale separato: governance delle fonti, recency, esclusioni, reviewability</li><li>Nuova shell macOS home-base packaged e famiglia Apple coerente per contratto</li><li>Prescrizioni di prestazione locali e dettatura/chat vocale (Whisper), sempre review-first</li></ul></div>
         <div class="tl-item future"><div class="ver"><b>v1.0.0</b> <span class="pill">visione</span></div><h4>Un ecosistema clinico locale, aperto, installabile</h4><ul><li>Esperienza nativa multi-dispositivo coerente sotto un unico contratto</li><li>Integrazione SISS/FSE con qualifica <code>SSI/A2A</code> sostenibile</li><li>Contratti di esportazione e migrazione formalizzati</li></ul></div>
       </div>
     </div>
@@ -322,7 +315,6 @@ const boundary = [
   <section id="boundary">
     <div class="wrap">
       <SectionHead
-        kicker="Boundary espliciti"
         heading="Cosa MediFlow non fa, e non vuole fare adesso."
         lead="Un white paper onesto descrive anche i limiti scelti. Sono confini, non difetti."
       />
@@ -337,7 +329,6 @@ const boundary = [
   <section id="glossario">
     <div class="wrap">
       <SectionHead
-        kicker="Glossario"
         heading="I termini, spiegati a chi non scrive software."
         lead="Apri il termine che ti interessa. Niente acronimi senza traduzione."
       />

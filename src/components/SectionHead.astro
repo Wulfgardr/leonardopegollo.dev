@@ -1,16 +1,13 @@
 ---
-// Intestazione di sezione ricorrente: kicker (label mono) + titolo + lead.
-// Sostituisce il blocco ripetuto a mano in home e white paper.
+// Intestazione di sezione: titolo + lead. Niente kicker/eyebrow decorativi.
 interface Props {
-  kicker: string;
   heading: string;
   lead?: string;
   reveal?: boolean;
 }
-const { kicker, heading, lead, reveal = true } = Astro.props;
+const { heading, lead, reveal = true } = Astro.props;
 ---
 <div class:list={['section-head', { reveal }]}>
-  <div class="kicker">{kicker}</div>
   <h2>{heading}</h2>
   {lead && <p class="lead">{lead}</p>}
   <slot />

@@ -298,24 +298,11 @@ em{ color:var(--ink-0); font-style:normal; font-weight:inherit; }
 .muted{ color:var(--ink-2); }
 .accent{ color:var(--mint); }
 
-.eyebrow,
-.kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
+.eyebrow{
+  display:inline-block;
   margin-bottom:14px;
-  font:760 .72rem/1 var(--font-technical);
-  color:var(--mint);
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-.kicker::before{
-  content:"";
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--signal);
-  box-shadow:0 0 0 3px rgba(21,196,122,.16);
+  color:var(--ink-2);
+  font-size:.9rem;
 }
 
 .btn{
