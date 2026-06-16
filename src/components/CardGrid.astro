@@ -1,0 +1,12 @@
+---
+// Griglia di card. cols = 2 | 3 | 4. Inoltra eventuali attributi extra (es. style).
+interface Props {
+  cols?: 2 | 3 | 4;
+  reveal?: boolean;
+  class?: string;
+}
+const { cols = 3, reveal = false, class: extra, ...rest } = Astro.props;
+---
+<div class:list={[`grid cols-${cols}`, { reveal }, extra]} {...rest}>
+  <slot />
+</div>

@@ -47,12 +47,5 @@ const fmt = (d: Date) =>
     font-size:13.5px; margin-top:18px;
   }
   .rss-line .sym{ color:var(--amber); width:16px; height:16px; }
-  :global(.link-ink){
-    color:var(--ink-0);
-    text-decoration:underline;
-    text-decoration-color:rgba(14,110,92,.45);
-    text-decoration-thickness:1px;
-    text-underline-offset:3px;
-  }
-  :global(.link-ink:hover){ text-decoration-color:var(--mint); }
+  /* .link-ink è definito in global.css; la classe sul markup eredita da lì. */
 </style>

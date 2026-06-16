@@ -1,0 +1,33 @@
+---
+// Card riusabile. Copre le tre forme presenti nel sito:
+//  - h3 + corpo (default)
+//  - ord (numero d'angolo) + icona (slot "icon") + h3 + corpo
+//  - principio: numeral romano + tag + h3 + corpo (class="principio")
+// Il corpo può contenere markup (p, ul, code) tramite lo slot di default,
+// oppure essere passato come testo con la prop `body`.
+interface Props {
+  title: string;
+  body?: string;
+  ord?: string;
+  numeral?: string;
+  tag?: string;
+  class?: string;
+}
+const { title, body, ord, numeral, tag, class: extra } = Astro.props;
+const hasIcon = Astro.slots.has('icon');
+---
+<div class:list={['card', extra]}>
+  {ord && <span class="ord">{ord}</span>}
+  {hasIcon && (
+    <div class="icon" aria-hidden="true"><slot name="icon" /></div>
+  )}
+  {(numeral || tag) && (
+    <div class="principio-head">
+      {numeral && <span class="numeral">{numeral}</span>}
+      {tag && <span class="tag">{tag}</span>}
+    </div>
+  )}
+  <h3>{title}</h3>
+  {body && <p>{body}</p>}
+  <slot />
+</div>

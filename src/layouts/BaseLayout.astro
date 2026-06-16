@@ -26,11 +26,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <!-- Enable scroll-reveal only when JS is present, before first paint, so the
+       above-the-fold content is never hidden waiting on the observer. -->
+  <script is:inline>document.documentElement.classList.add('js-reveal');</script>
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
-  <meta name="theme-color" content="#f7f8f6" />
+  <meta name="theme-color" content="#e6e9ec" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href={canonicalURL} />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
   <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
@@ -41,11 +45,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
   <ViewTransitions />
 </head>
 <body>
+  <a href="#main" class="skip-link">Salta al contenuto</a>
   <Scene />
   <div class="shell">
     <Nav />
 
-    <main class="surface">
+    <main id="main" class="surface">
       <slot />
       {!hideFooter && <Footer />}
     </main>

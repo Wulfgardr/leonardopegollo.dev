@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import SocialLinks from '~/components/SocialLinks.astro';
+import SectionHead from '~/components/SectionHead.astro';
+import PullQuote from '~/components/PullQuote.astro';
 import { getCollection } from 'astro:content';
 
 // Ultimi tre post del blog, in ordine di data decrescente.
@@ -54,37 +56,92 @@ const fmt = (d: Date) =>
         </div>
       </div>
 
-      <aside class="media-frame hero-frame reveal" aria-label="MediFlow in breve">
-        <div class="inner hero-note">
-          <div class="note-head">
-            <span>MediFlow</span>
-            <span>in breve</span>
+      <article id="appunto" class="artifact reveal" aria-label="Appunto operativo sintetico · dati dimostrativi">
+        <div class="artifact-shell">
+          <header class="artifact-head">
+            <div class="artifact-title">
+              <strong>Appunto operativo</strong>
+              <span>traccia sintetica · dati dimostrativi</span>
+            </div>
+            <span class="status-pill"><span class="status-dot" aria-hidden="true"></span>locale</span>
+          </header>
+
+          <div class="artifact-main">
+            <div class="artifact-body">
+              <div class="mini-panel">
+                <p class="mini-label">Contesto</p>
+                <p>
+                  Follow-up territoriale, cronicità e documentazione dispersa. Il punto non è
+                  automatizzare la cura: è rendere più chiaro cosa merita attenzione.
+                </p>
+              </div>
+
+              <div class="method-list" aria-label="Metodo">
+                <div class="method-row">
+                  <span class="method-index">01</span>
+                  <span class="method-text">
+                    <strong>Raccolgo il segnale clinico</strong>
+                    <span>Problema ricorrente, documento o dato che torna nel lavoro quotidiano.</span>
+                  </span>
+                </div>
+                <div class="method-row">
+                  <span class="method-index">02</span>
+                  <span class="method-text">
+                    <strong>Riconcilio le fonti</strong>
+                    <span>Distinguo dato, interpretazione e limite prima di trasformarli in azione.</span>
+                  </span>
+                </div>
+                <div class="method-row">
+                  <span class="method-index">03</span>
+                  <span class="method-text">
+                    <strong>Lascio una traccia rivedibile</strong>
+                    <span>Una nota utile al medico, non un output chiuso da accettare in fretta.</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <aside class="artifact-rail" aria-label="Stato della traccia">
+              <div class="rail-group">
+                <p class="rail-label">Dato</p>
+                <p class="rail-value">sul dispositivo</p>
+                <p class="rail-note">nessun cloud clinico</p>
+              </div>
+              <div class="rail-group">
+                <p class="rail-label">Revisione</p>
+                <p class="rail-value">umana</p>
+                <p class="rail-note">prima di ogni scelta</p>
+              </div>
+              <div class="rail-group">
+                <p class="rail-label">Chiarezza</p>
+                <div class="rail-meter" aria-hidden="true">
+                  <span style="--w:82%;--c:var(--mint)"></span>
+                  <span style="--w:64%;--c:var(--azure)"></span>
+                  <span style="--w:48%;--c:var(--amber)"></span>
+                </div>
+              </div>
+            </aside>
           </div>
-          <p class="note-lead">
-            Una cartella locale nata da esigenze pratiche di lavoro clinico:
-            meno promessa, più controllo sul dato.
-          </p>
-          <dl class="note-list">
-            <div>
-              <dt>Dati</dt>
-              <dd>restano sul Mac di chi cura, cifrati</dd>
+
+          <div class="evidence" aria-label="Evidenze sintetiche">
+            <div class="evidence-row">
+              <b>Fonte</b>
+              <span>cartella locale, nota clinica, documento allegato</span>
+              <em>sintetico</em>
             </div>
-            <div>
-              <dt>AI</dt>
-              <dd>supporto locale quando serve, senza automatismi clinici</dd>
+            <div class="evidence-row">
+              <b>Limite</b>
+              <span>nessuna inferenza nascosta, nessuna promessa diagnostica</span>
+              <em>visibile</em>
             </div>
-            <div>
-              <dt>Uscita</dt>
-              <dd>export e standard aperti per non chiudere il lavoro in una scatola</dd>
+            <div class="evidence-row">
+              <b>Azione</b>
+              <span>prossimo controllo, domanda aperta, dato da confermare</span>
+              <em>rivedibile</em>
             </div>
-            <div>
-              <dt>SISS/FSE</dt>
-              <dd>passaggio assistito, senza fingere integrazioni che non ci sono</dd>
-            </div>
-          </dl>
-          <p class="note-foot">Niente analytics. Niente cloud clinico. Scelte verificabili.</p>
+          </div>
         </div>
-      </aside>
+      </article>
     </div>
   </section>
 
@@ -129,30 +186,30 @@ const fmt = (d: Date) =>
 
   <section id="cosa-faccio">
     <div class="wrap">
-      <div class="section-head reveal">
-        <div class="kicker">Cosa faccio</div>
-        <h2>Tre cose, niente di più.</h2>
-        <p class="lead">Ogni progetto qui presente nasce da un problema reale incontrato sul lavoro. Niente esercizi di stile.</p>
-      </div>
+      <SectionHead
+        kicker="Cosa faccio"
+        heading="Tre cose, niente di più."
+        lead="Ogni progetto qui presente nasce da un problema reale incontrato sul lavoro. Niente esercizi di stile."
+      />
 
-      <div class="editorial-list reveal">
-        <a class="editorial-row" href="/mediflow">
-          <span class="idx">01</span>
-          <span class="row-title">MediFlow</span>
-          <span class="row-body">Cartella clinica locale, cifrata, con AI sul dispositivo. Standard ICD-11 e FHIR R4.</span>
-          <span class="row-action">White paper →</span>
+      <div class="taxonomy-grid reveal">
+        <a class="taxonomy-link" href="/mediflow" style="--tax:var(--mint)">
+          <span class="tax-top"><span>01</span><span class="tax-mark" aria-hidden="true"></span></span>
+          <strong>MediFlow</strong>
+          <p>Cartella clinica locale e cifrata, AI sul dispositivo. Standard ICD-11 e FHIR R4.</p>
+          <span class="tax-foot">White paper →</span>
         </a>
-        <div class="editorial-row">
-          <span class="idx">02</span>
-          <span class="row-title">Note dal territorio</span>
-          <span class="row-body">Letture dei dati territoriali, cronicità, appropriatezza e aspettative di chi è in cura.</span>
-          <span class="row-action muted">In arrivo</span>
+        <div class="taxonomy-link is-pending" style="--tax:var(--azure)" aria-disabled="true">
+          <span class="tax-top"><span>02</span><span class="tax-mark" aria-hidden="true"></span></span>
+          <strong>Note dal territorio</strong>
+          <p>Letture dei dati territoriali: cronicità, appropriatezza e aspettative di chi è in cura.</p>
+          <span class="tax-foot">In arrivo</span>
         </div>
-        <a class="editorial-row" href="/blog">
-          <span class="idx">03</span>
-          <span class="row-title">Note di lavoro</span>
-          <span class="row-body">Decisioni, audit, processi, accreditamento. Niente trend, niente buzz.</span>
-          <span class="row-action">Blog →</span>
+        <a class="taxonomy-link" href="/blog" style="--tax:var(--amber)">
+          <span class="tax-top"><span>03</span><span class="tax-mark" aria-hidden="true"></span></span>
+          <strong>Note di lavoro</strong>
+          <p>Decisioni, audit e processi. Niente trend, niente buzz.</p>
+          <span class="tax-foot">Blog →</span>
         </a>
       </div>
     </div>
@@ -161,10 +218,7 @@ const fmt = (d: Date) =>
   {posts.length > 0 && (
     <section id="ultimi-post">
       <div class="wrap">
-        <div class="section-head reveal">
-          <div class="kicker">Dal blog</div>
-          <h2>Ultimi appunti.</h2>
-        </div>
+        <SectionHead kicker="Dal blog" heading="Ultimi appunti." />
         <div class="post-list reveal">
           {posts.map((p) => (
             <a class="post-link" href={`/blog/${p.slug}`}>
@@ -186,10 +240,7 @@ const fmt = (d: Date) =>
 
   <section id="chiusura">
     <div class="wrap-narrow">
-      <div class="pull reveal">
-        «Scrivere quello che hai capito è il modo più rapido per scoprire cosa non avevi capito.»
-        <small>Promemoria personale</small>
-      </div>
+      <PullQuote cite="Promemoria personale">«Scrivere quello che hai capito è il modo più rapido per scoprire cosa non avevi capito.»</PullQuote>
     </div>
   </section>
 </BaseLayout>
@@ -206,7 +257,6 @@ const fmt = (d: Date) =>
     position:relative;
     padding:0;
   }
-  .hero-copy::before{ display:none; }
   .role-line{
     margin:0 0 18px;
     font-family:var(--font-technical);
@@ -238,129 +288,267 @@ const fmt = (d: Date) =>
   }
   .social-row{ margin-top:24px; }
 
-  .hero-note{
+  /* === Appunto operativo · clinical artifact === */
+  .artifact{
     position:relative;
-    display:flex;
-    min-height:430px;
-    flex-direction:column;
-    justify-content:space-between;
-    gap:24px;
-    padding:28px;
-    border:1px solid var(--line);
-    border-radius:16px;
+    border-radius:var(--r-media);
+    border:1px solid rgba(17,20,23,.11);
     background:
-      linear-gradient(135deg, rgba(14,110,92,.075), transparent 38%),
-      linear-gradient(180deg, #fff 0%, #f7f9f9 100%);
-    color:var(--ink-0);
-    box-shadow:none;
+      linear-gradient(180deg, rgba(255,255,255,.94), rgba(244,246,247,.92)),
+      var(--surface);
+    box-shadow:var(--sh-card);
     overflow:hidden;
   }
-  .hero-note::after{
+  .artifact::before{
     content:"";
     position:absolute;
-    inset:auto 24px 0;
-    height:1px;
-    background:linear-gradient(90deg, transparent, rgba(14,110,92,.28), transparent);
-    transform:translateY(1px);
+    inset:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(rgba(17,20,23,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17,20,23,.035) 1px, transparent 1px);
+    background-size:24px 24px;
+    mask-image:linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.22) 32%, transparent 78%);
+    -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.22) 32%, transparent 78%);
   }
-  .note-head{
+  .artifact-shell{
+    position:relative;
+    margin:10px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.8);
+    background:rgba(255,255,255,.88);
+    overflow:hidden;
+  }
+  .artifact-head{
     display:flex;
+    align-items:center;
     justify-content:space-between;
     gap:12px;
-    align-items:center;
-    padding-bottom:16px;
-    font-family:var(--font-technical);
-    font-size:.72rem;
-    color:var(--ink-2);
-    text-transform:uppercase;
+    min-height:56px;
+    padding:12px 14px;
     border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(244,246,247,.78));
   }
-  .note-head span:first-child{ color:var(--ink-0); font-weight:800; }
-  .note-lead{
-    max-width:11.5em;
-    margin:0;
-    font-family:var(--font-display);
-    font-size:clamp(1.65rem, 3.2vw, 2.45rem);
-    line-height:1.02;
+  .artifact-title{ min-width:0; }
+  .artifact-title strong{
+    display:block;
+    font:780 15px/1.25 var(--font-display);
     color:var(--ink-0);
   }
-  .note-list{
+  .artifact-title span{
+    display:block;
+    margin-top:2px;
+    color:var(--ink-1);
+    font:12px/1.35 var(--font-technical);
+  }
+  /* .status-pill / .status-dot ora vivono in global.css (motivo firma riusabile). */
+  .artifact-main{
     display:grid;
-    gap:0;
-    margin:0;
-    padding:0;
+    grid-template-columns:minmax(0,1fr) 138px;
+    min-height:390px;
   }
-  .note-list div{
-    display:grid;
-    grid-template-columns:76px minmax(0, 1fr);
-    gap:18px;
-    padding:14px 0;
-    border-top:1px solid var(--line);
-    transition:transform var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+  .artifact-body{ padding:15px; min-width:0; }
+  .mini-panel{
+    margin-bottom:12px;
+    padding:12px;
+    border:1px solid var(--line);
+    border-radius:var(--r-row);
+    background:rgba(244,246,247,.72);
   }
-  .hero-frame:hover .note-list div:nth-child(2),
-  .hero-frame:hover .note-list div:nth-child(4){
-    transform:translateX(5px);
-    border-color:var(--line-strong);
-  }
-  .note-list dt{
-    margin:0;
-    font:700 .72rem/1.4 var(--font-technical);
-    color:var(--ink-2);
+  .mini-label{
+    margin:0 0 7px;
+    color:var(--ink-1);
+    font:740 12px/1.25 var(--font-technical);
     text-transform:uppercase;
   }
-  .note-list dd{
+  .mini-panel p{
     margin:0;
     color:var(--ink-1);
-    font-size:.96rem;
-    line-height:1.42;
+    font-size:14px;
+    line-height:1.5;
   }
-  .note-foot{
-    align-self:flex-start;
+  .method-list{
+    display:grid;
+    gap:8px;
+    margin-top:10px;
+  }
+  .method-row{
+    display:grid;
+    grid-template-columns:34px minmax(0,1fr);
+    gap:10px;
+    align-items:start;
+    padding:10px;
+    border:1px solid rgba(17,20,23,.075);
+    border-radius:var(--r-row);
+    background:var(--surface);
+    transition:background var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+  }
+  .method-row:hover{
+    background:#fbfcfc;
+    border-color:rgba(14,110,92,.22);
+  }
+  .method-index{
+    width:26px;
+    height:26px;
+    display:grid;
+    place-items:center;
+    border-radius:8px;
+    background:var(--surface-3);
+    color:var(--ink-1);
+    font:780 12px/1 var(--font-technical);
+  }
+  .method-text{ min-width:0; }
+  .method-text strong{
+    display:block;
+    margin-bottom:2px;
+    font-size:14px;
+    line-height:1.35;
+    color:var(--ink-0);
+  }
+  .method-text span{
+    display:block;
+    color:var(--ink-1);
+    font-size:13px;
+    line-height:1.45;
+  }
+  .artifact-rail{
+    border-left:1px solid var(--line);
+    background:rgba(244,246,247,.54);
+    padding:12px;
+    min-width:0;
+  }
+  .rail-group + .rail-group{
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+  }
+  .rail-label{
+    margin:0 0 8px;
+    color:var(--ink-1);
+    font:740 11.5px/1.25 var(--font-technical);
+    text-transform:uppercase;
+  }
+  .rail-value{
     margin:0;
-    padding:9px 12px;
+    color:var(--ink-0);
+    font:760 13px/1.35 var(--font-body);
+  }
+  .rail-note{
+    margin:4px 0 0;
+    color:var(--ink-1);
+    font-size:12.5px;
+    line-height:1.35;
+  }
+  .rail-meter{
+    display:grid;
+    gap:5px;
+    margin-top:10px;
+  }
+  .rail-meter span{
+    height:6px;
+    border-radius:999px;
+    background:var(--line);
+    overflow:hidden;
+  }
+  .rail-meter span::before{
+    content:"";
+    display:block;
+    height:100%;
+    width:var(--w, 60%);
+    border-radius:inherit;
+    background:var(--c, var(--mint));
+  }
+  .evidence{
+    display:grid;
+    gap:8px;
+    padding:0 15px 15px;
+  }
+  .evidence-row{
+    display:grid;
+    grid-template-columns:84px minmax(0,1fr) 74px;
+    gap:10px;
+    align-items:center;
+    min-height:40px;
+    padding:8px 10px;
     border:1px solid var(--line);
-    border-radius:var(--r-pill);
-    background:rgba(255,255,255,.72);
-    color:var(--ink-2);
-    font:700 .72rem/1.25 var(--font-technical);
+    border-radius:var(--r-row);
+    background:rgba(255,255,255,.86);
+    color:var(--ink-1);
+    font-size:13px;
+  }
+  .evidence-row b{
+    color:var(--ink-0);
+    font:740 12px/1.25 var(--font-technical);
+  }
+  .evidence-row span{ min-width:0; }
+  .evidence-row em{
+    justify-self:end;
+    color:var(--ink-1);
+    font:700 11.5px/1.25 var(--font-technical);
+    font-style:normal;
   }
 
-  .editorial-list{ display:grid; gap:10px; }
-  .editorial-row{
+  /* === Tassonomia compatta · ogni ingresso con una prova === */
+  .taxonomy-grid{
     display:grid;
-    grid-template-columns:56px minmax(140px, 220px) minmax(0, 1fr) auto;
-    gap:22px;
-    align-items:start;
-    padding:18px;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:10px;
+  }
+  .taxonomy-link{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    min-height:150px;
+    min-width:0;
+    padding:16px;
     border:1px solid var(--line);
-    border-radius:var(--r-card);
+    border-radius:var(--r-row);
+    text-decoration:none;
+    color:inherit;
     background:var(--surface);
     box-shadow:var(--sh-pill);
-    color:inherit;
-    text-decoration:none;
-    transition:transform var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+    transition:box-shadow var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
   }
-  a.editorial-row:hover{
-    transform:translateY(-2px);
-    box-shadow:var(--sh-card);
+  a.taxonomy-link:hover{
     border-color:var(--line-strong);
+    box-shadow:var(--sh-card);
   }
-  .editorial-row .idx,
-  .editorial-row .row-action{
-    font-family:var(--font-technical);
-    font-size:.8rem;
-    color:var(--ink-2);
-  }
-  .editorial-row .row-title{
-    color:var(--ink-0);
-    font-weight:700;
-  }
-  .editorial-row .row-body{
+  .tax-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
     color:var(--ink-1);
-    max-width:62ch;
+    font:740 12px/1.25 var(--font-technical);
   }
-  .editorial-row .row-action{ color:var(--mint); white-space:nowrap; }
+  .tax-mark{
+    width:9px;
+    height:9px;
+    border-radius:999px;
+    background:var(--tax, var(--mint));
+  }
+  .taxonomy-link strong{
+    display:block;
+    color:var(--ink-0);
+    font:790 17px/1.28 var(--font-display);
+  }
+  .taxonomy-link p{
+    margin:0;
+    color:var(--ink-1);
+    font-size:13.5px;
+    line-height:1.5;
+  }
+  .tax-foot{
+    margin-top:auto;
+    color:var(--mint);
+    font:700 .76rem/1 var(--font-technical);
+  }
+  .taxonomy-link.is-pending{
+    background:var(--surface-2);
+    box-shadow:none;
+    cursor:default;
+  }
+  .taxonomy-link.is-pending .tax-foot{ color:var(--ink-1); }
 
   /* === Sezione bio (home) === */
   .bio-grid{
@@ -378,7 +566,7 @@ const fmt = (d: Date) =>
   .bio-side{
     text-align:center;
     padding:28px 24px;
-    border:1px solid var(--rule);
+    border:1px solid var(--line);
     border-radius:var(--r-card);
     background:var(--surface);
     box-shadow:var(--sh-card);
@@ -390,10 +578,10 @@ const fmt = (d: Date) =>
     object-fit:cover;
     background:#fff;
     padding:3px;
-    background-image:linear-gradient(#fff, #fff), linear-gradient(135deg, var(--mint) 0%, var(--bg-3) 100%);
+    background-image:linear-gradient(#fff, #fff), linear-gradient(135deg, var(--mint) 0%, var(--surface-3) 100%);
     background-origin:border-box;
     background-clip:content-box, border-box;
-    box-shadow:var(--shadow-1);
+    box-shadow:var(--sh-pill);
   }
   @media (max-width:780px){ .bio-photo{ margin:0 0 18px; } }
   .bio-role{
@@ -407,7 +595,7 @@ const fmt = (d: Date) =>
   .bio-meta{
     list-style:none; padding:18px 0 0; margin:0;
     text-align:left;
-    border-top:1px solid var(--rule);
+    border-top:1px solid var(--line);
     display:flex; flex-direction:column; gap:10px;
   }
   .bio-meta div{
@@ -429,22 +617,36 @@ const fmt = (d: Date) =>
   .bio-body p{ margin-bottom:14px; }
   .bio-body a{ color:var(--ink-0); }
 
+  /* Collapse the two-column hero before the sidebar+hero crush band (901-1040px):
+     two-column only survives where the copy track stays readable. */
+  @media (max-width:1180px){
+    .hero-grid{ grid-template-columns:1fr; gap:38px; }
+    .artifact{ max-width:620px; }
+  }
+  /* Stack the artifact internals (body over rail; rail becomes a 3-up row) once
+     the surface narrows — mirrors the prototype's 1040 rules, retargeted to 900. */
   @media (max-width:900px){
-    .hero-grid{ grid-template-columns:1fr; gap:36px; }
-    .hero-note{ max-width:560px; }
+    .artifact-main{ grid-template-columns:1fr; }
+    .artifact-rail{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:10px;
+      border-left:0;
+      border-top:1px solid var(--line);
+    }
+    .rail-group + .rail-group{ margin-top:0; padding-top:0; border-top:0; }
   }
   @media (max-width:720px){
-    .editorial-row{
-      grid-template-columns:42px 1fr;
-      gap:8px 14px;
-    }
-    .editorial-row .row-body,
-    .editorial-row .row-action{
-      grid-column:2;
-    }
-    .hero-note{ min-height:auto; padding:22px; }
-    .note-head{ font-size:.68rem; }
-    .note-lead{ max-width:100%; font-size:clamp(1.45rem, 8vw, 2rem); }
-    .note-list div{ grid-template-columns:1fr; gap:4px; }
+    .method-row{ grid-template-columns:30px minmax(0,1fr); }
+    .artifact-shell{ margin:7px; }
+  }
+  @media (max-width:680px){
+    .taxonomy-grid{ grid-template-columns:1fr; }
+    .artifact-head{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (max-width:560px){
+    .artifact-rail{ grid-template-columns:1fr; }
+    .evidence-row{ grid-template-columns:1fr; gap:4px; }
+    .evidence-row em{ justify-self:start; }
   }
 </style>

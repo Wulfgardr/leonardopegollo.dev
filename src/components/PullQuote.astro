@@ -1,0 +1,12 @@
+---
+// Citazione editoriale: filetto signal a sinistra, serif, attribuzione mono.
+interface Props {
+  cite: string;
+  reveal?: boolean;
+}
+const { cite, reveal = true } = Astro.props;
+---
+<div class:list={['pull', { reveal }]}>
+  <slot />
+  <small>{cite}</small>
+</div>

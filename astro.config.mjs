@@ -1,8 +1,4 @@
 import { defineConfig } from 'astro/config';
-// import sitemap from '@astrojs/sitemap';
-// Sitemap temporaneamente disabilitato: bug noto in @astrojs/sitemap@3.2.x con Astro 4
-// (Cannot read properties of undefined reading 'reduce').
-// Si riattiva quando si aggiorna a @astrojs/sitemap@^3.5.0.
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,13 +6,17 @@ export default defineConfig({
   // Se cambia, l'unico file da modificare è questo.
   site: 'https://leonardopegollo.dev',
   trailingSlash: 'ignore',
+  // Precarica i link interni al passaggio del mouse: con le ViewTransitions già
+  // attive, la navigazione secondaria risulta praticamente istantanea.
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
   build: {
     inlineStylesheets: 'auto',
   },
-  integrations: [
-    // sitemap({
-    //   changefreq: 'monthly',
-    //   priority: 0.7,
-    // }),
-  ],
+  // Nota: @astrojs/sitemap@3.7.2 va ancora in crash con questa versione di Astro
+  // ("Cannot read properties of undefined (reading 'reduce')" in astro:build:done).
+  // La sitemap è generata da src/pages/sitemap.xml.ts, sotto il nostro controllo.
+  integrations: [],
 });

@@ -6,7 +6,7 @@ import SocialLinks from '~/components/SocialLinks.astro';
   title="Chi sono"
   description="Leonardo Pegollo: medico di distretto a Milano, sanità territoriale, pazienti complessi, domiciliarità. E un applicativo clinico che vuole stare dalla parte di chi lavora."
 >
-  <section style="padding-top:80px">
+  <section class="section-top">
     <div class="wrap-narrow">
 
       <!-- Intestazione -->
@@ -87,8 +87,8 @@ import SocialLinks from '~/components/SocialLinks.astro';
       <!-- Cosa troverai qui -->
       <h2>Cosa troverai qui</h2>
       <p>
-        Per ora il <a href="/mediflow">white paper di MediFlow</a> (nome temporaneo,
-        lo so). Da qui in avanti il <a href="/blog">blog</a> raccoglierà note di
+        Per ora il <a href="/mediflow" class="link-ink">white paper di MediFlow</a> (nome temporaneo,
+        lo so). Da qui in avanti il <a href="/blog" class="link-ink">blog</a> raccoglierà note di
         lavoro su privacy, topologia delle app cliniche, governance dei flussi,
         prototipizzazione partecipata, qualità dei dati, integrazione con SISS/FSE,
         e qualche pezzo più libero su come si studia, si decide e si sbaglia in
@@ -144,8 +144,8 @@ import SocialLinks from '~/components/SocialLinks.astro';
   .meta-line{
     margin:24px 0 0;
     padding:18px 0;
-    border-top:1px solid var(--rule);
-    border-bottom:1px solid var(--rule);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
     display:grid;
     grid-template-columns:repeat(3, minmax(0,1fr));
     gap:18px;
@@ -166,15 +166,7 @@ import SocialLinks from '~/components/SocialLinks.astro';
     .meta-line{ grid-template-columns:1fr; gap:12px; padding:16px 0; }
   }
 
-  /* link interni in stile editoriale */
-  p a{
-    color:var(--ink-0);
-    text-decoration:underline;
-    text-decoration-color:rgba(14,110,92,.45);
-    text-decoration-thickness:1px;
-    text-underline-offset:3px;
-  }
-  p a:hover{ text-decoration-color:var(--mint); }
+  /* I link in prosa usano la classe .link-ink globale (single source of truth). */
 
   h2{ margin-top:40px; }
 </style>

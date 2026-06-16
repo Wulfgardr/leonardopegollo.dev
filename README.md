@@ -293,11 +293,12 @@ La home è in `src/pages/index.astro`.
 
 La pagina "Chi sono" è in `src/pages/about.astro`.
 
-Lo stile (liquid glass, palette colori, animazioni) è in `src/styles/global.css`. Cambiando le variabili CSS in cima al file (`:root { ... }`) si propaga a tutto il sito. Le variabili importanti:
+Lo stile (clinical console, palette colori, animazioni) è in `src/styles/global.css`. Cambiando le variabili CSS in cima al file (`:root { ... }`) si propaga a tutto il sito. Le variabili importanti:
 
-- `--bg-0`, `--bg-1` colori di sfondo
+- `--shell`, `--surface`, `--surface-2`, `--surface-3` colori di sfondo e pannelli
 - `--ink-0`, `--ink-1`, `--ink-2`, `--ink-3` gerarchia di colore del testo
-- `--teal`, `--azure`, `--violet` colori di accento (la palette liquid glass)
+- `--mint` (brand/azioni), `--signal` (stato "live"), `--amber`, `--azure` colori di accento
+- `--line`, `--line-strong` filetti; `--r-*` raggi; `--sh-*` ombre; `--space-*` spaziatura
 
 ---
 
