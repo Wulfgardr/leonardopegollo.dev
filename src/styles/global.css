@@ -161,16 +161,7 @@ a{ color:inherit; }
   .article img,
   .article picture,
   .article figure > svg,
-  .artifact,
-  .artifact-shell,
-  .artifact-head,
-  .status-pill,
-  .mini-panel,
-  .method-row,
-  .method-index,
-  .evidence-row,
   .taxonomy-link,
-  .rail-meter span,
   .bio-side,
   .social-links a,
   .topo,
@@ -857,28 +848,6 @@ pre code{ background:none; color:inherit; padding:0; }
   transition:top var(--dur-1) var(--ease);
 }
 .skip-link:focus-visible{ top:12px; }
-
-/* === Signature pill · reusable "live/status" marker (was home-scoped) === */
-.status-pill{
-  flex:0 0 auto;
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  min-height:28px;
-  padding:5px 8px;
-  border:1px solid rgba(14,110,92,.18);
-  border-radius:var(--r-card);
-  background:rgba(14,110,92,.07);
-  color:var(--mint-ink);
-  font:740 12px/1 var(--font-technical);
-}
-.status-dot{
-  width:7px;
-  height:7px;
-  border-radius:999px;
-  background:var(--signal);
-  box-shadow:0 0 0 3px rgba(21,196,122,.13);
-}
 
 /* === Small layout utilities (replace one-off inline styles) === */
 .stack-sm{ margin-top:var(--space-4); }
