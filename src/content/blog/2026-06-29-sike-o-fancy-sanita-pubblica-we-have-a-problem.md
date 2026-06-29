@@ -56,7 +56,7 @@ Se manca quella disciplina, il modello migliore serve solo a produrre una versio
 
 L'intelligenza artificiale può aiutarci a lavorare meglio. Non può assolverci dal sapere che cosa stiamo facendo.
 
-## Fonti e tracce
+## Da dove ho preso gli spunti tecnici e scientifici
 
 - Nagendran et al., "Artificial intelligence versus clinicians: systematic review of design, reporting standards, and claims of deep learning studies", BMJ 2020: https://www.bmj.com/content/368/bmj.m689
 - CONSORT-AI, EQUATOR Network: https://www.equator-network.org/reporting-guidelines/consort-artificial-intelligence/
@@ -67,7 +67,3 @@ L'intelligenza artificiale può aiutarci a lavorare meglio. Non può assolverci 
 - WHO, "Ethics and governance of artificial intelligence for health: guidance on large multi-modal models", pagina OMS aggiornata al 2025: https://www.who.int/publications/i/item/9789240084759
 - OpenAI, "Sycophancy in GPT-4o: what happened and what we're doing about it": https://openai.com/index/sycophancy-in-gpt-4o/
 - Anthropic, "Towards Understanding Sycophancy in Language Models": https://www.anthropic.com/research/towards-understanding-sycophancy-in-language-models
-
-## Nota editoriale
-
-Questa versione usa X/Twitter solo come sfondo del discorso pubblico recente. Non lo usa come prova quantitativa. Prima di pubblicarla, se il pezzo vuole diventare più forte sul piano scientifico, conviene aggiungere una fonte recente specifica su LLM in medicina o sanità pubblica, distinta dalla letteratura più generale sui modelli predittivi.
