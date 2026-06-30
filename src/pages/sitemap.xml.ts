@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
-// Sitemap generata a mano: l'integrazione @astrojs/sitemap va ancora in crash
-// con questa versione di Astro. Enumera le rotte statiche + i post non in bozza.
+// Sitemap generata a mano, per tenere le rotte sotto il nostro controllo
+// (niente integrazione @astrojs/sitemap). Enumera le rotte statiche + i post non in bozza.
 export const GET: APIRoute = async ({ site }) => {
   const base = (site ?? new URL('https://leonardopegollo.dev')).toString().replace(/\/$/, '');
 
@@ -14,7 +14,7 @@ export const GET: APIRoute = async ({ site }) => {
     { loc: `${base}/mediflow` },
     { loc: `${base}/blog` },
     ...posts.map((p) => ({
-      loc: `${base}/blog/${p.slug}`,
+      loc: `${base}/blog/${p.id}`,
       lastmod: (p.data.updatedDate ?? p.data.pubDate).toISOString().slice(0, 10),
     })),
   ];

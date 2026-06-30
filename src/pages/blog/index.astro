@@ -26,10 +26,10 @@ const fmt = (d: Date) =>
       <div class="post-list">
         {posts.length === 0 && <p class="muted">Nessun post ancora pubblicato.</p>}
         {posts.map((p) => (
-          <a class="post-link" href={`/blog/${p.slug}`}>
+          <a class="post-link" href={`/blog/${p.id}`}>
             <div class="meta">{fmt(p.data.pubDate)}</div>
             <div>
-                <h3 transition:name={`post-title-${p.slug}`}>{p.data.title}</h3>
+                <h3 transition:name={`post-title-${p.id}`}>{p.data.title}</h3>
               <p>{p.data.description}</p>
             </div>
             <div class="arrow" aria-hidden="true">→</div>

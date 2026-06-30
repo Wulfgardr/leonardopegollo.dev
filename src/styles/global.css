@@ -697,7 +697,6 @@ pre code{ background:none; color:inherit; padding:0; }
   letter-spacing:.03em;
 }
 
-:global(.link-ink),
 .link-ink{
   color:var(--ink-0);
   text-decoration:underline;
@@ -706,7 +705,6 @@ pre code{ background:none; color:inherit; padding:0; }
   text-underline-offset:4px;
   transition:text-decoration-color var(--dur-1) var(--ease), text-underline-offset var(--dur-1) var(--ease);
 }
-:global(.link-ink:hover),
 .link-ink:hover{ text-decoration-color:var(--mint); text-underline-offset:6px; }
 
 @media (prefers-reduced-motion: no-preference){

@@ -125,7 +125,7 @@ const fmt = (d: Date) =>
         <SectionHead heading="Ultimi appunti." />
         <div class="post-list reveal">
           {posts.map((p) => (
-            <a class="post-link" href={`/blog/${p.slug}`}>
+            <a class="post-link" href={`/blog/${p.id}`}>
               <div class="meta">{fmt(p.data.pubDate)}</div>
               <div>
                 <h3>{p.data.title}</h3>

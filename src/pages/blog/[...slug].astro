@@ -1,17 +1,17 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
   return posts.map((p) => ({
-    params: { slug: p.slug },
+    params: { slug: p.id },
     props: { post: p },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -28,7 +28,7 @@ const fmt = (d: Date) =>
             {post.data.updatedDate && <span> · aggiornato {fmt(post.data.updatedDate)}</span>}
             {post.data.tags.length > 0 && <span> · {post.data.tags.join(' · ')}</span>}
           </div>
-          <h1 transition:name={`post-title-${post.slug}`}>{post.data.title}</h1>
+          <h1 transition:name={`post-title-${post.id}`}>{post.data.title}</h1>
           {post.data.description && <p class="standfirst">{post.data.description}</p>}
         </header>
         <Content />

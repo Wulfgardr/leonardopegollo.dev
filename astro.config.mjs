@@ -15,8 +15,7 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
-  // Nota: @astrojs/sitemap@3.7.2 va ancora in crash con questa versione di Astro
-  // ("Cannot read properties of undefined (reading 'reduce')" in astro:build:done).
-  // La sitemap è generata da src/pages/sitemap.xml.ts, sotto il nostro controllo.
+  // La sitemap è generata a mano da src/pages/sitemap.xml.ts, così le rotte
+  // restano sotto il nostro controllo: nessuna integrazione @astrojs/sitemap.
   integrations: [],
 });

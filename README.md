@@ -66,13 +66,13 @@ Le rotte pubbliche corrispondono ai file in `src/pages/`:
 | `/blog` | `src/pages/blog/index.astro` | Lista dei post |
 | `/blog/<slug>` | `src/pages/blog/[...slug].astro` | Singolo post (generato dai markdown in `src/content/blog/`) |
 | `/rss.xml` | `src/pages/rss.xml.js` | Feed RSS del blog |
-| `/sitemap-index.xml` | generato da Astro | Sitemap automatica |
+| `/sitemap.xml` | `src/pages/sitemap.xml.ts` | Sitemap (generata a mano) |
 
 ---
 
 ## 2. Avviare il sito in locale
 
-Servono **Node.js 20+** e **npm**.
+Servono **Node.js 22.12+** e **npm** (Astro 7 richiede almeno Node 22.12.0).
 
 Se non hai Node, su macOS il modo più pulito è installare `nvm` (Node Version Manager) e poi una versione LTS di Node:
 
@@ -83,9 +83,9 @@ mkdir -p ~/.nvm
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
 echo '[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"' >> ~/.zshrc
 source ~/.zshrc
-nvm install 20
-nvm use 20
-node -v   # dovrebbe mostrare v20.x.x
+nvm install 22
+nvm use 22
+node -v   # dovrebbe mostrare v22.x.x (>= 22.12.0)
 ```
 
 Poi entri nel progetto e installi le dipendenze:
@@ -178,9 +178,9 @@ Compila i campi così:
 | **Build command** | `npm run build` |
 | **Build output directory** | `dist` |
 | **Root directory (advanced)** | (lascia vuoto) |
-| **Environment variables** | aggiungi `NODE_VERSION` = `20` |
+| **Environment variables** | aggiungi `NODE_VERSION` = `22.12.0` |
 
-> La variabile `NODE_VERSION` è importante: senza, Cloudflare prova un Node troppo vecchio per Astro 4 e la build fallisce.
+> La variabile `NODE_VERSION` è importante: senza, Cloudflare prova un Node troppo vecchio per Astro 7 (che richiede Node 22.12+) e la build fallisce.
 
 Salva. Parte il primo deploy. In 1-2 minuti hai un URL `https://leonardopegollo-dev.pages.dev` funzionante.
 
