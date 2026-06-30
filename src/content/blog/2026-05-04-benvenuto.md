@@ -28,8 +28,8 @@ Niente di obbligato, niente cadenza fissa.
 
 ## Cosa non ci sarà
 
-Niente cookie di tracciamento, niente analytics di terze parti, niente
-newsletter con doppio opt-in che poi finisce nello spam. Se vuoi seguire,
+Niente cookie di tracciamento, niente analytics, niente risorse caricate
+da terze parti, niente newsletter con doppio opt-in che poi finisce nello spam. Se vuoi seguire,
 c'è il [feed RSS](/rss.xml). Funziona ancora benissimo nel 2026.
 
 ## Una nota sullo stile

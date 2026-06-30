@@ -1,0 +1,23 @@
+sequenceDiagram
+    autonumber
+    participant M as Prescrittore/trice
+    participant C as SISS SPA (browser)
+    participant B as jsonBroker (SISS)
+    participant T as Sistema TS / SOGEI
+
+    Note left of M: Identificazione anagrafica
+    M->>C: Inserisci CF
+    C->>B: POST identificaCittadino
+    B-->>C: Anagrafica + esenzioni
+
+    Note left of M: Selezione prestazione
+    M->>C: Cerca prestazione (catalogo regionale)
+    C->>B: POST getPrestazioni
+    B-->>C: Codici prestazione + erogabilità
+
+    Note left of M: Registrazione prescrizione
+    M->>C: Conferma (priorità, quesito, note)
+    C->>B: POST registraPrescrizione
+    B->>T: Invia ricetta dematerializzata
+    T-->>B: NRE (15 cifre)
+    B-->>C: NRE + IUP regionale

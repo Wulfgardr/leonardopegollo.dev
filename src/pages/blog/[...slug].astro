@@ -64,6 +64,9 @@ const fmt = (d: Date) =>
 </style>
 
 <style is:global>
+  /* I diagrammi dei post sono SVG statici pre-renderizzati a build-time
+     (sorgenti in scripts/diagrams/*.mmd): nessun JS lato client, nessuna
+     risorsa di terze parti. Cornice scura coerente con la console del sito. */
   .mermaid{
     margin:28px 0;
     padding:14px;
@@ -72,25 +75,7 @@ const fmt = (d: Date) =>
     border-radius:var(--r-media);
     overflow:auto;
     text-align:center;
-    cursor:zoom-in;
-    position:relative;
     box-shadow:var(--sh-card);
-    transition:border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
-  }
-  .mermaid:hover{
-    border-color:var(--line-strong);
-    box-shadow:var(--sh-surface);
-    transform:translateY(-2px);
-  }
-  .mermaid::after{
-    content:"clicca per ingrandire";
-    position:absolute; top:24px; right:28px;
-    padding:6px 9px;
-    border-radius:999px;
-    background:rgba(13,17,23,.72);
-    border:1px solid rgba(230,237,243,.14);
-    font-family:var(--font-technical); font-size:10.5px;
-    color:#a8b0b8; pointer-events:none;
   }
   .mermaid svg{
     display:block;
@@ -111,159 +96,8 @@ const fmt = (d: Date) =>
   .mermaid svg .edgeLabel{
     color:inherit;
   }
-
-  .mermaid-modal{
-    position:fixed; inset:0; z-index:9999;
-    background:rgba(17,20,23,.88);
-    display:flex; align-items:center; justify-content:center;
-    padding:24px;
-    opacity:0; visibility:hidden;
-    transition:opacity .2s ease, visibility .2s ease;
-    cursor:zoom-out;
-  }
-  .mermaid-modal.open{ opacity:1; visibility:visible; }
-  .mermaid-modal-inner{
-    background:var(--surface);
-    border:1px solid rgba(255,255,255,.5);
-    border-radius:var(--r-media);
-    padding:14px;
-    width:96vw; height:92vh;
-    max-width:96vw; max-height:92vh;
-    overflow:auto;
-    box-shadow:0 30px 80px rgba(0,0,0,.6);
-  }
-  .mermaid-modal-inner svg{
-    display:block !important;
-    width:100% !important;
-    height:auto !important;
-    max-width:none !important;
-    max-height:none !important;
-    padding:24px !important;
-    background:#0d1117 !important;
-    border-radius:14px !important;
-  }
-  .mermaid-modal-close{
-    position:absolute; top:18px; right:22px;
-    width:38px; height:38px; border-radius:50%;
-    background:rgba(255,255,255,.14);
-    border:1px solid rgba(255,255,255,.32);
-    color:#fff;
-    font-size:20px; line-height:1;
-    display:grid; place-items:center;
-    cursor:pointer;
-  }
-  .mermaid-modal-close:hover{ background:rgba(255,255,255,.22); }
   @media (max-width:560px){
-    .mermaid::after{ display:none; }
     .mermaid{ padding:10px; }
     .mermaid svg{ padding:14px; border-radius:12px; }
   }
 </style>
-
-<script type="module" is:inline>
-  // Carica Mermaid (da CDN) SOLO se il post contiene davvero un diagramma:
-  // i post senza diagrammi non scaricano e non eseguono nulla.
-  const __mermaidBlocks = document.querySelectorAll('pre[data-language="mermaid"] > code');
-  if (__mermaidBlocks.length) {
-  const mermaid = (await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')).default;
-
-  // Tema custom coerente con la console visuale del sito.
-  mermaid.initialize({
-    startOnLoad: false,
-    securityLevel: 'loose',
-    fontFamily: 'ui-sans-serif, system-ui, -apple-system, sans-serif',
-    theme: 'base',
-    flowchart: {
-      htmlLabels: false,
-      curve: 'basis',
-      padding: 18,
-      nodeSpacing: 60,
-      rankSpacing: 70
-    },
-    sequence: {
-      diagramMarginX: 60,
-      diagramMarginY: 24,
-      actorMargin: 110,
-      width: 210,
-      boxMargin: 16,
-      messageMargin: 38,
-      actorFontSize: 15,
-      actorFontWeight: 700,
-      noteFontSize: 13,
-      messageFontSize: 14,
-      bottomMarginAdj: 30
-    },
-    themeVariables: {
-      fontSize: '15px',
-      background: '#0d1117',
-      primaryColor: '#111820',
-      primaryTextColor: '#e6edf3',
-      primaryBorderColor: '#2d3a44',
-      secondaryColor: '#14252d',
-      tertiaryColor: '#0e6e5c',
-      lineColor: '#52616d',
-      textColor: '#e6edf3',
-      mainBkg: '#111820',
-      nodeBorder: '#2d3a44',
-      clusterBkg: '#111820',
-      clusterBorder: '#2d3a44',
-      edgeLabelBackground: '#0d1117',
-      actorBkg: '#111820',
-      actorBorder: '#2d3a44',
-      actorTextColor: '#e6edf3',
-      actorLineColor: '#52616d',
-      signalColor: '#a8b0b8',
-      signalTextColor: '#e6edf3',
-      labelBoxBkgColor: '#111820',
-      labelBoxBorderColor: '#2d3a44',
-      noteBkgColor: '#14252d',
-      noteBorderColor: '#426b7f',
-      noteTextColor: '#e6edf3',
-      activationBkgColor: '#0e6e5c',
-      activationBorderColor: '#15c47a',
-    }
-  });
-
-  // Astro/Shiki annota il linguaggio sul <pre>, non sul <code>.
-  const nodes = document.querySelectorAll('pre[data-language="mermaid"] > code');
-  let i = 0;
-  for (const code of nodes) {
-    const pre = code.parentElement;
-    const wrapper = document.createElement('div');
-    wrapper.className = 'mermaid';
-    wrapper.id = 'mermaid-' + (++i);
-    wrapper.textContent = code.textContent;
-    pre.replaceWith(wrapper);
-  }
-  if (i > 0) {
-    try { await mermaid.run(); } catch (e) { console.warn('mermaid render', e); }
-  }
-
-  // Lightbox: click su un diagramma → modal full-screen
-  const modal = document.createElement('div');
-  modal.className = 'mermaid-modal';
-  modal.innerHTML = '<button class="mermaid-modal-close" aria-label="Chiudi">✕</button><div class="mermaid-modal-inner"></div>';
-  document.body.appendChild(modal);
-  const modalInner = modal.querySelector('.mermaid-modal-inner');
-  const closeModal = () => { modal.classList.remove('open'); modalInner.innerHTML = ''; };
-  modal.addEventListener('click', (e) => { if (e.target === modal || e.target.classList.contains('mermaid-modal-close')) closeModal(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-  document.querySelectorAll('.mermaid').forEach((el) => {
-    el.addEventListener('click', () => {
-      const svg = el.querySelector('svg');
-      if (!svg) return;
-      const clone = svg.cloneNode(true);
-      // Rimuove width/height inline imposti da Mermaid così l'SVG scala col container
-      clone.removeAttribute('width');
-      clone.removeAttribute('height');
-      clone.removeAttribute('style');
-      // Forza viewBox come unico determinante delle proporzioni e abilita preserveAspectRatio
-      clone.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-      modalInner.innerHTML = '';
-      modalInner.appendChild(clone);
-      modal.classList.add('open');
-    });
-  });
-  }
-</script>
