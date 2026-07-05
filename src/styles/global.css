@@ -839,7 +839,7 @@ pre code{ background:none; color:inherit; padding:0; }
 .stack-md{ margin-top:var(--space-6); }
 .section-top{ padding-top:var(--space-20); }
 
-/* === Print · the MediFlow white paper prints as a real document === */
+/* === Print · the MediFlow page prints as a real document === */
 @media print{
   html, body{ background:#fff; }
   .scene, .sidebar, .side-cta, .wp-subnav-wrap, .site-footer, .skip-link{ display:none !important; }

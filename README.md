@@ -1,6 +1,6 @@
 # leonardopegollo.dev
 
-Sito personale. Home, white paper di MediFlow, blog. Statico, costruito con Astro, pubblicato su Cloudflare Pages.
+Sito personale. Home, scheda pubblica di MediFlow, blog. Statico, costruito con Astro, pubblicato su Cloudflare Pages.
 
 Dominio: **leonardopegollo.dev** (registrato su Cloudflare Registrar, zona DNS già gestita da Cloudflare).
 
@@ -15,7 +15,7 @@ Dominio: **leonardopegollo.dev** (registrato su Cloudflare Registrar, zona DNS g
 5. [Collegare il dominio leonardopegollo.dev](#5-collegare-il-dominio-leonardopegollodev)
 6. [Email su @leonardopegollo.dev (gratis)](#6-email-su-leonardopegollodev-gratis)
 7. [Scrivere un nuovo post](#7-scrivere-un-nuovo-post)
-8. [Modificare il white paper o la home](#8-modificare-il-white-paper-o-la-home)
+8. [Modificare la scheda MediFlow o la home](#8-modificare-la-scheda-mediflow-o-la-home)
 9. [Costi attesi](#9-costi-attesi)
 10. [Estensioni future](#10-estensioni-future)
 
@@ -62,7 +62,7 @@ Le rotte pubbliche corrispondono ai file in `src/pages/`:
 | --- | --- | --- |
 | `/` | `src/pages/index.astro` | Home personale |
 | `/about` | `src/pages/about.astro` | Chi sono |
-| `/mediflow` | `src/pages/mediflow/index.astro` | White paper di MediFlow |
+| `/mediflow` | `src/pages/mediflow/index.astro` | Scheda pubblica di MediFlow |
 | `/blog` | `src/pages/blog/index.astro` | Lista dei post |
 | `/blog/<slug>` | `src/pages/blog/[...slug].astro` | Singolo post (generato dai markdown in `src/content/blog/`) |
 | `/rss.xml` | `src/pages/rss.xml.js` | Feed RSS del blog |
@@ -120,7 +120,7 @@ mv ~/Antigravity/medical-record-app/leop-dev-site ~/Antigravity/leonardopegollo.
 cd ~/Antigravity/leonardopegollo.dev
 git init
 git add .
-git commit -m "Setup iniziale: home, white paper MediFlow, blog"
+git commit -m "Setup iniziale: home, scheda MediFlow, blog"
 git branch -M main
 ```
 
@@ -189,7 +189,7 @@ Salva. Parte il primo deploy. In 1-2 minuti hai un URL `https://leonardopegollo-
 Apri l'URL `*.pages.dev`. Controlla:
 
 - la home si vede e ha lo stile liquid glass corretto
-- `/mediflow` mostra il white paper
+- `/mediflow` mostra la scheda pubblica di MediFlow
 - `/blog` mostra il post di benvenuto
 - `/rss.xml` apre il feed RSS
 
@@ -285,9 +285,9 @@ Per tenere un post in bozza senza pubblicarlo: `draft: true`. Verrà ignorato da
 
 ---
 
-## 8. Modificare il white paper o la home
+## 8. Modificare la scheda MediFlow o la home
 
-Il white paper è in un solo file: `src/pages/mediflow/index.astro`.
+La scheda pubblica di MediFlow è in un solo file: `src/pages/mediflow/index.astro`.
 
 La home è in `src/pages/index.astro`.
 
