@@ -33,9 +33,9 @@ const principi = [
   { numeral: 'IV', tag: `no automatismi`, title: `AI revisionabile`, body: `I modelli locali aiutano nella sintesi, nell'OCR e nei suggerimenti. Non scrivono mai diagnosi o terapie senza una conferma esplicita di chi esercita. L'unica eccezione documentata è l'autofill su codici ICD letteralmente presenti nel documento sorgente.` },
 ];
 const topoCards = [
-  { title: `Un nodo, non un servizio`, body: `Il Mac di chi cura è il nodo autorevole: contiene il database, espone l'API e orchestra l'AI. Niente server centrale.` },
-  { title: `Tre superfici API distinte`, body: `Web API per il browser (sessione), Native API versionata per i client Apple (token), Network API opzionale per i client paired in LAN fidata (capability + versione).` },
-  { title: `Servizi locali allowlisted`, body: `I proxy verso AI e ICD-11 accettano solo destinazioni localhost. Nessun rischio di SSRF verso indirizzi remoti.` },
+  { title: `Un nodo, non un servizio`, body: `Nel ramo 0.7.1 il Mac diventa il nodo autorevole: contiene il database, espone l'API, governa runtime e backup. Niente server centrale.` },
+  { title: `Tre superfici API distinte`, body: `Web API per il browser, Native API versionata per i client Apple, Network API opzionale per i client paired in LAN fidata. Capability e versioni restano esplicite.` },
+  { title: `Core condiviso, app per piattaforma`, body: `MediFlowCore porta contratti, filtri, cifratura e logica clinica fuori dalla UI. Linux e Windows verificano core e launcher, non promettono app desktop complete.` },
 ];
 const interop = [
   { title: `ICD-11`, body: `Diagnosi codificate secondo il sistema OMS, via API locale. Niente più testo libero ambiguo.` },
@@ -77,14 +77,15 @@ const boundary = [
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <span class="eyebrow">Scheda prodotto · stato corrente · 2026</span>
+      <span class="eyebrow">Scheda prodotto · v0.7.1 · Luglio 2026</span>
       <h1 class="gradient-title" style="margin-top:18px">
         MediFlow <span class="h-mute">è una cartella clinica</span><br/><span class="sig">locale</span>, per lavorare senza spedire i dati altrove.
       </h1>
       <p class="lead" style="max-width:720px; margin-top:24px">
         MediFlow è pensata per chi esercita in autonomia e per piccoli ambulatori.
         Tiene la scheda sul computer di chi cura, con i contenuti clinici sensibili cifrati. L'AI, quando serve,
-        gira sullo stesso dispositivo. Per uscire da MediFlow ci sono formati standard:
+        gira sullo stesso dispositivo. Con la 0.7.1 il Mac è il nodo home-base più avanzato; iPhone e iPad
+        restano client accoppiati e revisionabili. Per uscire da MediFlow ci sono formati standard:
         ICD-11 per le diagnosi, FHIR per l'esportazione.
       </p>
       <div style="display:flex; gap:10px; margin-top:30px; flex-wrap:wrap">
@@ -96,6 +97,7 @@ const boundary = [
         <span class="chip">Dati sul computer</span>
         <span class="chip">PIN e cifratura</span>
         <span class="chip">AI locale, opzionale</span>
+        <span class="chip">Mac home-base</span>
         <span class="chip">Export FHIR R4</span>
       </div>
 
@@ -104,6 +106,7 @@ const boundary = [
         <span><b>AES-256-GCM</b></span>
         <span><b>Niente telemetria</b></span>
         <span><b>Open source</b></span>
+        <span><b>v0.7.1</b></span>
         <span><b>Audit append-only</b></span>
         <span><b>FHIR R4</b></span>
       </div>
@@ -224,7 +227,7 @@ const boundary = [
     <div class="wrap">
       <SectionHead
         heading="Dove vivono i dati. Chi parla con chi."
-        lead="Il sistema gira sul Mac di chi cura. Il browser e i client Apple parlano con un'unica applicazione locale. I servizi opzionali (AI, ricerca diagnosi, redazione) sono sempre su localhost."
+        lead="Il sistema gira sul Mac di chi cura. Il browser e i client Apple parlano con un'unica applicazione locale; il core condiviso viene verificato anche su Linux e Windows. I servizi opzionali restano locali o esplicitamente valutativi."
       />
 
       <TopologyDiagram />
@@ -240,7 +243,7 @@ const boundary = [
     <div class="wrap">
       <SectionHead
         heading="Cosa succede davvero quando lavori in scheda."
-        lead="Sei flussi essenziali, in ordine di vita di una giornata clinica. Ogni passo è verificabile dal codice e dagli ADR pubblici."
+        lead="Sei flussi essenziali, in ordine di vita di una giornata clinica. La 0.7.1 consolida il Mac come base operativa e mantiene i client paired dentro capability esplicite."
       />
 
       <div class="flow-list reveal">
@@ -295,16 +298,16 @@ const boundary = [
   <section id="tappe">
     <div class="wrap">
       <SectionHead
-        heading="Dove siamo. Cosa viene dopo."
-        lead="Non serve una cronologia completa per capire MediFlow: conta distinguere cosa è già nel prodotto, cosa è in consolidamento e cosa resta una soglia futura."
+        heading="Roadmap pubblica dopo la 0.7.1."
+        lead="Non serve una cronologia completa per capire MediFlow: conta distinguere cosa è nella release corrente, cosa è in consolidamento e cosa resta una soglia futura."
       />
 
       <div class="timeline reveal">
-        <div class="tl-item"><div class="ver"><b>Mainline attuale</b> · prodotto locale</div><h4>Cartella web, API locale e sicurezza di base</h4><ul><li>Web app locale come superficie primaria su Mac</li><li>SQLite locale con campi clinici sensibili cifrati lato client</li><li>Contratto <code>/api/v1</code> per client nativi e superfici locali</li><li>Audit append-only, lockout autenticazione, backup governati</li></ul></div>
-        <div class="tl-item"><div class="ver"><b>Apple home-base</b> · consolidamento</div><h4>Mac nodo autorevole, iPhone e iPad come client paired</h4><ul><li>Pairing esplicito su rete locale fidata</li><li>Capability discovery e scritture versionate limitate</li><li>Core Swift condiviso per logica clinica, contratti, filtri e cifratura</li><li>Linux e Windows usati come verifica del core, non come promessa di app complete</li></ul></div>
-        <div class="tl-item"><div class="ver"><b>Document intelligence</b> · review-first</div><h4>OCR, sintesi e assorbimento evidenza senza automatismi clinici</h4><ul><li>Smart Import e nuova anagrafica da documento restano revisionabili</li><li>Artifact <code>parse/evidence</code> cifrati sugli allegati</li><li>Fallback OCR Apple Vision solo su macOS quando il primario locale è low-signal</li><li>Nessuna diagnosi o terapia scritta senza conferma esplicita</li></ul></div>
+        <div class="tl-item"><div class="ver"><b>v0.7.1</b> · mainline corrente</div><h4>Cartella web locale, Mac home-base e runtime verificabile</h4><ul><li>Web app locale come superficie clinica primaria su Mac</li><li>Campi clinici sensibili cifrati lato client dentro SQLite locale</li><li>Runtime panel, backup governati, audit append-only e lockout autenticazione</li><li>Launcher e core verificati anche su Linux e Windows, senza dichiarare app desktop complete</li></ul></div>
+        <div class="tl-item"><div class="ver"><b>Apple native</b> · consolidamento</div><h4>Mac nodo autorevole, iPhone e iPad come client paired</h4><ul><li>Pairing esplicito su rete locale fidata</li><li>Capability discovery e scritture versionate limitate</li><li>MediFlowCore condiviso per logica clinica, contratti, filtri e cifratura</li><li>UI Apple con Vetro Clinico/Liquid Glass dove la piattaforma lo consente</li></ul></div>
+        <div class="tl-item"><div class="ver"><b>Document intelligence</b> · review-first</div><h4>OCR, sintesi e assorbimento evidenza senza automatismi clinici</h4><ul><li>Smart Import e nuova anagrafica da documento restano revisionabili</li><li>Artifact <code>parse/evidence</code> cifrati sugli allegati</li><li>Fallback OCR Apple Vision solo su macOS quando il primario locale è low-signal</li><li>Voice visit e trascrizione restano review-first prima di ogni scrittura clinica</li></ul></div>
         <div class="tl-item"><div class="ver"><b>Boundary regionali</b> · handoff assistito</div><h4>SISS/FSE dentro il perimetro documentato</h4><ul><li>MediFlow prepara il contesto e richiama i percorsi ufficiali</li><li>Niente integrazione regionale nativa certificata dichiarata senza qualifica <code>SSI/A2A</code></li><li>Prescrizioni di prestazione separate dalle terapie farmacologiche</li><li>Matching repertorio reviewable, non spacciato per invio regionale</li></ul></div>
-        <div class="tl-item future"><div class="ver"><b>Prossima soglia</b> <span class="pill">in corso</span></div><h4>Rete più ampia, shell nativa, voce</h4><ul><li>Replica e fallback offline tra dispositivi con riconciliazione esplicita</li><li>Runtime AI locale centralizzabile per i client meno potenti, senza egress</li><li>Decision layer documentale separato: governance delle fonti, recency, esclusioni, reviewability</li><li>Prescrizioni di prestazione locali e dettatura/chat vocale, sempre review-first</li></ul></div>
+        <div class="tl-item future"><div class="ver"><b>Prossima soglia</b> <span class="pill">in corso</span></div><h4>Rete più ampia, packaging e voce</h4><ul><li>Replica e fallback offline tra dispositivi con riconciliazione esplicita</li><li>Runtime AI locale centralizzabile per i client meno potenti, senza egress</li><li>Packaging Windows/Linux limitato al runtime condiviso finché non esiste una UX desktop dedicata</li><li>Prescrizioni di prestazione locali e dettatura/chat vocale, sempre review-first</li></ul></div>
         <div class="tl-item future"><div class="ver"><b>Visione</b> <span class="pill">futura</span></div><h4>Un ecosistema clinico locale, aperto, installabile</h4><ul><li>Esperienza nativa multi-dispositivo coerente sotto un unico contratto</li><li>Integrazione SISS/FSE solo se qualificata e sostenibile</li><li>Contratti di esportazione e migrazione formalizzati</li></ul></div>
       </div>
     </div>
