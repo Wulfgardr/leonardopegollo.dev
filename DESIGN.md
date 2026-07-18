@@ -117,7 +117,7 @@ Non è una console, una landing SaaS o una rivista travestita da portfolio. Rifi
 
 ## Colors
 
-La tavolozza usa un osso minerale come carta; il verde compare solo per orientamento, link e stato. Il fondo è un omaggio discreto alla materialità di Brik, non un invito ad aggiungere effetti generativi.
+La tavolozza usa un osso minerale come carta; il verde compare solo per orientamento, link e stato. Il fondo deriva da riferimenti progettuali interni, che non diventano contenuto pubblico né un invito ad aggiungere effetti generativi.
 
 ### Primary
 
@@ -192,11 +192,7 @@ Le superfici sono piatte. La profondità arriva da scala, spazio, contrasto tona
 
 ### Navigation
 
-Il marchio resta a sinistra, quattro destinazioni restano a destra. Lo stato attivo usa una linea verde da 2px. Su mobile il marchio occupa la prima riga e le quattro destinazioni la seconda. MediFlow appartiene a “Lavoro” e non compare come quinta voce.
-
-### Index Visual
-
-Ogni fonte riceve una visualizzazione CSS distinta che ne suggerisce la grammatica. La visuale è contenuto: non viene accompagnata da etichette decorative e non sostituisce la nota critica.
+Il marchio resta a sinistra, con tre destinazioni a destra: Lavoro, Note e Bio. Lo stato attivo usa una linea verde da 2px ed è determinato dalla sezione reale della rotta. Su mobile il marchio occupa la prima riga e le tre destinazioni la seconda. MediFlow appartiene a “Lavoro” e non compare come quarta voce.
 
 ## Do's and Don'ts
 
@@ -206,8 +202,8 @@ Ogni fonte riceve una visualizzazione CSS distinta che ne suggerisce la grammati
 - **Do** conservare la voce diretta e in prima persona già presente nei testi.
 - **Do** usare gerarchia tipografica, spazio e bordi sottili prima di aggiungere contenitori.
 - **Do** mostrare diagrammi, dati o esempi reali quando un tema ha bisogno di un'immagine.
-- **Do** lasciare che ogni sezione abbia un compito chiaro: progetto, note, indice o bio.
-- **Do** prendere da Brik logiche di sistema, griglie e proporzioni; incorporare un tool live solo quando porta informazione reale.
+- **Do** lasciare che ogni sezione abbia un compito chiaro: progetto, note o bio.
+- **Do** usare i riferimenti di progetto come materiale interno; esporli nel sito solo quando diventano contenuto originale e realmente utile al lettore.
 
 ### Don't:
 

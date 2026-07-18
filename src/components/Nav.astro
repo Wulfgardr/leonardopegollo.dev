@@ -1,9 +1,19 @@
 ---
-const path = Astro.url.pathname;
-function active(prefix: string) {
-  if (prefix === '/') return path === '/' || path.startsWith('/mediflow') ? 'page' : undefined;
-  return path.startsWith(prefix) ? 'page' : undefined;
-}
+type NavSection = 'work' | 'notes' | 'bio';
+
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isWithin = (route: string) => path === route || path.startsWith(`${route}/`);
+
+const currentSection: NavSection | undefined =
+  path === '/' || isWithin('/mediflow')
+    ? 'work'
+    : isWithin('/blog')
+      ? 'notes'
+      : isWithin('/about')
+        ? 'bio'
+        : undefined;
+
+const active = (section: NavSection) => currentSection === section ? 'page' : undefined;
 ---
 <header class="site-header">
   <div class="nav-shell">
@@ -13,10 +23,9 @@ function active(prefix: string) {
     </a>
 
     <nav class="links" aria-label="Navigazione principale">
-      <a class="nav-row" href="/" aria-current={active('/')}>Lavoro</a>
-      <a class="nav-row" href="/blog" aria-current={active('/blog')}>Note</a>
-      <a class="nav-row" href="/index" aria-current={active('/index')}>Index</a>
-      <a class="nav-row" href="/about" aria-current={active('/about')}>Bio</a>
+      <a class="nav-row" href="/" aria-current={active('work')}>Lavoro</a>
+      <a class="nav-row" href="/blog" aria-current={active('notes')}>Note</a>
+      <a class="nav-row" href="/about" aria-current={active('bio')}>Bio</a>
     </nav>
   </div>
 </header>
