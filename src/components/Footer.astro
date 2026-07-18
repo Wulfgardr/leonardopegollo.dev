@@ -1,37 +1,14 @@
 ---
-import SocialLinks from '~/components/SocialLinks.astro';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
-  <div class="wrap">
-    <div class="cols">
-      <div>
-        <a class="brand" href="/" style="display:inline-flex">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-name">leonardopegollo<span class="muted">.dev</span></span>
-        </a>
-        <p style="max-width:480px; margin-top:18px; color:var(--ink-2)">
-          Sito personale di Leonardo Pegollo. Medico di distretto a Milano:
-          scrittura, sanità territoriale, dati e software clinico local-first.
-        </p>
-        <div style="margin-top:20px">
-          <SocialLinks variant="pills" />
-        </div>
-      </div>
-      <div>
-        <h5>Sezioni</h5>
-        <p><a href="/">Home</a></p>
-        <p><a href="/mediflow">MediFlow</a></p>
-        <p><a href="/blog">Blog</a></p>
-        <p><a href="/about">Chi sono</a></p>
-      </div>
-      <div>
-        <h5>Sottoscrivi</h5>
-        <p><a href="/rss.xml">RSS del blog</a></p>
-      </div>
-    </div>
-    <div class="bottom">
-      <span>© {year} · Leonardo Pegollo · progetto personale</span>
-    </div>
+  <div class="wrap footer-inner">
+    <span>© {year} Leonardo Pegollo</span>
+    <nav aria-label="Contatti e feed">
+      <a href="mailto:hello@leonardopegollo.dev">Email</a>
+      <a href="https://github.com/Wulfgardr" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://x.com/leonardopegollo" target="_blank" rel="noopener noreferrer">X</a>
+      <a href="/rss.xml">RSS</a>
+    </nav>
   </div>
 </footer>

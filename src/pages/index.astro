@@ -1,34 +1,40 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import SocialLinks from '~/components/SocialLinks.astro';
-import SectionHead from '~/components/SectionHead.astro';
-import PullQuote from '~/components/PullQuote.astro';
+import IndexVisual from '~/components/index/IndexVisual.astro';
+import TopologyDiagram from '~/components/mediflow/TopologyDiagram.astro';
+import { indexEntries } from '~/data/index';
 import { getCollection } from 'astro:content';
 
-// Ultimi tre post del blog, in ordine di data decrescente.
 const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
+  .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const fmt = (d: Date) =>
-  d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmt = (date: Date) =>
+  date.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const references = indexEntries.slice(0, 3);
 ---
+
 <BaseLayout
   title="leonardopegollo.dev"
   description="Leonardo Pegollo: medico di distretto a Milano. Sanità territoriale, dati, software clinico locale e tecnologia usata con giudizio."
 >
   <section class="hero">
     <div class="wrap hero-grid">
+      <h1 class="reveal">
+        Leonardo Pegollo{' '}
+        <span>medico, dati e lavoro clinico oggi.</span>
+      </h1>
+
       <div class="hero-copy reveal">
-        <h1 class="gradient-title">Leonardo Pegollo <span class="h-mute">medico, dati e lavoro clinico oggi.</span></h1>
         <p class="lead">
           Faccio il medico di distretto. Lavoro con pazienti complessi,
           domiciliarità e sanità territoriale; quando un problema ritorna spesso,
           provo a rimetterlo in ordine: dati, codice quando serve, un modo più
-          ripetibile di arrivare a una risposta. Da lì nasce
-          <a href="/mediflow" class="link-ink">MediFlow</a>, una cartella clinica
-          <span class="sig">locale</span> che tiene i dati sul computer di chi cura.
+          ripetibile di arrivare a una risposta. Da lì nasce{' '}
+          <a href="/mediflow" class="link-ink">MediFlow</a>, una cartella clinica{' '}
+          <span class="sig">locale</span>{' '}che tiene i dati sul computer di chi cura.
         </p>
         <p class="lead muted">
           Nel lavoro clinico di oggi gli strumenti contano: prevenzione, medicina
@@ -36,268 +42,135 @@ const fmt = (d: Date) =>
           dati, persone e decisioni, ma chiedono umiltà e revisione. Se servono
           solo a produrre contenuto, hanno già perso il punto.
         </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="/mediflow">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2 5 3-10 2 5h7" /></svg>
-            Leggi MediFlow
-          </a>
-          <a class="btn btn-ghost" href="/blog">Blog</a>
-          <a class="btn btn-ghost" href="/about">Bio</a>
-        </div>
-        <div class="social-row">
-          <SocialLinks variant="pills" />
-        </div>
       </div>
     </div>
   </section>
 
-  <section id="bio">
+  <section class="project-home">
     <div class="wrap">
-      <div class="bio-grid reveal">
-        <div class="bio-side">
-          <img class="bio-photo" src="/avatar.svg" alt="Foto di Leonardo Pegollo" width="200" height="200" loading="lazy" />
-          <p class="bio-role">Leonardo Pegollo</p>
-          <p class="bio-tag">Medico di distretto · Milano</p>
-          <dl class="bio-meta">
-            <div><dt>Digitali</dt><dd>SQL · Python · R · Astro</dd></div>
-            <div><dt>Analogici</dt><dd>Eko Health 500 · abbassalingua</dd></div>
-          </dl>
-          <div style="margin-top:18px">
-            <SocialLinks variant="icons" align="center" />
-          </div>
-        </div>
-        <div class="bio-body">
-          <h2>In due paragrafi.</h2>
+      <div class="project-head reveal">
+        <h2>MediFlow</h2>
+        <div>
           <p>
-            Faccio il medico di distretto a Milano. Da sempre lavoro su sanità
-            territoriale, pazienti complessi e domiciliarità: la parte di sistema dove
-            la cura non si esaurisce nella prescrizione, ma comincia lì. Sono fresco di
-            master in <em>gestione delle aziende sociosanitarie</em>. Un master che mi
-            ha lasciato addosso un certo modo di guardare i processi.
+            Una cartella clinica locale, pensata per chi esercita in autonomia e
+            per piccoli ambulatori. Tiene la scheda sul computer di chi cura, con
+            i contenuti clinici sensibili cifrati. L'AI, quando serve, gira sullo
+            stesso dispositivo.
           </p>
-          <p>
-            Mi interessa il punto in cui l'operatività clinica incontra dati,
-            codice e strumenti di lavoro: capire cosa fare, come farlo, e come
-            renderlo pratico senza perdere di vista la cura. Da qui
-            <a href="/mediflow" class="link-ink">MediFlow</a> e da qui questo sito.
-          </p>
-          <p class="muted" style="font-size:14.5px">
-            La <a href="/about" class="link-ink">versione lunga della bio</a> è nella pagina dedicata.
-          </p>
+          <a class="text-link" href="/mediflow">Apri la scheda →</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section id="cosa-faccio">
-    <div class="wrap">
-      <SectionHead
-        heading="Tre cose, niente di più."
-        lead="Ogni progetto qui presente nasce da un problema reale incontrato sul lavoro. Niente esercizi di stile."
-      />
-
-      <div class="taxonomy-grid reveal">
-        <a class="taxonomy-link" href="/mediflow" style="--tax:var(--mint)">
-          <span class="tax-top"><span>01</span><span class="tax-mark" aria-hidden="true"></span></span>
-          <strong>MediFlow</strong>
-          <p>Cartella clinica locale, con dati clinici cifrati e AI sul dispositivo. Standard ICD-11 e FHIR R4.</p>
-          <span class="tax-foot">Scheda prodotto →</span>
-        </a>
-        <div class="taxonomy-link is-pending" style="--tax:var(--azure)" aria-disabled="true">
-          <span class="tax-top"><span>02</span><span class="tax-mark" aria-hidden="true"></span></span>
-          <strong>Note dal territorio</strong>
-          <p>Letture dei dati territoriali: cronicità, appropriatezza e aspettative di chi è in cura.</p>
-          <span class="tax-foot">In arrivo</span>
-        </div>
-        <a class="taxonomy-link" href="/blog" style="--tax:var(--amber)">
-          <span class="tax-top"><span>03</span><span class="tax-mark" aria-hidden="true"></span></span>
-          <strong>Note di lavoro</strong>
-          <p>Decisioni, audit e processi. Niente trend, niente buzz.</p>
-          <span class="tax-foot">Blog →</span>
-        </a>
+      <div class="project-visual reveal">
+        <TopologyDiagram reveal={false} />
       </div>
     </div>
   </section>
 
   {posts.length > 0 && (
-    <section id="ultimi-post">
+    <section class="notes-home">
       <div class="wrap">
-        <SectionHead heading="Ultimi appunti." />
+        <div class="home-section-head">
+          <h2>Note</h2>
+          <a href="/blog">Tutte →</a>
+        </div>
+
         <div class="post-list reveal">
-          {posts.map((p) => (
-            <a class="post-link" href={`/blog/${p.id}`}>
-              <div class="meta">{fmt(p.data.pubDate)}</div>
+          {posts.map((post) => (
+            <a class="post-link" href={`/blog/${post.id}`}>
+              <div class="meta">{fmt(post.data.pubDate)}</div>
               <div>
-                <h3>{p.data.title}</h3>
-                <p>{p.data.description}</p>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
               </div>
               <div class="arrow" aria-hidden="true">→</div>
             </a>
           ))}
         </div>
-        <div style="margin-top:24px">
-          <a class="btn ghost" href="/blog">Tutti i post →</a>
-        </div>
       </div>
     </section>
   )}
 
-  <section id="chiusura">
-    <div class="wrap-narrow">
-      <PullQuote cite="Promemoria personale">«Scrivere quello che hai capito è il modo più rapido per scoprire cosa non avevi capito.»</PullQuote>
+  <section class="index-home">
+    <div class="wrap">
+      <div class="home-section-head index-heading">
+        <div>
+          <h2>Index</h2>
+          <p>Siti e strumenti che torno a guardare, con una nota su cosa fanno bene e cosa no.</p>
+        </div>
+        <a href="/index">Apri l’Index →</a>
+      </div>
+
+      <div class="reference-grid">
+        {references.map((entry) => (
+          <a class="reference reveal" href={`/index/${entry.slug}`}>
+            <IndexVisual kind={entry.visual} />
+            <div>
+              <h3>{entry.title}</h3>
+              <p>{entry.summary}</p>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .hero{ padding:0 0 64px; }
-  /* Hero a colonna singola, editoriale e text-first. */
-  .hero-grid{ display:block; }
-  .hero-copy{
-    position:relative;
-    padding:0;
-  }
-  .hero h1{ margin:0 0 24px; max-width:10ch; }
-  .hero h1 .h-mute{ display:block; max-width:12ch; }
-  .hero .lead{ max-width:620px; margin-top:0; font-size:1.18rem; }
-  .cta-row{
-    display:flex;
-    gap:10px;
-    margin-top:26px;
-    flex-wrap:wrap;
-  }
-  .social-row{ margin-top:24px; }
+  section.hero{ padding:clamp(72px, 10vw, 140px) 0 clamp(78px, 10vw, 138px); }
+  .hero-grid{ display:grid; grid-template-columns:minmax(0, .92fr) minmax(360px, .76fr); gap:clamp(54px, 9vw, 130px); align-items:end; }
+  .hero h1{ margin:0; max-width:8.5ch; font-size:clamp(3.9rem, 7.8vw, 7.4rem); line-height:.88; letter-spacing:-.035em; }
+  .hero h1 span{ display:block; color:var(--ink-2); }
+  .hero-copy{ padding-bottom:.4rem; }
+  .hero-copy .lead{ margin:0; font-size:clamp(1.05rem, 1.5vw, 1.24rem); }
+  .hero-copy .lead + .lead{ margin-top:26px; }
 
-  /* === Tassonomia compatta · ogni ingresso con una prova === */
-  .taxonomy-grid{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0,1fr));
-    gap:10px;
-  }
-  .taxonomy-link{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-    min-height:150px;
-    min-width:0;
-    padding:16px;
-    border:1px solid var(--line);
-    border-radius:var(--r-row);
-    text-decoration:none;
-    color:inherit;
-    background:var(--surface);
-    box-shadow:var(--sh-pill);
-    transition:box-shadow var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
-  }
-  a.taxonomy-link:hover{
-    border-color:var(--line-strong);
-    box-shadow:var(--sh-card);
-  }
-  .tax-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-    color:var(--ink-1);
-    font:740 12px/1.25 var(--font-technical);
-  }
-  .tax-mark{
-    width:9px;
-    height:9px;
-    border-radius:999px;
-    background:var(--tax, var(--mint));
-  }
-  .taxonomy-link strong{
-    display:block;
-    color:var(--ink-0);
-    font:790 17px/1.28 var(--font-display);
-  }
-  .taxonomy-link p{
-    margin:0;
-    color:var(--ink-1);
-    font-size:13.5px;
-    line-height:1.5;
-  }
-  .tax-foot{
-    margin-top:auto;
-    color:var(--mint);
-    font:700 .76rem/1 var(--font-technical);
-  }
-  .taxonomy-link.is-pending{
-    background:var(--surface-2);
-    box-shadow:none;
-    cursor:default;
-  }
-  .taxonomy-link.is-pending .tax-foot{ color:var(--ink-1); }
+  .project-home{ padding:clamp(64px, 8vw, 108px) 0; }
+  .project-head{ display:grid; grid-template-columns:minmax(0, 1fr) minmax(320px, .78fr); gap:clamp(40px, 8vw, 110px); align-items:start; margin-bottom:clamp(38px, 6vw, 72px); }
+  .project-head h2{ margin:0; font-size:clamp(3.5rem, 7vw, 6.8rem); line-height:.9; letter-spacing:-.035em; }
+  .project-head p{ font-size:1.13rem; line-height:1.65; }
+  .text-link,
+  .home-section-head a{ color:var(--mint); font-weight:720; text-decoration:none; }
+  .text-link:hover,
+  .home-section-head a:hover{ text-decoration:underline; text-underline-offset:5px; }
+  .project-visual :global(.topo){ padding:0; border:0; border-radius:0; box-shadow:none; }
+  .project-visual :global(.topo svg){ padding:clamp(10px, 2vw, 20px); border-radius:0; }
+  .project-visual :global(.legend){ padding:12px 0 0; margin-top:0; }
 
-  /* === Sezione bio (home) === */
-  .bio-grid{
-    display:grid;
-    grid-template-columns: 260px 1fr;
-    gap:48px;
-    align-items:start;
-    padding:0;
-    background:transparent; border:none;
-    backdrop-filter:none; -webkit-backdrop-filter:none;
-  }
-  @media (max-width:780px){
-    .bio-grid{ grid-template-columns:1fr; gap:32px; }
-  }
-  .bio-side{
-    text-align:center;
-    padding:28px 24px;
-    border:1px solid var(--line);
-    border-radius:var(--r-card);
-    background:var(--surface);
-    box-shadow:var(--sh-card);
-  }
-  @media (max-width:780px){ .bio-side{ text-align:left; padding:24px; } }
-  .bio-photo{
-    width:144px; height:144px; border-radius:50%;
-    margin:0 auto 18px; display:block;
-    object-fit:cover;
-    background:#fff;
-    padding:3px;
-    background-image:linear-gradient(#fff, #fff), linear-gradient(135deg, var(--mint) 0%, var(--surface-3) 100%);
-    background-origin:border-box;
-    background-clip:content-box, border-box;
-    box-shadow:var(--sh-pill);
-  }
-  @media (max-width:780px){ .bio-photo{ margin:0 0 18px; } }
-  .bio-role{
-    font-family:var(--font-display);
-    font-size:20px; font-weight:500; color:var(--ink-0); margin:0 0 4px;
-  }
-  .bio-tag{
-    font-family:var(--font-technical);
-    font-size:12px; color:var(--ink-2); margin:0 0 20px;
-  }
-  .bio-meta{
-    list-style:none; padding:18px 0 0; margin:0;
-    text-align:left;
-    border-top:1px solid var(--line);
-    display:flex; flex-direction:column; gap:10px;
-  }
-  .bio-meta div{
-    display:grid;
-    grid-template-columns:80px 1fr;
-    gap:10px;
-    font-size:13.5px;
-    color:var(--ink-1);
-  }
-  .bio-meta dt{
-    font-family:var(--font-technical);
-    font-size:11px; text-transform:uppercase;
-    color:var(--ink-2);
-    margin:0; padding-top:2px;
-  }
-  .bio-meta dd{ margin:0; }
+  .notes-home,
+  .index-home{ padding:clamp(60px, 8vw, 100px) 0; }
+  .home-section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:28px; margin-bottom:32px; }
+  .home-section-head h2{ margin:0; font-size:clamp(2.6rem, 5vw, 4.8rem); letter-spacing:-.035em; }
+  .index-heading{ align-items:flex-end; }
+  .index-heading p{ max-width:560px; margin:18px 0 0; }
+  .index-heading > a{ flex:0 0 auto; }
+  .reference-grid{ display:grid; grid-template-columns:1.2fr .9fr .9fr; gap:16px; }
+  .reference{ display:flex; flex-direction:column; min-width:0; border:1px solid var(--line); color:inherit; text-decoration:none; transition:border-color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease); }
+  .reference:hover{ border-color:var(--ink-2); transform:translateY(-2px); }
+  .reference :global(.index-visual){ min-height:220px; }
+  .reference:first-child :global(.index-visual){ min-height:300px; }
+  .reference > div:last-child{ padding:24px; }
+  .reference h3{ margin:0 0 10px; font-size:1.25rem; letter-spacing:-.02em; }
+  .reference p{ margin:0; font-size:.95rem; }
 
-  .bio-body h2{ margin-top:0; }
-  .bio-body p{ margin-bottom:14px; }
-  .bio-body a{ color:var(--ink-0); }
-
-  @media (max-width:680px){
-    .taxonomy-grid{ grid-template-columns:1fr; }
+  @media (max-width:900px){
+    .hero-grid,
+    .project-head{ grid-template-columns:1fr; }
+    .hero h1{ max-width:9ch; }
+    .hero-copy{ max-width:680px; margin-left:auto; }
+    .project-head > div{ max-width:620px; margin-left:auto; }
+    .reference-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .reference:first-child{ grid-column:1 / -1; }
+  }
+  @media (max-width:620px){
+    section.hero{ padding-top:64px; }
+    .hero h1{ font-size:clamp(3.3rem, 17vw, 5rem); }
+    .hero-grid{ gap:48px; }
+    .project-head h2{ font-size:clamp(3.2rem, 16vw, 5.4rem); }
+    .home-section-head,
+    .index-heading{ align-items:flex-start; flex-direction:column; }
+    .reference-grid{ grid-template-columns:1fr; }
+    .reference:first-child{ grid-column:auto; }
+    .reference:hover{ transform:none; }
   }
 </style>

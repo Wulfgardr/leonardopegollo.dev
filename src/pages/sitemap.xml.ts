@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { indexEntries } from '~/data/index';
 
 // Sitemap generata a mano, per tenere le rotte sotto il nostro controllo
 // (niente integrazione @astrojs/sitemap). Enumera le rotte statiche + i post non in bozza.
@@ -13,6 +14,8 @@ export const GET: APIRoute = async ({ site }) => {
     { loc: `${base}/about` },
     { loc: `${base}/mediflow` },
     { loc: `${base}/blog` },
+    { loc: `${base}/index` },
+    ...indexEntries.map((entry) => ({ loc: `${base}/index/${entry.slug}` })),
     ...posts.map((p) => ({
       loc: `${base}/blog/${p.id}`,
       lastmod: (p.data.updatedDate ?? p.data.pubDate).toISOString().slice(0, 10),
