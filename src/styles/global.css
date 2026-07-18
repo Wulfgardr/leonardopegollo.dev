@@ -58,6 +58,7 @@
 
   --container:1120px;
   --measure:720px;
+  --site-header-height:76px;
   --ease:cubic-bezier(.22,.61,.36,1);
   --dur-1:160ms;
   --dur-2:260ms;
@@ -144,13 +145,13 @@ section + section{ border-top:1px solid var(--line); }
 .site-header{
   position:sticky;
   top:0;
-  z-index:30;
+  z-index:40;
   background:var(--surface);
   border-bottom:1px solid var(--line);
 }
 .nav-shell{
   width:min(var(--container), calc(100% - clamp(40px, 8vw, 112px)));
-  min-height:76px;
+  min-height:var(--site-header-height);
   margin:0 auto;
   display:flex;
   align-items:center;
