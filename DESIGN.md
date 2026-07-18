@@ -110,14 +110,14 @@ Non è una console, una landing SaaS o una rivista travestita da portfolio. Rifi
 **Key Characteristics:**
 
 - Tipografia grande usata come struttura, non come slogan.
-- Superfici piatte, bordi sottili, un solo verde operativo.
+- Superfici piatte color osso, bordi sottili, un solo verde operativo.
 - Testi in prima persona lasciati respirare.
 - Diagrammi e visualizzazioni solo quando spiegano qualcosa.
 - Una destinazione per ogni voce di navigazione.
 
 ## Colors
 
-La tavolozza usa bianco e grigi freddi come carta; il verde compare solo per orientamento, link e stato.
+La tavolozza usa un osso minerale come carta; il verde compare solo per orientamento, link e stato. Il fondo è un omaggio discreto alla materialità di Brik, non un invito ad aggiungere effetti generativi.
 
 ### Primary
 
@@ -129,8 +129,9 @@ La tavolozza usa bianco e grigi freddi come carta; il verde compare solo per ori
 
 ### Neutral
 
-- **Carta fredda:** sfondo esterno del foglio su schermi larghi.
-- **Superficie bianca:** piano principale di lettura.
+- **Osso esterno:** sfondo del foglio su schermi larghi.
+- **Carta osso:** piano principale di lettura (`oklch(95.4% .014 83)`).
+- **Osso profondo:** visualizzazioni e superfici secondarie, sullo stesso asse cromatico.
 - **Inchiostro:** titoli e testo ad alta priorità.
 - **Grigi di lavoro:** paragrafi, date e informazioni secondarie.
 - **Linea:** separazione fra regioni, senza creare scatole ovunque.
@@ -161,7 +162,7 @@ La tavolozza usa bianco e grigi freddi come carta; il verde compare solo per ori
 
 ## Elevation
 
-Le superfici sono piatte. La profondità arriva da scala, spazio, contrasto tonale e bordi da un pixel. L'unica ombra ambientale ammessa separa l'intero foglio bianco dallo sfondo sui monitor larghi; card, elenchi e navigazione restano senza ombra.
+Le superfici sono piatte. La profondità arriva da scala, spazio, contrasto tonale e bordi da un pixel. L'unica ombra ambientale ammessa separa l'intero foglio color osso dallo sfondo sui monitor larghi; card, elenchi e navigazione restano senza ombra.
 
 ### Named Rules
 
@@ -174,7 +175,7 @@ Le superfici sono piatte. La profondità arriva da scala, spazio, contrasto tona
 - **Shape:** pillola compatta, riservata ad azioni reali.
 - **Primary:** verde operativo, testo bianco, 11px per 18px.
 - **Hover / Focus:** verde più profondo; focus da 2px ben visibile.
-- **Secondary / Ghost:** bianco e bordo sottile, senza ombra.
+- **Secondary / Ghost:** carta osso e bordo sottile, senza ombra.
 
 ### Chips
 
@@ -184,7 +185,7 @@ Le superfici sono piatte. La profondità arriva da scala, spazio, contrasto tona
 ### Cards / Containers
 
 - **Corner Style:** quasi squadrato (4px).
-- **Background:** bianco o una visualizzazione a colore pieno.
+- **Background:** carta osso o una visualizzazione a colore pieno.
 - **Shadow Strategy:** nessuna ombra.
 - **Border:** linea neutra da un pixel.
 - **Internal Padding:** 24–48px secondo la scala del contenuto.
@@ -206,6 +207,7 @@ Ogni fonte riceve una visualizzazione CSS distinta che ne suggerisce la grammati
 - **Do** usare gerarchia tipografica, spazio e bordi sottili prima di aggiungere contenitori.
 - **Do** mostrare diagrammi, dati o esempi reali quando un tema ha bisogno di un'immagine.
 - **Do** lasciare che ogni sezione abbia un compito chiaro: progetto, note, indice o bio.
+- **Do** prendere da Brik logiche di sistema, griglie e proporzioni; incorporare un tool live solo quando porta informazione reale.
 
 ### Don't:
 

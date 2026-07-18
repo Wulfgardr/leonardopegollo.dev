@@ -5,17 +5,17 @@
 :root{
   color-scheme:light;
 
-  --shell:#e9ece8;
-  --surface:#ffffff;
-  --surface-2:#f3f5f2;
-  --surface-3:#e9eeea;
+  /* A mineral bone field: warm enough to feel physical, quiet enough to keep
+     typography in charge. The hue is shared across every neutral token. */
+  --shell:oklch(86.5% .012 83);
+  --surface:oklch(95.4% .014 83);
+  --surface-2:oklch(91.8% .019 83);
+  --surface-3:oklch(86.8% .022 83);
 
-  --ink-0:#111417;
-  --ink-1:#5d6873;
-  /* --ink-2/--ink-3 deepened from #8b949d/#aab3bb to clear WCAG AA on white,
-     keeping the cool blue-grey hue. */
-  --ink-2:#6e7882;
-  --ink-3:#7e8893;
+  --ink-0:oklch(22% .01 83);
+  --ink-1:oklch(44% .008 83);
+  --ink-2:oklch(49% .008 83);
+  --ink-3:oklch(53% .008 83);
 
   /* Accent roles: mint = brand/primary, signal = "live" state only,
      amber = storage/"in arrivo", azure = client/informational. */
@@ -24,10 +24,11 @@
   --signal:#15c47a;
   --signal-ink:#0a8a54;
   --amber:#8a6a2b;
+  --amber-ink:#6f5018;
   --azure:#426b7f;
 
-  --line:#e2e6e9;
-  --line-strong:#cfd7dd;
+  --line:oklch(83.5% .018 83);
+  --line-strong:oklch(75.5% .02 83);
   --r-card:4px;
   --r-row:4px;
   --r-panel:0;
@@ -36,7 +37,7 @@
 
   --sh-pill:none;
   --sh-card:none;
-  --sh-surface:0 0 44px rgba(17,20,23,.06);
+  --sh-surface:0 0 44px rgba(29,26,21,.08);
 
   --font-display:"Helvetica Neue",system-ui,-apple-system,"Segoe UI",sans-serif;
   --font-body:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -144,10 +145,8 @@ section + section{ border-top:1px solid var(--line); }
   position:sticky;
   top:0;
   z-index:30;
-  background:rgba(255,255,255,.94);
+  background:var(--surface);
   border-bottom:1px solid var(--line);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
 }
 .nav-shell{
   width:min(var(--container), calc(100% - clamp(40px, 8vw, 112px)));

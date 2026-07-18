@@ -17,6 +17,11 @@ export interface IndexEntry {
   transferable: string;
   limits: string;
   visual: IndexVisualKind;
+  tools?: Array<{
+    name: string;
+    url: string;
+    note: string;
+  }>;
 }
 
 export const indexEntries: IndexEntry[] = [
@@ -25,16 +30,33 @@ export const indexEntries: IndexEntry[] = [
     title: 'Brik Gallery',
     url: 'https://brik.space/Gallery',
     source: 'Galleria web',
-    summary: 'Una raccolta di siti che tratta il web come materiale visivo, non come una serie di template.',
-    why: 'Mi serve per ricordare che un indice può avere ritmo senza diventare rumoroso.',
+    summary: 'Una raccolta di strumenti generativi per tipografia, immagini, movimento e interazione.',
+    why: 'Mi interessa perché tratta il design come un sistema di regole e varianti, non come un’immagine da rifare ogni volta.',
     observe: [
-      'Come alterna densità e vuoto.',
-      'La varietà delle anteprime, senza una griglia troppo regolare.',
-      'Il modo in cui ogni sito resta riconoscibile.',
+      'I controlli rendono visibili le decisioni che costruiscono un risultato.',
+      'Le anteprime alternano densità e vuoto senza una griglia troppo regolare.',
+      'Uno strumento può essere riusato e adattato invece di produrre un solo oggetto.',
     ],
-    transferable: 'La varietà può stare nella composizione, non nel numero di componenti.',
-    limits: 'Una galleria si può permettere più disorientamento di un sito personale.',
+    transferable: 'La varietà può stare nelle proporzioni, nel ritmo e nei parametri, non nel numero di componenti.',
+    limits: 'Molti strumenti sono volutamente spettacolari. In un sito da leggere vanno usati come studio o come export statico, non come effetto permanente.',
     visual: 'gallery',
+    tools: [
+      {
+        name: 'Grid Poster',
+        url: 'https://brik.space/ToolViewer?slug=swiss-grid-poster-mrpujp1e',
+        note: 'Per studiare colonne, margini e rapporti fra titolo e testo. Utile in fase di progetto, non come stile da copiare alla lettera.',
+      },
+      {
+        name: 'Structural Horizon Gallery',
+        url: 'https://brik.space/ToolViewer?slug=structural-horizon-gallery-mp3p7tvk',
+        note: 'La sua composizione asimmetrica può servire all’Index quando avrà immagini e casi reali da mostrare.',
+      },
+      {
+        name: 'Shift Grid',
+        url: 'https://brik.space/ToolViewer?slug=shift-grid-mp5r466n',
+        note: 'Interessante per una futura raccolta di schermate o progetti; sulla home attuale aggiungerebbe movimento senza una funzione.',
+      },
+    ],
   },
   {
     slug: 'the-pudding',
