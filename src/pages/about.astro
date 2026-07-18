@@ -19,12 +19,6 @@ import SocialLinks from '~/components/SocialLinks.astro';
         informazioni, persone, decisioni.
       </p>
 
-      <dl class="meta-line">
-        <div><dt>Luogo</dt><dd>Milano</dd></div>
-        <div><dt>Ruolo</dt><dd>Medico di distretto</dd></div>
-        <div><dt>Formazione</dt><dd>Master gestione aziende sociosanitarie</dd></div>
-      </dl>
-
       <div style="margin-top:22px">
         <SocialLinks variant="pills" />
       </div>
@@ -133,36 +127,10 @@ import SocialLinks from '~/components/SocialLinks.astro';
 </BaseLayout>
 
 <style>
-  /* Riga meta tipo intestazione di scheda: definizione + valore */
   section p:not(.lead):not(.muted){
     font-family:var(--font-body);
     font-size:1.02rem;
     line-height:1.7;
-  }
-
-  .meta-line{
-    margin:24px 0 0;
-    padding:18px 0;
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0,1fr));
-    gap:18px;
-  }
-  .meta-line > div{
-    display:flex; flex-direction:column; gap:4px;
-  }
-  .meta-line dt{
-    font-family:var(--font-technical);
-    font-size:11px; text-transform:uppercase;
-    color:var(--ink-2);
-    margin:0;
-  }
-  .meta-line dd{
-    margin:0; color:var(--ink-0); font-size:14.5px;
-  }
-  @media (max-width:680px){
-    .meta-line{ grid-template-columns:1fr; gap:12px; padding:16px 0; }
   }
 
   /* I link in prosa usano la classe .link-ink globale (single source of truth). */
