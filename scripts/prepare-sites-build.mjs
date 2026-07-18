@@ -13,7 +13,16 @@ await writeFile(
   workerFile,
   `export default {
   fetch(request, env) {
-    return env.ASSETS.fetch(request);
+    const url = new URL(request.url);
+    const lastSegment = url.pathname.split('/').at(-1) ?? '';
+
+    if (!lastSegment.includes('.')) {
+      url.pathname = url.pathname.endsWith('/')
+        ? \`\${url.pathname}index.html\`
+        : \`\${url.pathname}/index.html\`;
+    }
+
+    return env.ASSETS.fetch(new Request(url, request));
   },
 };
 `,
