@@ -10,27 +10,27 @@ import TopologyDiagram from '~/components/mediflow/TopologyDiagram.astro';
 // e si modificano in un punto solo.
 const perchiMedico = [
   { title: `Cosa vede ogni giorno`, body: `La scheda clinica con la storia coerente: diagnosi codificate, terapie con principio attivo e ATC, controlli passati e in agenda, osservazioni con unità di misura standard, allegati con riassunto.` },
-  { title: `Cosa cambia rispetto al solito`, body: `La cartella autorevole resta sul suo computer. Ogni funzione intelligente deve dichiarare dove lavora e non può scrivere nulla in scheda senza una conferma esplicita.` },
-  { title: `Cosa non gli viene imposto`, body: `La 0.8 non richiede account o abbonamenti AI esterni. Un futuro provider opzionale resta separato dalla cartella e richiede un'attivazione esplicita.` },
+  { title: `Cosa cambia rispetto al solito`, body: `La cartella autorevole resta sul suo computer. Se una funzione intelligente lavora altrove, deve dirlo; in ogni caso, niente entra in scheda senza una conferma esplicita.` },
+  { title: `Cosa non gli viene imposto`, body: `La 0.8 non chiede account o abbonamenti AI esterni. Un futuro provider opzionale resta separato dalla cartella e richiede un'attivazione esplicita.` },
   { title: `Cosa porta via se cambia idea`, body: `Un pacchetto FHIR R4 con anagrafica, diagnosi, visite, terapie e osservazioni. Standard riconosciuto, leggibile da altri sistemi.` },
 ];
 const perchiPaziente = [
-  { title: `Dove finiscono i suoi dati`, body: `La cartella resta sul computer di chi cura. I contenuti clinici sensibili sono cifrati lato client e non escono per impostazione predefinita.` },
-  { title: `Quando può esistere un invio`, body: `Solo un flusso futuro, qualificato e autorizzato, può usare un servizio remoto. Deve dichiarare minimizzazione, consenso, ritenzione e provider; oggi questo percorso è chiuso.` },
+  { title: `Dove finiscono i suoi dati`, body: `La risposta breve è: sul computer di chi cura. I contenuti clinici sensibili sono cifrati lato client e non escono per impostazione predefinita.` },
+  { title: `Quando può esistere un invio`, body: `Può esistere solo dentro un flusso futuro, qualificato e autorizzato. Deve dichiarare minimizzazione, consenso, ritenzione e provider; oggi quel percorso è chiuso.` },
   { title: `Quali diritti restano garantiti`, body: `Diritto all'oblio (Art. 17 GDPR) con cancellazione governata. Portabilità dei dati (Art. 20) tramite esportazione in formato standard.` },
   { title: `Cosa succede se il computer viene rubato`, body: `Senza PIN non si sblocca la sessione e i campi clinici cifrati restano ciphertext. Dispositivo, backup e metadati restano comunque parte del perimetro da proteggere.` },
 ];
 const perchiAmm = [
-  { title: `Modello di dispiegamento`, body: `La cartella resta single-tenant e local-first. Intelligence Fabric può scegliere un esecutore senza trasformare il database clinico in un servizio centrale.` },
-  { title: `Compatibilità con il SSR`, body: `Boundary espliciti verso SISS/FSE: oggi MediFlow prepara il contesto e richiama i percorsi ufficiali in modalità assistita. Niente claim di integrazione regionale certificata fuori da quanto documentato.` },
-  { title: `Auditing`, body: `Registro append-only con catalogo eventi limitato (chi, cosa, quando, esito). Niente PHI nei log applicativi, niente testi liberi clinici fuori dal record.` },
+  { title: `Modello di dispiegamento`, body: `Il database clinico resta single-tenant e local-first. Intelligence Fabric può scegliere un esecutore senza trasformare la cartella in un servizio centrale.` },
+  { title: `Compatibilità con il SSR`, body: `Verso SISS e FSE il confine è esplicito: oggi MediFlow prepara il contesto e richiama i percorsi ufficiali. Non dichiara un'integrazione regionale certificata dove non esiste.` },
+  { title: `Cosa resta tracciato`, body: `Il registro append-only conserva chi, cosa, quando ed esito. I log applicativi non contengono PHI né testi clinici liberi fuori dal record.` },
   { title: `Costi e credenziali`, body: `Nessun canone cloud è obbligatorio. Login, abbonamento, API key e OAuth restano classi distinte; nessuna credenziale concede da sola accesso clinico.` },
 ];
 const principi = [
-  { numeral: 'I', tag: `default`, title: `Local-first, non local-only`, body: `La cartella autorevole resta sul computer. Ogni capability parte dal profilo locale e senza fallback. Un canale remoto richiede una policy esplicita e controlli qualificati.` },
+  { numeral: 'I', tag: `default`, title: `Local-first, non local-only`, body: `La cartella autorevole resta sul computer. Da lì si parte. Se una funzione futura richiede un canale remoto, servono una policy esplicita, controlli qualificati e nessun fallback nascosto.` },
   { numeral: 'II', tag: `cifratura`, title: `Cifratura lato client`, body: `I campi clinici sensibili sono cifrati lato client con AES-256-GCM prima della scrittura. Il PIN non viene mai salvato. La chiave principale viene sbloccata dalla chiave derivata dal PIN, custodita in memoria solo durante la sessione e mai sul disco. Nessun ripristino possibile in caso di smarrimento del PIN: è una garanzia, non un bug.` },
   { numeral: 'III', tag: `interoperabilità`, title: `Standard aperti`, body: `ICD-11 per le diagnosi, ATC e AIC per i farmaci, LOINC e UCUM per le osservazioni, FHIR R4 per l'esportazione. Niente formato proprietario quando esiste un formato condiviso a livello internazionale.` },
-  { numeral: 'IV', tag: `provenienza`, title: `Informazione contestualizzata`, body: `Ogni output intelligente deve indicare funzione, luogo di calcolo, metodo e provenienza. Diagnosi, terapie e altri dati clinici strutturati richiedono sempre un'azione esplicita del medico.` },
+  { numeral: 'IV', tag: `provenienza`, title: `Informazione contestualizzata`, body: `Un risultato non basta: deve dire quale funzione lo ha prodotto, dove è stato calcolato, con quale metodo e da quale provenienza. Diagnosi e terapie richiedono sempre un'azione esplicita del medico.` },
 ];
 const topoCards = [
   { title: `Un nodo, non un servizio`, body: `Nella release 0.8.0 il Mac resta il nodo autorevole: contiene il database, espone le API e governa runtime e backup. Niente server centrale.` },
@@ -46,7 +46,7 @@ const interop = [
 const boundary = [
   { title: `Niente sincronizzazione cloud completa`, body: `Non sincronizziamo le cartelle attraverso Internet con un servizio centrale. La modalità Mac home-base copre solo la rete locale fidata, in opt-in, con scrittura limitata e versionata.` },
   { title: `Niente multi-tenant centralizzato`, body: `MediFlow non è un servizio condiviso fra strutture. È un'app per chi esercita in autonomia o per piccoli ambulatori che operano sotto la responsabilità di chi cura.` },
-  { title: `Nessun invio esterno implicito`, body: `Ollama resta l'unico provider AI operativo della 0.8. Intelligence Fabric rende visibile il percorso cloud, ma oggi il relativo profilo non soddisfa i requisiti e il gate resta chiuso.` },
+  { title: `Nessun invio esterno implicito`, body: `Nella 0.8 Ollama resta l'unico provider AI operativo. Intelligence Fabric non apre da sola un percorso cloud: oggi quel profilo non supera i requisiti e il gate resta chiuso.` },
   { title: `Niente integrazione regionale fuori boundary`, body: `Verso SISS/FSE oggi MediFlow prepara il contesto e richiama i percorsi ufficiali in modalità assistita. Niente UI regionale custom dentro il prodotto fino a una qualifica documentata.` },
   { title: `Niente automatismi clinici al buio`, body: `L'AI non scrive diagnosi, terapie o altri dati clinici strutturati senza un'azione esplicita del medico. Gli output ambigui, incompleti o incompatibili con il contratto vengono rifiutati.` },
   { title: `Niente telemetria silenziosa`, body: `Nessun ping remoto per misurare l'uso. Nessun analytics o beacon nascosto. Un eventuale servizio esterno deve appartenere a una capability richiesta e riconoscibile.` },
@@ -80,15 +80,16 @@ const boundary = [
     <div class="wrap">
       <p class="hero-status">Release sorgente 0.8.0 · programma Intelligence Fabric post-0.8</p>
       <h1 class="gradient-title">
-        MediFlow <span class="h-mute">è una cartella clinica</span><br/>{' '}<span class="sig">local-first</span>. Il contratto post‑0.8 dichiara dove lavora ogni funzione.
+        MediFlow <span class="h-mute">è una cartella clinica</span><br/>{' '}<span class="sig">local-first</span>. Non significa che tutto debba restare locale.
       </h1>
       <p class="lead" style="max-width:720px; margin-top:24px">
         MediFlow è pensata per chi esercita in autonomia e per piccoli ambulatori.
-        Tiene la cartella autorevole sul computer di chi cura, con i contenuti clinici sensibili cifrati.
+        Significa che la cartella autorevole resta sul computer di chi cura, con i contenuti clinici sensibili cifrati.
         Con la 0.8.0 il Mac resta il nodo home-base autorevole; il workspace web e le superfici
         native per macOS, iPhone e iPad condividono i flussi clinici principali, adattati a ogni piattaforma.
-        Intelligence Fabric definisce il contratto post-0.8: ogni funzione dichiara dove lavora,
-        quale uscita dati ammette e come l'output deve essere presentato e revisionato.
+        Il lavoro post-0.8 sull'Intelligence Fabric affronta il passaggio successivo:
+        quando una funzione usa un esecutore diverso, deve dichiarare quale dato tocca,
+        dove lavora e quale revisione chiede prima che il risultato entri nel lavoro clinico.
       </p>
       <div style="display:flex; gap:10px; margin-top:30px; flex-wrap:wrap">
         <a class="btn btn-primary" href="#cosa">Leggi la scheda <span aria-hidden="true">→</span></a>
@@ -229,29 +230,29 @@ const boundary = [
     <div class="wrap">
       <SectionHead
         heading="Local-first non significa local-only."
-        lead="Intelligence Fabric separa la cartella clinica dal luogo in cui avviene un'elaborazione. Il routing segue la funzione richiesta, non il marchio del modello."
+        lead="Il punto non è scegliere una volta per tutte fra locale e cloud. Il punto è scegliere lo strumento in base al lavoro, al dato che tocca e al rischio che introduce."
       />
 
       <div class="fabric-route reveal" aria-label="Percorso governato di una funzione Intelligence Fabric">
         <article>
           <span>01</span>
           <h3>Capability</h3>
-          <p>La richiesta nomina una funzione: sintesi, OCR, ricerca, classificazione, esportazione o un'altra operazione dichiarata.</p>
+          <p>Si parte dal lavoro da fare: sintesi, OCR, ricerca, classificazione, esportazione o un'altra operazione dichiarata.</p>
         </article>
         <article>
           <span>02</span>
           <h3>Policy</h3>
-          <p>Prima del calcolo, MediFlow fissa classe del dato, luoghi ammessi, profilo di uscita, ritenzione e revisione richiesta.</p>
+          <p>Prima di eseguire qualcosa, MediFlow fissa classe del dato, luoghi ammessi, profilo di uscita, ritenzione e revisione richiesta.</p>
         </article>
         <article>
           <span>03</span>
           <h3>Risoluzione</h3>
-          <p>Il resolver sceglie un esecutore compatibile. Se capability, luogo o profilo non coincidono, il flusso si ferma senza fallback.</p>
+          <p>A quel punto il resolver sceglie un esecutore compatibile. Se funzione, luogo o profilo non coincidono, il flusso si ferma senza fallback.</p>
         </article>
         <article>
           <span>04</span>
           <h3>Provenienza</h3>
-          <p>L'output indica sempre capability, luogo e passaggi preparatori. Se usa un modello, dichiara anche provider e modello, senza inserire prompt o contenuti clinici nella ricevuta.</p>
+          <p>Il risultato porta con sé funzione, luogo e passaggi preparatori. Se usa un modello, dichiara anche provider e modello; prompt e contenuti clinici restano fuori dalla ricevuta.</p>
         </article>
       </div>
 
@@ -259,24 +260,24 @@ const boundary = [
         <div>
           <h3>Stato della 0.8</h3>
           <p>
-            Le funzioni operative usano il processo locale o il Mac home-base.
-            Ollama è l'unico connettore AI operativo; le pipeline deterministiche restano disponibili senza modello.
-            Il gate verso servizi esterni è chiuso.
+            Oggi il quadro è più semplice: le funzioni operative usano il processo locale o il Mac home-base.
+            Ollama è l'unico connettore AI operativo; le pipeline deterministiche funzionano anche senza modello.
+            Il gate verso servizi esterni resta chiuso.
           </p>
         </div>
         <div>
           <h3>Contratto post-0.8</h3>
           <p>
-            Lo scaffold Intelligence Fabric è definito e verificato sul programma post-0.8, ma non è una funzione consegnata dalla release.
-            Le venue on-device e cloud richiedono sviluppi e verifiche dedicate. Non ereditano autorizzazioni.
+            Il contratto Intelligence Fabric esiste ed è stato verificato nel programma post-0.8.
+            Non equivale a una funzione già consegnata: le venue on-device e cloud richiedono sviluppi e verifiche dedicate, e non ereditano autorizzazioni.
           </p>
         </div>
       </div>
 
       <div class="information-contract reveal">
         <div class="information-contract-head">
-          <h3>Come deve essere servita l'informazione</h3>
-          <p>Un risultato utile deve spiegare anche il proprio contesto operativo.</p>
+          <h3>Come arriva l'informazione</h3>
+          <p>Un output ordinato non è ancora un'informazione affidabile. Deve portarsi dietro il proprio contesto operativo.</p>
         </div>
         <dl>
           <div><dt>Che cosa</dt><dd>La capability e l'operazione che hanno prodotto il risultato.</dd></div>
