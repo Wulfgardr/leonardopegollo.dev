@@ -296,6 +296,8 @@ const fmt = (d: Date) =>
 
 <script>
   /* @Codex: progressive enhancement per i visual PRREG; il contenuto resta leggibile senza JS. */
+  const prregFlowCleanups = new Map<HTMLElement, () => void>();
+
   const setupPrregFlow = (root: HTMLElement) => {
     const steps = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-prreg-step]'));
     const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-prreg-panel]'));
@@ -304,6 +306,8 @@ const fmt = (d: Date) =>
     const previous = root.querySelector<HTMLButtonElement>('[data-prreg-prev]');
     const next = root.querySelector<HTMLButtonElement>('[data-prreg-next]');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const controller = new AbortController();
+    const listenerOptions = { signal: controller.signal };
     let active = 0;
     let timer: number | undefined;
 
@@ -328,26 +332,45 @@ const fmt = (d: Date) =>
     };
 
     steps.forEach((step, i) => {
-      step.addEventListener('click', () => { stop(); select(i); });
+      step.addEventListener('click', () => { stop(); select(i); }, listenerOptions);
       step.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowRight') { event.preventDefault(); stop(); select(active + 1, true); }
         if (event.key === 'ArrowLeft') { event.preventDefault(); stop(); select(active - 1, true); }
         if (event.key === 'Home') { event.preventDefault(); stop(); select(0, true); }
         if (event.key === 'End') { event.preventDefault(); stop(); select(steps.length - 1, true); }
-      });
+      }, listenerOptions);
     });
-    previous?.addEventListener('click', () => { stop(); select(active - 1); });
-    next?.addEventListener('click', () => { stop(); select(active + 1); });
+    previous?.addEventListener('click', () => { stop(); select(active - 1); }, listenerOptions);
+    next?.addEventListener('click', () => { stop(); select(active + 1); }, listenerOptions);
     play?.addEventListener('click', () => {
       if (timer !== undefined) return stop();
       if (reduceMotion.matches) return;
       play.textContent = 'Pausa';
       play.setAttribute('aria-pressed', 'true');
       timer = window.setInterval(() => select(active + 1), 1800);
-    });
-    reduceMotion.addEventListener('change', stop);
+    }, listenerOptions);
+    reduceMotion.addEventListener('change', stop, listenerOptions);
     select(0);
+
+    return () => {
+      stop();
+      controller.abort();
+    };
   };
 
-  document.querySelectorAll<HTMLElement>('[data-prreg-flow]').forEach(setupPrregFlow);
+  const cleanupPrregFlows = () => {
+    prregFlowCleanups.forEach((cleanup) => cleanup());
+    prregFlowCleanups.clear();
+  };
+
+  const initPrregFlows = () => {
+    cleanupPrregFlows();
+    document.querySelectorAll<HTMLElement>('[data-prreg-flow]').forEach((root) => {
+      prregFlowCleanups.set(root, setupPrregFlow(root));
+    });
+  };
+
+  document.addEventListener('astro:before-swap', cleanupPrregFlows);
+  document.addEventListener('astro:page-load', initPrregFlows);
+  initPrregFlows();
 </script>
