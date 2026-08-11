@@ -33,7 +33,7 @@ const principi = [
   { numeral: 'IV', tag: `provenienza`, title: `Informazione contestualizzata`, body: `Un risultato non basta: deve dire quale funzione lo ha prodotto, dove è stato calcolato, con quale metodo e da quale provenienza. Diagnosi e terapie richiedono sempre un'azione esplicita del medico.` },
 ];
 const topoCards = [
-  { title: `Un nodo, non un servizio`, body: `Nella release 0.8.0 il Mac resta il nodo autorevole: contiene il database, espone le API e governa runtime e backup. Niente server centrale.` },
+  { title: `Un nodo, non un servizio`, body: `Nella release 0.8.2 il Mac resta il nodo autorevole: contiene il database, espone le API e governa runtime e backup. Niente server centrale.` },
   { title: `Tre superfici API distinte`, body: `Web API per il browser, Native API versionata per i client Apple, Network API opzionale per i client paired in LAN fidata. Capability e versioni restano esplicite.` },
   { title: `Runtime condiviso, perimetro chiaro`, body: `Runtime web, launcher e core sono verificati anche su Linux e Windows. Non equivale a promettere tre app desktop native complete.` },
 ];
@@ -54,7 +54,7 @@ const boundary = [
 ---
 <BaseLayout
   title="MediFlow · scheda prodotto"
-  description="MediFlow 0.8: workspace clinico local-first, con campi clinici cifrati, AI revisionabile e superfici web, macOS, iPhone e iPad."
+  description="MediFlow 0.8.2: workspace clinico local-first, con campi clinici cifrati, AI revisionabile e superfici web, macOS, iPhone e iPad."
 >
   <!-- Sotto-navigazione interna della scheda MediFlow -->
   <div class="wp-subnav-wrap">
@@ -78,22 +78,22 @@ const boundary = [
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <p class="hero-status">Release sorgente 0.8.0 · programma Intelligence Fabric post-0.8</p>
+      <p class="hero-status">Release sorgente 0.8.2 · programma Intelligence Fabric post-0.8</p>
       <h1 class="gradient-title">
         MediFlow <span class="h-mute">è una cartella clinica</span><br/>{' '}<span class="sig">local-first</span>. Non significa che tutto debba restare locale.
       </h1>
       <p class="lead" style="max-width:720px; margin-top:24px">
         MediFlow è pensata per chi esercita in autonomia e per piccoli ambulatori.
         Significa che la cartella autorevole resta sul computer di chi cura, con i contenuti clinici sensibili cifrati.
-        Con la 0.8.0 il Mac resta il nodo home-base autorevole; il workspace web e le superfici
-        native per macOS, iPhone e iPad condividono i flussi clinici principali, adattati a ogni piattaforma.
+        Con la 0.8.2 il Mac resta il nodo home-base autorevole. Il workspace web è la superficie operativa principale;
+        macOS, iPhone e iPad crescono sugli stessi contratti locali, con parità ancora incompleta.
         Il lavoro post-0.8 sull'Intelligence Fabric affronta il passaggio successivo:
         quando una funzione usa un esecutore diverso, deve dichiarare quale dato tocca,
         dove lavora e quale revisione chiede prima che il risultato entri nel lavoro clinico.
       </p>
       <div style="display:flex; gap:10px; margin-top:30px; flex-wrap:wrap">
         <a class="btn btn-primary" href="#cosa">Leggi la scheda <span aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="https://github.com/Wulfgardr/mediflow/releases/tag/v0.8.0">Apri la release 0.8</a>
+        <a class="btn btn-ghost" href="https://github.com/Wulfgardr/mediflow/releases/tag/v0.8.2">Apri la release 0.8.2</a>
       </div>
 
       <div class="chip-row hero-meta" aria-label="Coordinate MediFlow">
@@ -109,7 +109,7 @@ const boundary = [
         <span><b>AES-256-GCM</b></span>
         <span><b>Nessun egress implicito</b></span>
         <span><b>Open source</b></span>
-        <span><b>v0.8.0</b></span>
+        <span><b>v0.8.2 sorgente</b></span>
         <span><b>Audit append-only</b></span>
         <span><b>FHIR R4</b></span>
       </div>
@@ -311,7 +311,7 @@ const boundary = [
     <div class="wrap">
       <SectionHead
         heading="Cosa succede davvero quando lavori in scheda."
-        lead="Sei flussi essenziali, in ordine di vita di una giornata clinica. La 0.8.0 mantiene il Mac come base operativa e i client paired dentro capability esplicite."
+        lead="Sei flussi essenziali, in ordine di vita di una giornata clinica. La 0.8.2 mantiene il Mac come base operativa e i client paired dentro capacità esplicite."
       />
 
       <div class="flow-list reveal">
@@ -366,18 +366,18 @@ const boundary = [
   <section id="tappe">
     <div class="wrap">
       <SectionHead
-        heading="Stato pubblico dalla 0.8.0."
+        heading="Dove siamo dopo la 0.8.2."
         lead="La release distingue ciò che è consegnato, i limiti ancora aperti e la direzione post-0.8. Una release sorgente non equivale a una pubblicazione App Store o a una certificazione."
       />
 
       <div class="timeline reveal">
         <div class="tl-item">
-          <div class="ver"><b>v0.8.0</b> · release sorgente</div>
-          <div class="tl-content"><h4>Workspace web e superfici Apple sullo stesso tree verificato</h4><ul><li>Mac home-base come nodo autorevole per database, runtime e backup</li><li>Superfici native per macOS, iPhone e iPad con flussi clinici principali adattati alla piattaforma</li><li>Campi clinici sensibili cifrati, audit append-only e lockout autenticazione</li><li>Runtime web, launcher e core verificati anche su Linux e Windows, senza dichiarare app desktop native complete</li></ul></div>
+          <div class="ver"><b>v0.8.2</b> · disponibile come sorgente</div>
+          <div class="tl-content"><h4>Confini più verificabili, senza ampliare le promesse</h4><ul><li>Mac home-base come nodo autorevole e workspace web come superficie operativa principale</li><li>Revisione umana richiesta prima di scrivere proposte cliniche prodotte dall'AI</li><li>API senza messaggi grezzi delle eccezioni e controlli automatici collegati alla CI</li><li>Versioni web e Apple allineate nei metadati; nessuna pubblicazione App Store dichiarata</li></ul></div>
         </div>
         <div class="tl-item">
-          <div class="ver"><b>Apple native</b> · parità semantica non completa</div>
-          <div class="tl-content"><h4>Mac nodo autorevole, iPhone e iPad come client paired</h4><ul><li>Pairing esplicito su rete locale fidata</li><li>Capability discovery e scritture online versionate</li><li>30 delle 43 capability con obiettivo di parità risultano complete; 13 restano parziali</li><li>VoiceOver reale su iPhone e iPad non ancora provato; gli audit automatici non equivalgono a conformità</li></ul></div>
+          <div class="ver"><b>Apple native</b> · sviluppo in corso</div>
+          <div class="tl-content"><h4>Mac nodo autorevole, iPhone e iPad come client paired</h4><ul><li>Pairing esplicito su rete locale fidata</li><li>Capacità e scritture online versionate</li><li>Quattro contratti UI iPad superati senza fallimenti né salti nel push verificato</li><li>Parità completa e conformità accessibilità non dichiarate; compatibilità con host precedenti ancora aperta</li></ul></div>
         </div>
         <div class="tl-item">
           <div class="ver"><b>Document intelligence</b> · review-first</div>
@@ -388,8 +388,8 @@ const boundary = [
           <div class="tl-content"><h4>SISS/FSE dentro il perimetro documentato</h4><ul><li>MediFlow prepara il contesto e richiama i percorsi ufficiali</li><li>Niente integrazione regionale nativa certificata dichiarata senza qualifica <code>SSI/A2A</code></li><li>Prescrizioni di prestazione separate dalle terapie farmacologiche</li><li>Matching repertorio reviewable, non spacciato per invio regionale</li></ul></div>
         </div>
         <div class="tl-item future">
-          <div class="ver"><b>Post-0.8</b> <span class="pill">contratto definito</span></div>
-          <div class="tl-content"><h4>Intelligence Fabric, un solo contratto per funzioni diverse</h4><ul><li>5 capability generative e 11 deterministiche registrate nello scaffold verificato</li><li>Routing esplicito fra processo locale, Mac home-base e future venue on-device o cloud</li><li>Policy immutabile, provenienza obbligatoria, fallback assente e resolver fail-closed</li><li>Provider esterni, consenso cloud e interfacce consumer non sono funzioni complete della 0.8</li></ul></div>
+          <div class="ver"><b>Post-0.8</b> <span class="pill">in costruzione</span></div>
+          <div class="tl-content"><h4>Intelligence Fabric locale, con fallback negato</h4><ul><li>Registro delle capacità e stato in sola lettura già presenti nel codice</li><li>Routing più ampio, provider e adozione nativa ancora incompleti</li><li>Nessun nuovo cloud, credenziale o consenso aggiunto dalla 0.8.2</li><li>Ogni scrittura clinica resta un comando separato e revisionato</li></ul></div>
         </div>
         <div class="tl-item future">
           <div class="ver"><b>Visione</b> <span class="pill">futura</span></div>
