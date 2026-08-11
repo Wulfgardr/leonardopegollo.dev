@@ -123,23 +123,9 @@ const fmt = (d: Date) =>
   }
   .prreg-viz__head h3{ margin:0; font-size:clamp(1.4rem, 3vw, 2rem); }
   .prreg-viz__head p{ margin:7px 0 0; color:var(--ink-2); }
-  .prreg-legend{ display:flex; flex-wrap:wrap; gap:6px; }
-  .prreg-legend span{
-    display:inline-flex;
-    align-items:center;
-    min-height:30px;
-    padding:5px 9px;
-    color:var(--ink-2);
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:999px;
-    font-family:var(--font-technical);
-    font-size:12px;
-    line-height:1.25;
-  }
-  .prreg-legend .observed{ color:var(--mint); border-color:color-mix(in oklab, var(--mint) 45%, var(--line)); }
 
-  .prreg-flow__controls{
+  .prreg-flow__controls{ display:none; }
+  .prreg-flow[data-prreg-enhanced="true"] .prreg-flow__controls{
     display:flex;
     align-items:center;
     flex-wrap:wrap;
@@ -168,13 +154,14 @@ const fmt = (d: Date) =>
     font-size:12px;
   }
   .prreg-flow__track{
-    display:grid;
+    display:none;
     grid-template-columns:repeat(3, minmax(0, 1fr));
     gap:8px;
     margin:0;
     padding:0;
     list-style:none;
   }
+  .prreg-flow[data-prreg-enhanced="true"] .prreg-flow__track{ display:grid; }
   .prreg-flow__track li{ min-width:0; margin:0; padding:0; }
   .prreg-step{
     display:flex;
@@ -223,6 +210,8 @@ const fmt = (d: Date) =>
   }
   .prreg-flow__detail strong{ font-size:1rem; }
   .prreg-flow__detail p{ margin:7px 0 0; color:var(--ink-1); }
+  .prreg-flow__detail [data-prreg-panel] + [data-prreg-panel]{ margin-top:16px; padding-top:16px; border-top:1px solid var(--line); }
+  .prreg-flow[data-prreg-enhanced="true"] .prreg-flow__detail [data-prreg-panel]{ margin:0; padding:0; border:0; }
   .prreg-viz figcaption{ margin-top:16px; color:var(--ink-2); font-size:13px; line-height:1.55; }
 
   .prreg-errors{ margin:0; padding:0; list-style:none; }
@@ -351,10 +340,13 @@ const fmt = (d: Date) =>
     }, listenerOptions);
     reduceMotion.addEventListener('change', stop, listenerOptions);
     select(0);
+    root.dataset.prregEnhanced = 'true';
 
     return () => {
       stop();
       controller.abort();
+      delete root.dataset.prregEnhanced;
+      panels.forEach((panel) => { panel.hidden = false; });
     };
   };
 

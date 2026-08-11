@@ -131,10 +131,6 @@ La forma osservata è questa:
       <h3 id="prreg-flow-title">Che cosa succede dopo il menu SISS?</h3>
       <p>Scegli un passaggio. Oppure guarda la sequenza completa.</p>
     </div>
-    <div class="prreg-legend" aria-label="Legenda">
-      <span class="observed">Nel log</span>
-      <span>Cosa significa</span>
-    </div>
   </div>
   <div class="prreg-flow__controls" aria-label="Controlli della sequenza">
     <button type="button" data-prreg-prev aria-label="Passaggio precedente">←</button>
@@ -156,15 +152,15 @@ La forma osservata è questa:
   </ol>
   <div class="prreg-flow__detail" aria-live="polite">
     <div data-prreg-panel><strong>Menu SISS</strong><p>Il percorso parte dal menu regionale. Il log non mostra un ingresso autonomo dal gestionale.</p></div>
-    <div data-prreg-panel hidden><strong>Autenticazione e profilo</strong><p>L'autenticazione e la scelta del profilo preparano la sessione usata da PRREG.</p></div>
-    <div data-prreg-panel hidden><strong>Avvio della webapp</strong><p>PRREG carica configurazioni, moduli, ruolo, struttura e dati statici.</p></div>
-    <div data-prreg-panel hidden><strong>Ricerca</strong><p>Il testo produce alcuni risultati. Il log non spiega come PRREG li ordina.</p></div>
-    <div data-prreg-panel hidden><strong>Associazione</strong><p>PRREG trasforma il risultato scelto in un elemento della prescrizione. Il nome della chiamata non documenta tutte le regole.</p></div>
-    <div data-prreg-panel hidden><strong>Controlli</strong><p>La webapp controlla la prescrizione prima della registrazione. Il log redatto non mostra tutte le regole applicate.</p></div>
-    <div data-prreg-panel hidden><strong>Partizionamento</strong><p>PRREG può dividere o raggruppare gli elementi. L'elenco iniziale non coincide sempre con le ricette finali.</p></div>
-    <div data-prreg-panel hidden><strong>Registrazione</strong><p>Preparazione e invio sono due passaggi distinti. La bozza diventa un atto solo se l'esito lo conferma.</p></div>
-    <div data-prreg-panel hidden><strong>Controllo dell'esito</strong><p>La webapp legge la risposta e cerca eventuali errori. Un guasto qui può lasciare l'esito incerto.</p></div>
-    <div data-prreg-panel hidden><strong>Stampa</strong><p>PRREG prepara la stampa dopo il controllo dell'esito. Compilazione, registrazione e stampa sono tre stati diversi.</p></div>
+    <div data-prreg-panel><strong>Autenticazione e profilo</strong><p>L'autenticazione e la scelta del profilo preparano la sessione usata da PRREG.</p></div>
+    <div data-prreg-panel><strong>Avvio della webapp</strong><p>PRREG carica configurazioni, moduli, ruolo, struttura e dati statici.</p></div>
+    <div data-prreg-panel><strong>Ricerca</strong><p>Il testo produce alcuni risultati. Il log non spiega come PRREG li ordina.</p></div>
+    <div data-prreg-panel><strong>Associazione</strong><p>PRREG trasforma il risultato scelto in un elemento della prescrizione. Il nome della chiamata non documenta tutte le regole.</p></div>
+    <div data-prreg-panel><strong>Controlli</strong><p>La webapp controlla la prescrizione prima della registrazione. Il log redatto non mostra tutte le regole applicate.</p></div>
+    <div data-prreg-panel><strong>Partizionamento</strong><p>PRREG può dividere o raggruppare gli elementi. L'elenco iniziale non coincide sempre con le ricette finali.</p></div>
+    <div data-prreg-panel><strong>Registrazione</strong><p>Preparazione e invio sono due passaggi distinti. La bozza diventa un atto solo se l'esito lo conferma.</p></div>
+    <div data-prreg-panel><strong>Controllo dell'esito</strong><p>La webapp legge la risposta e cerca eventuali errori. Un guasto qui può lasciare l'esito incerto.</p></div>
+    <div data-prreg-panel><strong>Stampa</strong><p>PRREG prepara la stampa dopo il controllo dell'esito. Compilazione, registrazione e stampa sono tre stati diversi.</p></div>
   </div>
   <figcaption>Il log mostra questi passaggi nella webapp autenticata. Non dimostra l'esistenza di un contratto d'integrazione.</figcaption>
 </figure>
