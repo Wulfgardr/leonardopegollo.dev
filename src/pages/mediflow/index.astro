@@ -10,32 +10,32 @@ import TopologyDiagram from '~/components/mediflow/TopologyDiagram.astro';
 // e si modificano in un punto solo.
 const perchiMedico = [
   { title: `Cosa vede ogni giorno`, body: `La scheda clinica con la storia coerente: diagnosi codificate, terapie con principio attivo e ATC, controlli passati e in agenda, osservazioni con unità di misura standard, allegati con riassunto.` },
-  { title: `Cosa cambia rispetto al solito`, body: `I dati non sono in un servizio remoto: sono nel suo computer. L'AI lo aiuta ma non scrive nulla in scheda senza una sua conferma esplicita, soprattutto su diagnosi e terapie.` },
-  { title: `Cosa non gli viene chiesto`, body: `Niente account su servizi terzi, niente abbonamenti per usare l'AI, niente caricamento di referti sul cloud. Il PIN sblocca la sessione locale.` },
+  { title: `Cosa cambia rispetto al solito`, body: `La cartella autorevole resta sul suo computer. Se una funzione intelligente lavora altrove, deve dirlo; in ogni caso, niente entra in scheda senza una conferma esplicita.` },
+  { title: `Cosa non gli viene imposto`, body: `La 0.8 non chiede account o abbonamenti AI esterni. Un futuro provider opzionale resta separato dalla cartella e richiede un'attivazione esplicita.` },
   { title: `Cosa porta via se cambia idea`, body: `Un pacchetto FHIR R4 con anagrafica, diagnosi, visite, terapie e osservazioni. Standard riconosciuto, leggibile da altri sistemi.` },
 ];
 const perchiPaziente = [
-  { title: `Dove finiscono i suoi dati`, body: `Sul computer di chi ha in carico la persona. I contenuti clinici sensibili sono cifrati lato client. Non vengono condivisi con servizi remoti né usati per addestrare modelli.` },
+  { title: `Dove finiscono i suoi dati`, body: `La risposta breve è: sul computer di chi cura. I contenuti clinici sensibili sono cifrati lato client e non escono per impostazione predefinita.` },
+  { title: `Quando può esistere un invio`, body: `Può esistere solo dentro un flusso futuro, qualificato e autorizzato. Deve dichiarare minimizzazione, consenso, ritenzione e provider; oggi quel percorso è chiuso.` },
   { title: `Quali diritti restano garantiti`, body: `Diritto all'oblio (Art. 17 GDPR) con cancellazione governata. Portabilità dei dati (Art. 20) tramite esportazione in formato standard.` },
   { title: `Cosa succede se il computer viene rubato`, body: `Senza PIN non si sblocca la sessione e i campi clinici cifrati restano ciphertext. Dispositivo, backup e metadati restano comunque parte del perimetro da proteggere.` },
-  { title: `Chi è responsabile`, body: `Il professionista resta titolare del trattamento. MediFlow è lo strumento, non l'esecutore.` },
 ];
 const perchiAmm = [
-  { title: `Modello di dispiegamento`, body: `Single-tenant locale. Un nodo per professionista. Niente server centrale da mantenere, niente perimetro multi-paziente da difendere a livello di rete.` },
-  { title: `Compatibilità con il SSR`, body: `Boundary espliciti verso SISS/FSE: oggi MediFlow prepara il contesto e richiama i percorsi ufficiali in modalità assistita. Niente claim di integrazione regionale certificata fuori da quanto documentato.` },
-  { title: `Auditing`, body: `Registro append-only con catalogo eventi limitato (chi, cosa, quando, esito). Niente PHI nei log applicativi, niente testi liberi clinici fuori dal record.` },
-  { title: `Costi nascosti`, body: `Nessun canone per AI cloud. Nessun lock-in proprietario di formato dati: l'export FHIR R4 e la cifratura aperta tengono basso il costo di uscita.` },
+  { title: `Modello di dispiegamento`, body: `Il database clinico resta single-tenant e local-first. Intelligence Fabric può scegliere un esecutore senza trasformare la cartella in un servizio centrale.` },
+  { title: `Compatibilità con il SSR`, body: `Verso SISS e FSE il confine è esplicito: oggi MediFlow prepara il contesto e richiama i percorsi ufficiali. Non dichiara un'integrazione regionale certificata dove non esiste.` },
+  { title: `Cosa resta tracciato`, body: `Il registro append-only conserva chi, cosa, quando ed esito. I log applicativi non contengono PHI né testi clinici liberi fuori dal record.` },
+  { title: `Costi e credenziali`, body: `Nessun canone cloud è obbligatorio. Login, abbonamento, API key e OAuth restano classi distinte; nessuna credenziale concede da sola accesso clinico.` },
 ];
 const principi = [
-  { numeral: 'I', tag: `default`, title: `Locale prima di tutto`, body: `I dati clinici non escono dal computer per impostazione predefinita. Niente telemetria, niente sincronizzazione automatica, niente chiamate AI verso servizi esterni. Se una funzione richiedesse un canale remoto, viene aggiunta in modo esplicito, documentata e disattivabile.` },
+  { numeral: 'I', tag: `default`, title: `Local-first, non local-only`, body: `La cartella autorevole resta sul computer. Da lì si parte. Se una funzione futura richiede un canale remoto, servono una policy esplicita, controlli qualificati e nessun fallback nascosto.` },
   { numeral: 'II', tag: `cifratura`, title: `Cifratura lato client`, body: `I campi clinici sensibili sono cifrati lato client con AES-256-GCM prima della scrittura. Il PIN non viene mai salvato. La chiave principale viene sbloccata dalla chiave derivata dal PIN, custodita in memoria solo durante la sessione e mai sul disco. Nessun ripristino possibile in caso di smarrimento del PIN: è una garanzia, non un bug.` },
   { numeral: 'III', tag: `interoperabilità`, title: `Standard aperti`, body: `ICD-11 per le diagnosi, ATC e AIC per i farmaci, LOINC e UCUM per le osservazioni, FHIR R4 per l'esportazione. Niente formato proprietario quando esiste un formato condiviso a livello internazionale.` },
-  { numeral: 'IV', tag: `no automatismi`, title: `AI revisionabile`, body: `I modelli locali aiutano nella sintesi, nell'OCR e nei suggerimenti. Non scrivono mai diagnosi o terapie senza una conferma esplicita di chi esercita. L'unica eccezione documentata è l'autofill su codici ICD letteralmente presenti nel documento sorgente.` },
+  { numeral: 'IV', tag: `provenienza`, title: `Informazione contestualizzata`, body: `Un risultato non basta: deve dire quale funzione lo ha prodotto, dove è stato calcolato, con quale metodo e da quale provenienza. Diagnosi e terapie richiedono sempre un'azione esplicita del medico.` },
 ];
 const topoCards = [
-  { title: `Un nodo, non un servizio`, body: `Nel ramo 0.7.1 il Mac diventa il nodo autorevole: contiene il database, espone l'API, governa runtime e backup. Niente server centrale.` },
+  { title: `Un nodo, non un servizio`, body: `Nella release 0.8.2 il Mac resta il nodo autorevole: contiene il database, espone le API e governa runtime e backup. Niente server centrale.` },
   { title: `Tre superfici API distinte`, body: `Web API per il browser, Native API versionata per i client Apple, Network API opzionale per i client paired in LAN fidata. Capability e versioni restano esplicite.` },
-  { title: `Core condiviso, app per piattaforma`, body: `MediFlowCore porta contratti, filtri, cifratura e logica clinica fuori dalla UI. Linux e Windows verificano core e launcher, non promettono app desktop complete.` },
+  { title: `Runtime condiviso, perimetro chiaro`, body: `Runtime web, launcher e core sono verificati anche su Linux e Windows. Non equivale a promettere tre app desktop native complete.` },
 ];
 const interop = [
   { title: `ICD-11`, body: `Diagnosi codificate secondo il sistema OMS, via API locale. Niente più testo libero ambiguo.` },
@@ -46,15 +46,15 @@ const interop = [
 const boundary = [
   { title: `Niente sincronizzazione cloud completa`, body: `Non sincronizziamo le cartelle attraverso Internet con un servizio centrale. La modalità Mac home-base copre solo la rete locale fidata, in opt-in, con scrittura limitata e versionata.` },
   { title: `Niente multi-tenant centralizzato`, body: `MediFlow non è un servizio condiviso fra strutture. È un'app per chi esercita in autonomia o per piccoli ambulatori che operano sotto la responsabilità di chi cura.` },
-  { title: `Niente AI cloud di default`, body: `L'unica eccezione documentata è una lane interna di valutazione comparativa, opt-in, mai usata come runtime clinico, mai con dati paziente non redatti.` },
+  { title: `Nessun invio esterno implicito`, body: `Nella 0.8 Ollama resta l'unico provider AI operativo. Intelligence Fabric non apre da sola un percorso cloud: oggi quel profilo non supera i requisiti e il gate resta chiuso.` },
   { title: `Niente integrazione regionale fuori boundary`, body: `Verso SISS/FSE oggi MediFlow prepara il contesto e richiama i percorsi ufficiali in modalità assistita. Niente UI regionale custom dentro il prodotto fino a una qualifica documentata.` },
-  { title: `Niente automatismi clinici al buio`, body: `L'AI non scrive diagnosi e terapie senza conferma. L'unico autofill ammesso è su codici ICD letteralmente presenti nel documento sorgente.` },
-  { title: `Niente telemetria silenziosa`, body: `Nessun ping a servizi remoti per uso. Nessun analytics. Nessun beacon. Niente.` },
+  { title: `Niente automatismi clinici al buio`, body: `L'AI non scrive diagnosi, terapie o altri dati clinici strutturati senza un'azione esplicita del medico. Gli output ambigui, incompleti o incompatibili con il contratto vengono rifiutati.` },
+  { title: `Niente telemetria silenziosa`, body: `Nessun ping remoto per misurare l'uso. Nessun analytics o beacon nascosto. Un eventuale servizio esterno deve appartenere a una capability richiesta e riconoscibile.` },
 ];
 ---
 <BaseLayout
   title="MediFlow · scheda prodotto"
-  description="MediFlow: cartella clinica locale, con campi clinici cifrati e AI sul dispositivo. Cosa è, come funziona, dove va."
+  description="MediFlow 0.8.2: workspace clinico local-first, con campi clinici cifrati, AI revisionabile e superfici web, macOS, iPhone e iPad."
 >
   <!-- Sotto-navigazione interna della scheda MediFlow -->
   <div class="wp-subnav-wrap">
@@ -64,11 +64,12 @@ const boundary = [
           <li><a href="#cosa"><span class="n">01</span>Cos'è</a></li>
           <li><a href="#perchi"><span class="n">02</span>Per chi</a></li>
           <li><a href="#principi"><span class="n">03</span>Principi</a></li>
-          <li><a href="#topologia"><span class="n">04</span>Topologia</a></li>
-          <li><a href="#flussi"><span class="n">05</span>Flussi</a></li>
-          <li><a href="#sicurezza"><span class="n">06</span>Sicurezza</a></li>
-          <li><a href="#tappe"><span class="n">07</span>Tappe</a></li>
-          <li><a href="#glossario"><span class="n">08</span>Glossario</a></li>
+          <li><a href="#fabric"><span class="n">04</span>Fabric</a></li>
+          <li><a href="#topologia"><span class="n">05</span>Topologia</a></li>
+          <li><a href="#flussi"><span class="n">06</span>Flussi</a></li>
+          <li><a href="#sicurezza"><span class="n">07</span>Sicurezza</a></li>
+          <li><a href="#tappe"><span class="n">08</span>Stato</a></li>
+          <li><a href="#glossario"><span class="n">09</span>Glossario</a></li>
         </ol>
       </div>
     </nav>
@@ -77,36 +78,38 @@ const boundary = [
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <span class="eyebrow">Scheda prodotto · v0.7.1 · Luglio 2026</span>
-      <h1 class="gradient-title" style="margin-top:18px">
-        MediFlow <span class="h-mute">è una cartella clinica</span><br/><span class="sig">locale</span>, per lavorare senza spedire i dati altrove.
+      <p class="hero-status">Release sorgente 0.8.2 · programma Intelligence Fabric post-0.8</p>
+      <h1 class="gradient-title">
+        MediFlow <span class="h-mute">è una cartella clinica</span><br/>{' '}<span class="sig">local-first</span>. Non significa che tutto debba restare locale.
       </h1>
       <p class="lead" style="max-width:720px; margin-top:24px">
         MediFlow è pensata per chi esercita in autonomia e per piccoli ambulatori.
-        Tiene la scheda sul computer di chi cura, con i contenuti clinici sensibili cifrati. L'AI, quando serve,
-        gira sullo stesso dispositivo. Con la 0.7.1 il Mac è il nodo home-base più avanzato; iPhone e iPad
-        restano client accoppiati e revisionabili. Per uscire da MediFlow ci sono formati standard:
-        ICD-11 per le diagnosi, FHIR per l'esportazione.
+        Significa che la cartella autorevole resta sul computer di chi cura, con i contenuti clinici sensibili cifrati.
+        Con la 0.8.2 il Mac resta il nodo home-base autorevole. Il workspace web è la superficie operativa principale;
+        macOS, iPhone e iPad crescono sugli stessi contratti locali, con parità ancora incompleta.
+        Il lavoro post-0.8 sull'Intelligence Fabric affronta il passaggio successivo:
+        quando una funzione usa un esecutore diverso, deve dichiarare quale dato tocca,
+        dove lavora e quale revisione chiede prima che il risultato entri nel lavoro clinico.
       </p>
       <div style="display:flex; gap:10px; margin-top:30px; flex-wrap:wrap">
         <a class="btn btn-primary" href="#cosa">Leggi la scheda <span aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="#tappe">Dove stiamo andando</a>
+        <a class="btn btn-ghost" href="https://github.com/Wulfgardr/mediflow/releases/tag/v0.8.2">Apri la release 0.8.2</a>
       </div>
 
       <div class="chip-row hero-meta" aria-label="Coordinate MediFlow">
-        <span class="chip">Dati sul computer</span>
+        <span class="chip">Cartella autorevole locale</span>
         <span class="chip">PIN e cifratura</span>
-        <span class="chip">AI locale, opzionale</span>
-        <span class="chip">Mac home-base</span>
-        <span class="chip">Export FHIR R4</span>
+        <span class="chip">AI review-first</span>
+        <span class="chip">Venue esplicita</span>
+        <span class="chip">Egress chiuso nella 0.8</span>
       </div>
 
       <div class="strip" aria-hidden="true">
         <span><b>Local-first</b></span>
         <span><b>AES-256-GCM</b></span>
-        <span><b>Niente telemetria</b></span>
+        <span><b>Nessun egress implicito</b></span>
         <span><b>Open source</b></span>
-        <span><b>v0.7.1</b></span>
+        <span><b>v0.8.2 sorgente</b></span>
         <span><b>Audit append-only</b></span>
         <span><b>FHIR R4</b></span>
       </div>
@@ -118,7 +121,7 @@ const boundary = [
     <div class="wrap">
       <SectionHead
         heading="Una cartella clinica, niente di più. Niente di meno."
-        lead="MediFlow gestisce anagrafica, diario clinico, terapie, controlli, osservazioni e documenti delle persone in cura. Lo fa senza chiedere a chi cura di affidare i dati a un servizio remoto e senza promettere miracoli che non può mantenere."
+        lead="MediFlow gestisce anagrafica, diario, terapie, controlli, osservazioni e documenti. La cartella resta local-first; ogni eventuale elaborazione esterna deve essere separata, visibile e governata."
       />
 
       <CardGrid cols={3} reveal>
@@ -129,7 +132,7 @@ const boundary = [
             <path d="M9 10h6M9 14h6M9 17h4"/>
           </svg>
         </Card>
-        <Card ord="02" title="AI che lavora con te" body="Riassunti documentali, suggerimenti di codifica ICD-11 a partire dai referti, lettura testuale dei PDF. Sempre revisionabile, mai automatica al buio.">
+        <Card ord="02" title="Informazione che dichiara come nasce" body="Riassunti, OCR, suggerimenti ICD-11 e funzioni deterministiche. La 0.8 rifiuta gli output incompatibili; Intelligence Fabric aggiunge venue, metodo e provenienza al contratto.">
           <svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 13l3-3 3 3 3-6 3 6 4-8"/>
             <path d="M4 19h16"/>
@@ -222,17 +225,82 @@ const boundary = [
     </div>
   </section>
 
+  <!-- INTELLIGENCE FABRIC -->
+  <section id="fabric">
+    <div class="wrap">
+      <SectionHead
+        heading="Local-first non significa local-only."
+        lead="Il punto non è scegliere una volta per tutte fra locale e cloud. Il punto è scegliere lo strumento in base al lavoro, al dato che tocca e al rischio che introduce."
+      />
+
+      <div class="fabric-route reveal" aria-label="Percorso governato di una funzione Intelligence Fabric">
+        <article>
+          <span>01</span>
+          <h3>Capability</h3>
+          <p>Si parte dal lavoro da fare: sintesi, OCR, ricerca, classificazione, esportazione o un'altra operazione dichiarata.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Policy</h3>
+          <p>Prima di eseguire qualcosa, MediFlow fissa classe del dato, luoghi ammessi, profilo di uscita, ritenzione e revisione richiesta.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Risoluzione</h3>
+          <p>A quel punto il resolver sceglie un esecutore compatibile. Se funzione, luogo o profilo non coincidono, il flusso si ferma senza fallback.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>Provenienza</h3>
+          <p>Il risultato porta con sé funzione, luogo e passaggi preparatori. Se usa un modello, dichiara anche provider e modello; prompt e contenuti clinici restano fuori dalla ricevuta.</p>
+        </article>
+      </div>
+
+      <div class="fabric-state reveal">
+        <div>
+          <h3>Stato della 0.8</h3>
+          <p>
+            Oggi il quadro è più semplice: le funzioni operative usano il processo locale o il Mac home-base.
+            Ollama è l'unico connettore AI operativo; le pipeline deterministiche funzionano anche senza modello.
+            Il gate verso servizi esterni resta chiuso.
+          </p>
+        </div>
+        <div>
+          <h3>Contratto post-0.8</h3>
+          <p>
+            Il contratto Intelligence Fabric esiste ed è stato verificato nel programma post-0.8.
+            Non equivale a una funzione già consegnata: le venue on-device e cloud richiedono sviluppi e verifiche dedicate, e non ereditano autorizzazioni.
+          </p>
+        </div>
+      </div>
+
+      <div class="information-contract reveal">
+        <div class="information-contract-head">
+          <h3>Come arriva l'informazione</h3>
+          <p>Un output ordinato non è ancora un'informazione affidabile. Deve portarsi dietro il proprio contesto operativo.</p>
+        </div>
+        <dl>
+          <div><dt>Che cosa</dt><dd>La capability e l'operazione che hanno prodotto il risultato.</dd></div>
+          <div><dt>Dove</dt><dd>Processo locale, Mac home-base, dispositivo o servizio cloud autorizzato.</dd></div>
+          <div><dt>Come</dt><dd>Pipeline deterministica o modello, con provider e passaggi preparatori dichiarati.</dd></div>
+          <div><dt>Con quali limiti</dt><dd>Profilo di uscita, ritenzione, stato di disponibilità e revisione richiesta.</dd></div>
+          <div><dt>Cosa succede dopo</dt><dd>Informazione, proposta da rivedere o azione clinica separata e autorizzata.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
   <!-- TOPOLOGIA -->
   <section id="topologia">
     <div class="wrap">
       <SectionHead
         heading="Dove vivono i dati. Chi parla con chi."
-        lead="Il sistema gira sul Mac di chi cura. Il browser e i client Apple parlano con un'unica applicazione locale; il core condiviso viene verificato anche su Linux e Windows. I servizi opzionali restano locali o esplicitamente valutativi."
+        lead="La cartella autorevole vive sul Mac. Browser locale, client macOS e dispositivi paired seguono percorsi distinti; Intelligence Fabric governa separatamente il luogo di ogni elaborazione."
       />
 
       <TopologyDiagram />
 
-      <CardGrid cols={3} reveal style="margin-top:30px">
+      <CardGrid cols={3} reveal class="topo-cards">
         {topoCards.map((c) => <Card title={c.title} body={c.body} />)}
       </CardGrid>
     </div>
@@ -243,16 +311,16 @@ const boundary = [
     <div class="wrap">
       <SectionHead
         heading="Cosa succede davvero quando lavori in scheda."
-        lead="Sei flussi essenziali, in ordine di vita di una giornata clinica. La 0.7.1 consolida il Mac come base operativa e mantiene i client paired dentro capability esplicite."
+        lead="Sei flussi essenziali, in ordine di vita di una giornata clinica. La 0.8.2 mantiene il Mac come base operativa e i client paired dentro capacità esplicite."
       />
 
       <div class="flow-list reveal">
         <div class="flow"><div class="step">FLUSSO · 01</div><div class="body"><h4>Sblocco e attivazione delle chiavi</h4><p>Il professionista inserisce il PIN. Dal PIN si deriva una chiave intermedia, che a sua volta sblocca la chiave principale, mantenuta in memoria solo per la sessione attiva. Nessuna delle due viene salvata sul disco.</p></div></div>
         <div class="flow"><div class="step">FLUSSO · 02</div><div class="body"><h4>Scrittura clinica dal browser</h4><p>I campi sensibili (note, allegati, riassunti AI) vengono cifrati nel browser prima di partire verso l'API. Sul disco arrivano solo stringhe nella forma <code>ENC:iv:cipher</code>. Il server non vede mai il testo in chiaro.</p></div></div>
         <div class="flow"><div class="step">FLUSSO · 03</div><div class="body"><h4>Lettura/scrittura dal client macOS nativo</h4><p>Il client Apple cifra in locale, parla in HTTPS verso il proxy TLS sulla porta 3443, presenta un token bearer su un'API versionata <code>/api/v1/*</code>. Niente scraping della UI, niente dipendenza dai dettagli interni del web.</p></div></div>
-        <div class="flow"><div class="step">FLUSSO · 04</div><div class="body"><h4>Documento → OCR → sintesi → archivio</h4><p>Il referto caricato passa al servizio OCR locale (Ollama), che lo rende testo. Un secondo passaggio AI estrae sintesi, qualità del segnale e codici ICD esplicitamente presenti. Il risultato viene cifrato e attaccato alla scheda clinica come allegato + artefatto di evidenza.</p></div></div>
-        <div class="flow"><div class="step">FLUSSO · 05</div><div class="body"><h4>Smart import revisionabile</h4><p>Dal profilo paziente l'AI propone diagnosi e terapie a partire dalle fonti già presenti (note, diario, allegati analizzati). Le proposte sono associate a evidenze e attendono conferma esplicita. Nessuna scrittura in scheda senza un click consapevole.</p></div></div>
-        <div class="flow"><div class="step">FLUSSO · 06</div><div class="body"><h4>Modalità Mac home-base con client paired</h4><p>Se attivata in modo esplicito, la modalità rete consente a un iPhone o iPad accoppiato di consultare e aggiornare in modo limitato profilo, diario, terapie, controlli e osservazioni. Ogni scrittura richiede capability dedicate, sessione operatore e numero di versione: in caso di conflitto il server risponde con un esplicito errore di versione.</p></div></div>
+        <div class="flow"><div class="step">FLUSSO · 04</div><div class="body"><h4>Documento → OCR → sintesi → archivio</h4><p>Nella 0.8 il referto passa al servizio OCR locale. Un secondo passaggio prepara sintesi, qualità del segnale e codici ICD espliciti. Il risultato viene accettato solo se rispetta il contratto richiesto.</p></div></div>
+        <div class="flow"><div class="step">FLUSSO · 05</div><div class="body"><h4>Smart import revisionabile</h4><p>Dal profilo paziente l'AI propone diagnosi e terapie a partire dalle fonti già presenti. Le proposte restano materiale di revisione associato alle evidenze. Nessun dato clinico strutturato entra nella scheda senza un'azione esplicita del medico.</p></div></div>
+        <div class="flow"><div class="step">FLUSSO · 06</div><div class="body"><h4>Modalità Mac home-base con client paired</h4><p>Se attivata in modo esplicito, la modalità rete consente a un dispositivo accoppiato di consultare e aggiornare, entro capability dedicate, profilo e stato, diario, terapie, controlli, osservazioni, prestazioni e alcuni documenti manuali. Ogni scrittura richiede sessione operatore e numero di versione; niente sincronizzazione multi-master, hard delete remoto o invocazioni AI.</p></div></div>
       </div>
     </div>
   </section>
@@ -275,7 +343,7 @@ const boundary = [
         <Card title="Cifratura"><p>AES-256-GCM lato client. Formato di campo cifrato esplicito (<code>ENC:iv:cipher</code>). KDF: PBKDF2-SHA256 da PIN + salt utente. La chiave principale è cifrata sotto la KEK derivata dal PIN ed è leggibile solo durante una sessione attiva.</p></Card>
         <Card title="Lockout autenticazione"><p>Cinque tentativi falliti in quindici minuti attivano un blocco di pari durata. Risposte standard: <code>401</code> finché il blocco non scatta, <code>423</code> con header <code>Retry-After</code> durante il blocco. Il bearer token nativo non aggira la policy: il PIN è la barriera condivisa.</p></Card>
         <Card title="Logging e redazione" body="I log applicativi non contengono mai campi paziente decifrati, OCR grezzo, prompt AI completi o allegati. L'audit clinico è separato dai log tecnici: è strutturato, versionato e append-only, con catalogo di eventi minimo." />
-        <Card title="Boundary verso servizi esterni"><p>I proxy locali accettano solo destinazioni su <code>127.0.0.1</code> e porte previste. Ogni risposta dei modelli AI è trattata come input non fidato. Niente import silenziosi da testo libero verso diagnosi o terapie.</p></Card>
+        <Card title="Boundary verso servizi esterni"><p>Nella 0.8 i proxy AI accettano solo destinazioni locali previste. Intelligence Fabric non cambia questo stato: un profilo remoto futuro deve superare gate, consenso, ritenzione, redazione e autorizzazione del provider. Nessun plug-in accede direttamente al database.</p></Card>
       </CardGrid>
     </div>
   </section>
@@ -298,17 +366,35 @@ const boundary = [
   <section id="tappe">
     <div class="wrap">
       <SectionHead
-        heading="Roadmap pubblica dopo la 0.7.1."
-        lead="Non serve una cronologia completa per capire MediFlow: conta distinguere cosa è nella release corrente, cosa è in consolidamento e cosa resta una soglia futura."
+        heading="Dove siamo dopo la 0.8.2."
+        lead="La release distingue ciò che è consegnato, i limiti ancora aperti e la direzione post-0.8. Una release sorgente non equivale a una pubblicazione App Store o a una certificazione."
       />
 
       <div class="timeline reveal">
-        <div class="tl-item"><div class="ver"><b>v0.7.1</b> · mainline corrente</div><h4>Cartella web locale, Mac home-base e runtime verificabile</h4><ul><li>Web app locale come superficie clinica primaria su Mac</li><li>Campi clinici sensibili cifrati lato client dentro SQLite locale</li><li>Runtime panel, backup governati, audit append-only e lockout autenticazione</li><li>Launcher e core verificati anche su Linux e Windows, senza dichiarare app desktop complete</li></ul></div>
-        <div class="tl-item"><div class="ver"><b>Apple native</b> · consolidamento</div><h4>Mac nodo autorevole, iPhone e iPad come client paired</h4><ul><li>Pairing esplicito su rete locale fidata</li><li>Capability discovery e scritture versionate limitate</li><li>MediFlowCore condiviso per logica clinica, contratti, filtri e cifratura</li><li>UI Apple con Vetro Clinico/Liquid Glass dove la piattaforma lo consente</li></ul></div>
-        <div class="tl-item"><div class="ver"><b>Document intelligence</b> · review-first</div><h4>OCR, sintesi e assorbimento evidenza senza automatismi clinici</h4><ul><li>Smart Import e nuova anagrafica da documento restano revisionabili</li><li>Artifact <code>parse/evidence</code> cifrati sugli allegati</li><li>Fallback OCR Apple Vision solo su macOS quando il primario locale è low-signal</li><li>Voice visit e trascrizione restano review-first prima di ogni scrittura clinica</li></ul></div>
-        <div class="tl-item"><div class="ver"><b>Boundary regionali</b> · handoff assistito</div><h4>SISS/FSE dentro il perimetro documentato</h4><ul><li>MediFlow prepara il contesto e richiama i percorsi ufficiali</li><li>Niente integrazione regionale nativa certificata dichiarata senza qualifica <code>SSI/A2A</code></li><li>Prescrizioni di prestazione separate dalle terapie farmacologiche</li><li>Matching repertorio reviewable, non spacciato per invio regionale</li></ul></div>
-        <div class="tl-item future"><div class="ver"><b>Prossima soglia</b> <span class="pill">in corso</span></div><h4>Rete più ampia, packaging e voce</h4><ul><li>Replica e fallback offline tra dispositivi con riconciliazione esplicita</li><li>Runtime AI locale centralizzabile per i client meno potenti, senza egress</li><li>Packaging Windows/Linux limitato al runtime condiviso finché non esiste una UX desktop dedicata</li><li>Prescrizioni di prestazione locali e dettatura/chat vocale, sempre review-first</li></ul></div>
-        <div class="tl-item future"><div class="ver"><b>Visione</b> <span class="pill">futura</span></div><h4>Un ecosistema clinico locale, aperto, installabile</h4><ul><li>Esperienza nativa multi-dispositivo coerente sotto un unico contratto</li><li>Integrazione SISS/FSE solo se qualificata e sostenibile</li><li>Contratti di esportazione e migrazione formalizzati</li></ul></div>
+        <div class="tl-item">
+          <div class="ver"><b>v0.8.2</b> · disponibile come sorgente</div>
+          <div class="tl-content"><h4>Confini più verificabili, senza ampliare le promesse</h4><ul><li>Mac home-base come nodo autorevole e workspace web come superficie operativa principale</li><li>Revisione umana richiesta prima di scrivere proposte cliniche prodotte dall'AI</li><li>API senza messaggi grezzi delle eccezioni e controlli automatici collegati alla CI</li><li>Versioni web e Apple allineate nei metadati; nessuna pubblicazione App Store dichiarata</li></ul></div>
+        </div>
+        <div class="tl-item">
+          <div class="ver"><b>Apple native</b> · sviluppo in corso</div>
+          <div class="tl-content"><h4>Mac nodo autorevole, iPhone e iPad come client paired</h4><ul><li>Pairing esplicito su rete locale fidata</li><li>Capacità e scritture online versionate</li><li>Quattro contratti UI iPad superati senza fallimenti né salti nel push verificato</li><li>Parità completa e conformità accessibilità non dichiarate; compatibilità con host precedenti ancora aperta</li></ul></div>
+        </div>
+        <div class="tl-item">
+          <div class="ver"><b>Document intelligence</b> · review-first</div>
+          <div class="tl-content"><h4>OCR, sintesi ed evidenze con controlli fail-closed</h4><ul><li>Patient Insight, Smart Import e sintesi accettano solo output compatibili con il contratto richiesto</li><li>Gli output ambigui, multipli, incompleti o con chiavi riservate duplicate vengono rifiutati</li><li>Le diagnosi estratte restano materiale di revisione e non entrano automaticamente nella scheda</li><li>Ollama resta l'unico provider AI operativo della release</li></ul></div>
+        </div>
+        <div class="tl-item">
+          <div class="ver"><b>Boundary regionali</b> · handoff assistito</div>
+          <div class="tl-content"><h4>SISS/FSE dentro il perimetro documentato</h4><ul><li>MediFlow prepara il contesto e richiama i percorsi ufficiali</li><li>Niente integrazione regionale nativa certificata dichiarata senza qualifica <code>SSI/A2A</code></li><li>Prescrizioni di prestazione separate dalle terapie farmacologiche</li><li>Matching repertorio reviewable, non spacciato per invio regionale</li></ul></div>
+        </div>
+        <div class="tl-item future">
+          <div class="ver"><b>Post-0.8</b> <span class="pill">in costruzione</span></div>
+          <div class="tl-content"><h4>Intelligence Fabric locale, con fallback negato</h4><ul><li>Registro delle capacità e stato in sola lettura già presenti nel codice</li><li>Routing più ampio, provider e adozione nativa ancora incompleti</li><li>Nessun nuovo cloud, credenziale o consenso aggiunto dalla 0.8.2</li><li>Ogni scrittura clinica resta un comando separato e revisionato</li></ul></div>
+        </div>
+        <div class="tl-item future">
+          <div class="ver"><b>Visione</b> <span class="pill">futura</span></div>
+          <div class="tl-content"><h4>Un ecosistema clinico locale, aperto, installabile</h4><ul><li>Esperienza nativa multi-dispositivo coerente sotto un unico contratto</li><li>Integrazione SISS/FSE solo se qualificata e sostenibile</li><li>Contratti di esportazione e migrazione formalizzati</li></ul></div>
+        </div>
       </div>
     </div>
   </section>
@@ -336,7 +422,9 @@ const boundary = [
       />
 
       <div class="reveal">
-        <details class="term"><summary>Local-first / Locale prima di tutto</summary><p>Il software funziona prima di tutto sul dispositivo di chi lo usa. La rete è opzionale e governata. Il contrario è "cloud-first": app che hanno bisogno di un server centrale per funzionare e mandano lì i dati.</p></details>
+        <details class="term"><summary>Local-first / Locale prima di tutto</summary><p>La cartella autorevole e le funzioni essenziali restano locali. La rete è opzionale e governata. Local-first non vieta ogni servizio remoto: vieta che diventi invisibile, obbligatorio o necessario per aprire la cartella.</p></details>
+        <details class="term"><summary>Intelligence Fabric</summary><p>Il contratto post-0.8 che descrive ogni funzione intelligente come una capability. Per ogni richiesta fissa luogo di calcolo, profilo di uscita, revisione e provenienza, poi rifiuta le combinazioni non ammesse.</p></details>
+        <details class="term"><summary>Venue ed egress</summary><p>La venue è il luogo effettivo del calcolo: processo locale, Mac home-base, dispositivo o cloud. Egress indica un'uscita di dati dal perimetro locale. Nella 0.8 il profilo operativo è local_only e il gate esterno resta chiuso.</p></details>
         <details class="term"><summary>Cifratura a riposo / PIN</summary><p>I campi clinici sensibili vengono cifrati lato client prima della scrittura sul disco. Il PIN sblocca la sessione e non viene salvato. Niente backdoor di recupero: questa è la garanzia, ma anche la responsabilità di chi cura.</p></details>
         <details class="term"><summary>AES-256-GCM</summary><p>L'algoritmo di cifratura usato. È uno standard internazionale considerato robusto. Il numero 256 si riferisce alla lunghezza della chiave in bit; più alto, più difficile da forzare.</p></details>
         <details class="term"><summary>PIN, KEK, master key</summary><p>Il PIN è quello che chi cura inserisce. Da lì si deriva una "chiave intermedia" (KEK) che serve a proteggere la "chiave principale" (master key). La master key è quella che cifra davvero i dati clinici e vive solo in memoria durante la sessione.</p></details>
@@ -370,8 +458,15 @@ const boundary = [
     border-left:0;
     padding-left:0;
   }
-  .hero h1{ max-width:12ch; }
+  .hero h1{ max-width:14ch; }
   .hero h1 .h-mute{ color:var(--ink-1); }
+  .hero-status{
+    margin:0 0 18px;
+    max-width:70ch;
+    color:var(--ink-2);
+    font-family:var(--font-technical);
+    font-size:13.5px;
+  }
 
   /* Coordinate operative come chip: la grammatica MediFlow resta visibile */
   .hero-meta{
@@ -379,6 +474,114 @@ const boundary = [
   }
   @media (max-width:780px){
     .hero h1{ max-width:100%; }
+  }
+
+  .topo-cards{ margin-top:var(--space-8); }
+
+  /* Intelligence Fabric: sequenza operativa, stato e contratto informativo */
+  .fabric-route{
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    border-top:1px solid var(--line-strong);
+    border-bottom:1px solid var(--line-strong);
+  }
+  .fabric-route article{
+    min-width:0;
+    padding:var(--space-6);
+    border-right:1px solid var(--line);
+  }
+  .fabric-route article:first-child{ padding-left:0; }
+  .fabric-route article:last-child{
+    padding-right:0;
+    border-right:0;
+  }
+  .fabric-route span{
+    display:block;
+    margin-bottom:var(--space-4);
+    color:var(--mint);
+    font-family:var(--font-technical);
+    font-size:.8rem;
+  }
+  .fabric-route h3,
+  .fabric-state h3,
+  .information-contract h3{
+    margin:0 0 var(--space-3);
+    color:var(--ink-0);
+    font-family:var(--font-display);
+    font-size:clamp(1.18rem, 1.8vw, 1.5rem);
+    line-height:1.15;
+    letter-spacing:-.02em;
+    text-wrap:balance;
+  }
+  .fabric-route p,
+  .fabric-state p,
+  .information-contract p,
+  .information-contract dd{
+    margin:0;
+    color:var(--ink-1);
+    font-size:16.5px;
+    line-height:1.6;
+    text-wrap:pretty;
+  }
+  .fabric-state{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:clamp(28px, 6vw, 80px);
+    padding:clamp(34px, 6vw, 64px) 0;
+    border-bottom:1px solid var(--line-strong);
+  }
+  .fabric-state div{
+    max-width:62ch;
+  }
+  .information-contract{
+    display:grid;
+    grid-template-columns:minmax(240px, .72fr) minmax(0, 1.28fr);
+    gap:clamp(34px, 7vw, 100px);
+    padding-top:clamp(34px, 6vw, 64px);
+  }
+  .information-contract-head{
+    max-width:38ch;
+  }
+  .information-contract dl{
+    margin:0;
+    border-top:1px solid var(--line);
+  }
+  .information-contract dl div{
+    display:grid;
+    grid-template-columns:150px minmax(0, 1fr);
+    gap:var(--space-6);
+    padding:15px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .information-contract dt{
+    color:var(--ink-0);
+    font-family:var(--font-technical);
+    font-size:.8rem;
+    font-weight:650;
+  }
+  @media (max-width:900px){
+    .fabric-route{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+    .fabric-route article:nth-child(2){ border-right:0; }
+    .fabric-route article:nth-child(-n + 2){ border-bottom:1px solid var(--line); }
+    .fabric-route article:nth-child(3){ padding-left:0; }
+  }
+  @media (max-width:680px){
+    .fabric-route,
+    .fabric-state,
+    .information-contract{ grid-template-columns:1fr; }
+    .fabric-route article{
+      padding:var(--space-6) 0;
+      border-right:0;
+      border-bottom:1px solid var(--line);
+    }
+    .fabric-route article:nth-child(3){ border-bottom:1px solid var(--line); }
+    .fabric-route article:last-child{ border-bottom:0; }
+    .fabric-state{ gap:var(--space-8); }
+    .information-contract{ gap:var(--space-6); }
+    .information-contract dl div{
+      grid-template-columns:1fr;
+      gap:var(--space-2);
+    }
   }
 
   /* Tag piccolo, accanto al titolo dei principi */
@@ -435,38 +638,43 @@ const boundary = [
     .flow{ grid-template-columns:1fr; gap:8px; }
   }
 
-  /* Timeline: filetto continuo, pallini puliti, schede senza glass */
-  .timeline{ position:relative; padding-left:32px; }
-  .timeline::before{
-    content:""; position:absolute; left:7px; top:8px; bottom:0; width:1px;
-    background:var(--line-strong);
+  /* Timeline: il rail appartiene alla griglia, non galleggia fuori dalle tappe */
+  .timeline{
+    --timeline-label:176px;
+    border-top:1px solid var(--line);
   }
   .tl-item{
-    position:relative; margin-bottom:24px;
-    padding:18px 22px;
-    border-radius:var(--r-card);
-    background:rgba(255,255,255,.64);
-    border:1px solid var(--line);
-  }
-  .tl-item::before{
-    content:""; position:absolute; left:-28px; top:24px;
-    width:11px; height:11px; border-radius:50%;
-    background:var(--surface);
-    border:2px solid var(--mint);
-    box-shadow:0 0 0 4px rgba(14,110,92,.12);
-  }
-  .tl-item.future::before{
-    border-color:var(--amber);
-    box-shadow:0 0 0 4px rgba(138,106,43,.12);
+    display:grid;
+    grid-template-columns:var(--timeline-label) minmax(0, 1fr);
+    margin:0;
+    border-bottom:1px solid var(--line);
   }
   .tl-item .ver{
-    display:inline-flex; gap:8px; align-items:center;
+    position:relative;
+    display:block;
+    align-self:stretch;
+    padding:var(--space-6) var(--space-6) var(--space-6) 0;
+    border-right:1px solid var(--line-strong);
     font-family:var(--font-technical);
     font-size:11.5px; color:var(--ink-2);
     text-transform:uppercase;
-    margin-bottom:10px;
+    line-height:1.5;
   }
+  .tl-item .ver::after{
+    content:"";
+    position:absolute;
+    top:31px;
+    right:-7px;
+    width:13px;
+    height:2px;
+    background:var(--mint);
+  }
+  .tl-item.future .ver::after{ background:var(--amber); }
   .tl-item .ver b{ color:var(--ink-0); font-weight:600; }
+  .tl-content{
+    max-width:72ch;
+    padding:var(--space-6) 0 var(--space-6) var(--space-8);
+  }
   .tl-item h4{
     margin:0 0 12px; color:var(--ink-0);
     font-family:var(--font-display);
@@ -483,16 +691,49 @@ const boundary = [
     border:1px solid var(--line); margin-left:6px;
   }
   .tl-item.future .pill{
-    color:var(--amber);
+    color:var(--amber-ink);
     border-color:rgba(138,106,43,.35);
     background:rgba(138,106,43,.07);
+  }
+  @media (max-width:700px){
+    .timeline{ position:relative; }
+    .timeline::before{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:0;
+      width:1px;
+      background:var(--line-strong);
+    }
+    .tl-item{
+      position:relative;
+      grid-template-columns:1fr;
+      padding-left:var(--space-6);
+    }
+    .tl-item::before{
+      content:"";
+      position:absolute;
+      top:31px;
+      left:0;
+      width:13px;
+      height:2px;
+      background:var(--mint);
+    }
+    .tl-item.future::before{ background:var(--amber); }
+    .tl-item .ver{
+      padding:var(--space-6) 0 var(--space-2);
+      border-right:0;
+    }
+    .tl-item .ver::after{ display:none; }
+    .tl-content{ padding:0 0 var(--space-6); }
   }
 
   /* Glossary: file di voci con riga sottile, ± segno tipografico */
   details.term{
     padding:18px 0;
     border-bottom:1px solid var(--line);
-    cursor:pointer; transition:padding .2s ease;
+    cursor:pointer;
     background:transparent; border-radius:0;
     border-top:none; border-left:none; border-right:none;
   }
@@ -526,42 +767,69 @@ const boundary = [
 
   /* Sub-nav della scheda MediFlow: barra editoriale numerata */
   .wp-subnav-wrap{
-    position:sticky; top:16px; z-index:30;
-    margin:-22px 0 34px;
-    background:rgba(255,255,255,.72);
-    backdrop-filter:blur(14px) saturate(140%);
-    -webkit-backdrop-filter:blur(14px) saturate(140%);
-    border:1px solid var(--line);
-    border-radius:var(--r-panel);
-    box-shadow:var(--sh-pill);
+    position:sticky;
+    top:var(--site-header-height);
+    z-index:20;
+    margin:0 0 var(--space-8);
+    background:var(--surface);
+    border-bottom:1px solid var(--line);
   }
   .wp-subnav ol{
-    list-style:none; padding:0; margin:0;
+    list-style:none; padding:var(--space-1) 0; margin:0;
     display:flex; gap:0; overflow-x:auto;
-    scrollbar-width:none;
+    scrollbar-width:thin;
+    scrollbar-color:var(--line-strong) transparent;
   }
-  .wp-subnav ol::-webkit-scrollbar{ display:none; }
+  .wp-subnav ol::-webkit-scrollbar{ height:3px; }
+  .wp-subnav ol::-webkit-scrollbar-thumb{ background:var(--line-strong); }
   .wp-subnav li{ flex-shrink:0; }
   .wp-subnav a{
     display:inline-flex; align-items:center; gap:8px;
-    padding:10px 12px;
-    border-radius:var(--r-pill);
+    padding:9px 12px;
+    border-radius:var(--r-row);
     color:var(--ink-2); text-decoration:none; font-size:13px;
-    transition:color var(--dur-1) var(--ease), background var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+    transition:color var(--dur-1) var(--ease), background var(--dur-1) var(--ease);
     white-space:nowrap;
     border-bottom:0;
     margin-right:4px;
   }
   .wp-subnav a:last-of-type{ margin-right:0; }
-  .wp-subnav a:hover{ color:var(--mint); background:var(--surface); box-shadow:var(--sh-pill); }
+  .wp-subnav a:hover{ color:var(--mint); background:var(--surface-2); }
   .wp-subnav a .n{
     font-family:var(--font-technical);
     font-size:11px; color:var(--ink-3);
   }
   .wp-subnav a:hover .n{ color:var(--mint); }
 
-  @media (min-width:980px){
-    .wp-subnav-wrap{ top:16px; }
+  #cosa,
+  #perchi,
+  #principi,
+  #fabric,
+  #topologia,
+  #flussi,
+  #sicurezza,
+  #tappe,
+  #glossario{
+    scroll-margin-top:calc(var(--site-header-height) + 52px);
+  }
+
+  @media (max-width:680px){
+    .wp-subnav-wrap{
+      position:static;
+      margin-bottom:var(--space-6);
+    }
+    .wp-subnav ol{ padding-bottom:var(--space-2); }
+    #cosa,
+    #perchi,
+    #principi,
+    #fabric,
+    #topologia,
+    #flussi,
+    #sicurezza,
+    #tappe,
+    #glossario{
+      scroll-margin-top:var(--space-4);
+    }
   }
 
   /* Chiusura: pull centrato senza override pesanti */

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-18T20:35:00+02:00",
+  "title": "Design System: leonardopegollo.dev",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Verde operativo",
+        "canonical": "#0e6e5c",
+        "tonalRamp": ["#06221d", "#093b31", "#0b5547", "#0e6e5c", "#2c8a76", "#62aa99", "#a8d0c6", "#e7f1ee"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Carta osso",
+        "canonical": "#f4efe6",
+        "tonalRamp": ["#1d1a15", "#3b3832", "#63605b", "#8d887f", "#b6afa2", "#cfc8bc", "#eae3d6", "#f4efe6"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Inchiostro",
+        "canonical": "#1d1a15",
+        "tonalRamp": ["#1d1a15", "#34312c", "#55524e", "#6e6b67", "#96918a", "#bdb6ad", "#ddd6ca", "#f4efe6"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Linea",
+        "canonical": "#cfc8bc",
+        "tonalRamp": ["#211e19", "#3e3a34", "#625e57", "#8a847a", "#b6afa2", "#cfc8bc", "#e5ded2", "#f4efe6"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Una sola idea dominante per apertura." },
+      "headline": { "displayName": "Headline", "purpose": "Titoli di sezione e nomi di progetto." },
+      "body": { "displayName": "Body", "purpose": "Testo in prima persona e spiegazioni." },
+      "label": { "displayName": "Label", "purpose": "Date e dati funzionali, mai etichette d'atmosfera." }
+    },
+    "shadows": [
+      { "name": "foglio-ambientale", "value": "0 0 44px rgba(29,26,21,.08)", "purpose": "Separa l'intero foglio color osso dallo sfondo solo sui monitor larghi." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(.22,.61,.36,1)", "purpose": "Stati, link e cambi di pagina." },
+      { "name": "duration-fast", "value": "160ms", "purpose": "Hover e focus." },
+      { "name": "duration-reveal", "value": "420ms", "purpose": "Ingresso sobrio dei contenuti sotto la piega." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "860px" },
+      { "name": "mobile", "value": "680px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Azione primaria reale, usata con parsimonia.",
+      "html": "<button class=\"ds-btn-primary\">Apri la scheda</button>",
+      "css": ".ds-btn-primary { background:#0e6e5c; color:#fff; padding:11px 18px; border:1px solid #0e6e5c; border-radius:999px; font:700 15px/1 system-ui,sans-serif; } .ds-btn-primary:hover { background:#0a5848; border-color:#0a5848; } .ds-btn-primary:focus-visible { outline:2px solid #0e6e5c; outline-offset:3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Azione secondaria senza elevazione.",
+      "html": "<button class=\"ds-btn-ghost\">Tutte le note</button>",
+      "css": ".ds-btn-ghost { background:#f4efe6; color:#1d1a15; padding:11px 18px; border:1px solid #cfc8bc; border-radius:999px; font:700 15px/1 system-ui,sans-serif; } .ds-btn-ghost:hover { border-color:#b6afa2; } .ds-btn-ghost:focus-visible { outline:2px solid #0e6e5c; outline-offset:3px; }"
+    },
+    {
+      "name": "Top Navigation",
+      "kind": "nav",
+      "description": "Quattro destinazioni, una linea per lo stato attivo.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-active\" href=\"#\">Lavoro</a><a href=\"#\">Note</a><a href=\"#\">Index</a><a href=\"#\">Bio</a></nav>",
+      "css": ".ds-nav { display:flex; gap:24px; border-bottom:1px solid #cfc8bc; font:670 15px/1 system-ui,sans-serif; } .ds-nav a { position:relative; padding:22px 0; color:#55524e; text-decoration:none; } .ds-nav a:hover { color:#1d1a15; } .ds-nav .ds-active { color:#1d1a15; } .ds-nav .ds-active::after { content:''; position:absolute; right:0; bottom:-1px; left:0; height:2px; background:#0e6e5c; } .ds-nav a:focus-visible { outline:2px solid #0e6e5c; outline-offset:3px; }"
+    },
+    {
+      "name": "Functional Chip",
+      "kind": "chip",
+      "description": "Metadato o filtro reale; mai una frase decorativa.",
+      "html": "<span class=\"ds-chip\">FHIR R4</span>",
+      "css": ".ds-chip { display:inline-flex; padding:7px 12px; border:1px solid #cfc8bc; border-radius:999px; background:#eae3d6; color:#55524e; font:700 12px/1 ui-monospace,monospace; }"
+    },
+    {
+      "name": "Reference Card",
+      "kind": "card",
+      "refersTo": "reference-card",
+      "description": "Visuale, titolo e nota; nessuna sottopancia.",
+      "html": "<a class=\"ds-reference\" href=\"#\"><span class=\"ds-visual\"></span><strong>Brik Gallery</strong><p>Strumenti generativi per tipografia, immagini, movimento e interazione.</p></a>",
+      "css": ".ds-reference { display:grid; gap:16px; padding:24px; border:1px solid #cfc8bc; border-radius:4px; background:#f4efe6; color:#1d1a15; text-decoration:none; font-family:system-ui,sans-serif; } .ds-visual { display:block; height:120px; background:#dbd3c4; } .ds-reference strong { font-size:24px; } .ds-reference p { margin:0; color:#55524e; line-height:1.6; } .ds-reference:hover { border-color:#63605b; } .ds-reference:focus-visible { outline:2px solid #0e6e5c; outline-offset:3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Il foglio di lavoro clinico",
+    "overview": "Il sito deve sembrare preparato da una persona che usa il testo per mettere ordine nel lavoro: grande quando deve dichiarare il tema, preciso quando deve spiegare, asciutto quando deve orientare. La composizione può essere asimmetrica e ambiziosa, ma ogni scarto deve aiutare la lettura. Non è una console, una landing SaaS o una rivista travestita da portfolio. Rifiuta il metatesto che commenta il design, le etichette d'atmosfera, i duplicati di navigazione e le decorazioni che non portano informazione.",
+    "keyCharacteristics": [
+      "Tipografia grande usata come struttura, non come slogan.",
+      "Superfici piatte color osso, bordi sottili, un solo verde operativo.",
+      "Testi in prima persona lasciati respirare.",
+      "Diagrammi e visualizzazioni solo quando spiegano qualcosa.",
+      "Una destinazione per ogni voce di navigazione."
+    ],
+    "rules": [
+      { "name": "The One Green Rule", "body": "Il verde indica una relazione o un'azione; non colora intere sezioni per dare carattere.", "section": "colors" },
+      { "name": "The Bone Field Rule", "body": "Il fondo osso è una superficie di lettura continua; non giustifica texture, grana o decorazioni aggiuntive.", "section": "colors" },
+      { "name": "The No Kicker Rule", "body": "Un titolo non riceve una piccola etichetta sopra solo per sembrare progettato.", "section": "typography" },
+      { "name": "The Flat By Default Rule", "body": "Se un componente ha bisogno di un'ombra per essere riconoscibile, la gerarchia non è ancora risolta.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do mantenere una sola destinazione per concetto e controllare i duplicati prima di pubblicare.",
+      "Do conservare la voce diretta e in prima persona già presente nei testi.",
+      "Do usare gerarchia tipografica, spazio e bordi sottili prima di aggiungere contenitori.",
+      "Do mostrare diagrammi, dati o esempi reali quando un tema ha bisogno di un'immagine.",
+      "Do lasciare che ogni sezione abbia un compito chiaro: progetto, note, indice o bio.",
+      "Do prendere da Brik logiche di sistema, griglie e proporzioni; incorporare un tool live solo quando porta informazione reale."
+    ],
+    "donts": [
+      "Don't duplicare MediFlow fra navigazione, call to action e contenuto della stessa regione.",
+      "Don't aggiungere metatesto generativo, slogan sul design, kicker, soprattitoli o piccole sottopance decorative.",
+      "Don't ripetere il menu nel footer.",
+      "Don't usare gradienti decorativi, griglie di sfondo, glassmorphism o card fantasma con ombre larghe.",
+      "Don't arrotondare ogni superficie o mettere un'icona sopra ogni titolo.",
+      "Don't trasformare il sito in una landing SaaS o in un finto magazine editoriale."
+    ]
+  }
+}
