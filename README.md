@@ -1,3 +1,9 @@
+> **MediFlow:** la presentazione del prodotto è su
+> [Get MediFlow](https://getmediflow.wulfgardr.chatgpt.site).
+> La rotta storica `/mediflow` rimanda a questo sito, ospitato su ChatGPT Sites.
+> Le istruzioni Cloudflare sotto restano disponibili per il sito personale;
+> non descrivono l’hosting di Get MediFlow.
+
 # leonardopegollo.dev
 
 Sito personale. Home, scheda pubblica di MediFlow, blog. Statico, costruito con Astro, pubblicato su Cloudflare Pages.
