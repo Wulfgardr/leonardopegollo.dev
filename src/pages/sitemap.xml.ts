@@ -11,7 +11,6 @@ export const GET: APIRoute = async ({ site }) => {
   const urls: { loc: string; lastmod?: string }[] = [
     { loc: `${base}/` },
     { loc: `${base}/about` },
-    { loc: `${base}/mediflow` },
     { loc: `${base}/blog` },
     ...posts.map((p) => ({
       loc: `${base}/blog/${p.id}`,
