@@ -1,5 +1,5 @@
 > **MediFlow:** la presentazione del prodotto è su
-> [Get MediFlow](https://getmediflow.wulfgardr.chatgpt.site).
+> [Get MediFlow](https://getmediflow.dev).
 > La rotta storica `/mediflow` rimanda a questo sito, ospitato su ChatGPT Sites.
 > Le istruzioni Cloudflare sotto restano disponibili per il sito personale;
 > non descrivono l’hosting di Get MediFlow.
