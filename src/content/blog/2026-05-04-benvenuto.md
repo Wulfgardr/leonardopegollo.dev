@@ -18,7 +18,7 @@ appropriatezza prescrittiva, qualità del dato, audit. Roba che mi capita di
 costruire o ricostruire ogni settimana e di cui non trovo quasi mai una buona
 spiegazione asciutta da nessun'altra parte.
 
-**Riflessioni di prodotto su [MediFlow](/mediflow).** Decisioni architetturali,
+**Riflessioni di prodotto su [MediFlow](https://getmediflow.wulfgardr.chatgpt.site).** Decisioni architetturali,
 trade-off, perché ho scelto una cosa al posto di un'altra. Niente marketing.
 La cosa più utile che possa fare con un blog è raccontare con onestà perché
 una scelta ha senso, anche quando qualcuno legittimamente sceglierebbe altro.
