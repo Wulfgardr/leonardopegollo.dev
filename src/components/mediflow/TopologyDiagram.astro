@@ -12,85 +12,76 @@ const { reveal = true } = Astro.props;
   aria-describedby="topology-description topology-boundary"
 >
   <figcaption class="topology-intro">
-    <h3 id="topology-title">Tre ingressi, un solo nodo autorevole.</h3>
+    <h3 id="topology-title">Verso la 0.8.6 · Un nodo, più accessi.</h3>
     <p id="topology-description">
-      Ogni client segue un percorso esplicito verso il Mac home-base. I client paired
-      non accedono mai direttamente al database.
+      Il runtime locale può essere ospitato su Mac, Windows o Linux.
+      App associate e agenti passano dai servizi autorizzati, senza aprire il database.
     </p>
   </figcaption>
 
-  <div class="topology-grid" role="group" aria-label="Percorsi dei client verso il Mac home-base">
+  <div class="topology-grid" role="group" aria-label="Percorsi Web, app associate e Mini o MCP verso il nodo MediFlow">
     <span class="axis axis-entry">Ingresso</span>
     <span class="axis axis-route">Percorso</span>
-    <span class="axis axis-host">Mac home-base · nodo autorevole</span>
+    <span class="axis axis-host">Nodo MediFlow · autorità sui dati</span>
 
     <article class="endpoint endpoint-web">
-      <strong>Browser web locale</strong>
-      <span>UI clinica · cifratura lato client</span>
+      <strong>Browser locale</strong>
+      <span>Cartelle, agenda, documenti e impostazioni</span>
     </article>
-    <div class="transport transport-web">
-      <span>HTTP loopback · :3000</span>
-    </div>
-
+    <div class="transport transport-web"><span>HTTP loopback</span></div>
     <article class="endpoint endpoint-native">
-      <strong>Client macOS locale</strong>
-      <span>Sessione sicurezza · cifratura locale</span>
+      <strong>App Mac, iPhone e iPad associate</strong>
+      <span>Accesso online; cache cifrata limitata a lista e ultimo profilo</span>
     </article>
-    <div class="transport transport-native">
-      <span>HTTPS loopback · :3443</span>
-    </div>
-
+    <div class="transport transport-native"><span>HTTPS · associazione esplicita</span></div>
     <article class="endpoint endpoint-paired">
-      <strong>iPhone, iPad o Mac paired</strong>
-      <span>Opt-in · LAN fidata · capability esplicite</span>
+      <strong>Mini e agenti MCP</strong>
+      <span>Letture e proposte nel contesto autorizzato dal Web</span>
     </article>
-    <div class="transport transport-paired">
-      <span>HTTPS LAN · :3443</span>
-    </div>
+    <div class="transport transport-paired"><span>Supervisor locale · IPC ereditato</span></div>
 
     <div class="api api-web">
-      <strong>Web API</strong>
-      <code>/api/*</code>
-      <span>session cookie</span>
+      <strong>API Web</strong><code>/api/*</code>
+      <span>Sessione Web · controlli di versione</span>
     </div>
     <div class="api api-native">
-      <strong>TLS proxy → Native API</strong>
-      <code>/api/v1/*</code>
-      <span>bearer token locale</span>
+      <strong>API dei client associati</strong><code>/api/v1/network/*</code>
+      <span>Pairing + sessione operatore nativa + capacità autorizzate</span>
     </div>
     <div class="api api-network">
-      <strong>TLS proxy → Network API</strong>
-      <code>/api/v1/network/*</code>
-      <span>pairing + sessione · scritture versionate</span>
+      <strong>Servizi applicativi AIP</strong><code>RPC autenticata su IPC</code>
+      <span>Limiti, revoca e audit · nessuna autorità fornita dal chiamante</span>
     </div>
-
   </div>
 
-  <section class="home-resources" aria-label="Risorse locali del Mac home-base">
-    <h4>Dentro il Mac home-base</h4>
+  <section class="home-resources" aria-label="Risorse del nodo locale">
+    <h4>Dentro il nodo locale</h4>
     <article class="resource storage">
-      <strong>medical.db</strong>
-      <span>SQLite autorevole · campi clinici sensibili cifrati</span>
+      <strong>SQLite autorevole</strong>
+      <span>Campi clinici sensibili cifrati · scritture versionate</span>
     </article>
     <article class="resource backup">
-      <strong>Backup locale</strong>
-      <span>artifact governato · retention configurabile</span>
+      <strong>Backup amministrativo</strong>
+      <span>Verifica del contenuto e ripristino controllato</span>
     </article>
     <article class="resource services">
-      <strong>Servizi locali opzionali</strong>
-      <span>Ollama :11434 · ICD-11 :8888</span>
-      <small>OpenMed :18080 solo shadow evaluation</small>
+      <strong>Servizi facoltativi</strong>
+      <span>Ollama · ATHENA/MLX su Mac compatibile</span>
+      <small>WHO: ricerca e verifica dei codici con un servizio locale da configurare</small>
     </article>
     <article class="resource security">
-      <strong>Credenziali e TLS</strong>
-      <span>token locale 0600 · percorsi certificato configurabili</span>
+      <strong>Accessi distinti</strong>
+      <span>Il dispositivo associato non sostituisce il login dell’operatore</span>
     </article>
   </section>
 
   <p class="topology-boundary" id="topology-boundary">
-    <strong>Confine operativo:</strong> loopback per il lavoro sul Mac; rete locale fidata
-    soltanto in modalità <code>network-home-base</code>. Nessun cloud e nessun multi-master
-    per impostazione predefinita.
+    <strong>Confine operativo:</strong> la rete locale è facoltativa; cloud e
+    generazione AI sono disattivati per default. Nessuna scrittura offline o
+    sincronizzazione multi-master. Mini è stato provato con il Supervisor e il
+    server Web reali su Mac, per letture e proposte senza salvataggi clinici.
+    Le prove delle altre piattaforme e la distribuzione firmata restano separate.
+    La 0.8.6 è ancora in preparazione.
   </p>
 </figure>
 
@@ -120,7 +111,7 @@ const { reveal = true } = Astro.props;
 
   .topology-grid{
     display:grid;
-    grid-template-columns:minmax(190px, .8fr) minmax(180px, .72fr) minmax(360px, 1.48fr);
+    grid-template-columns:minmax(0, .85fr) minmax(160px, .7fr) minmax(0, 1.45fr);
     grid-template-rows:auto repeat(3, minmax(92px, auto));
   }
   .axis{
@@ -158,7 +149,7 @@ const { reveal = true } = Astro.props;
   .resource span,
   .resource small{
     color:var(--ink-2);
-    font-size:.8rem;
+    font-size:.875rem;
     line-height:1.45;
   }
 
@@ -176,15 +167,15 @@ const { reveal = true } = Astro.props;
     position:absolute;
     right:0;
     left:0;
-    top:50%;
-    height:1px;
+    top:calc(50% + 18px);
+    height:2px;
     background:var(--line-strong);
   }
   .transport::after{
     content:"";
     position:absolute;
     right:-1px;
-    top:calc(50% - 4px);
+    top:calc(50% + 15px);
     width:6px;
     height:8px;
     background:var(--mint);
@@ -194,9 +185,10 @@ const { reveal = true } = Astro.props;
     position:relative;
     z-index:1;
     padding:var(--space-1) var(--space-2);
-    background:var(--surface);
+    background:transparent;
     color:var(--ink-2);
-    font:600 11px/1.35 var(--font-technical);
+    font:600 12px/1.35 var(--font-technical);
+    transform:translateY(-10px);
     text-align:center;
   }
 
@@ -217,7 +209,7 @@ const { reveal = true } = Astro.props;
   .api-network{ grid-row:4; }
   .api{
     display:grid;
-    grid-template-columns:minmax(0, 1fr) auto;
+    grid-template-columns:minmax(0, 1fr);
     gap:var(--space-1) var(--space-4);
     align-content:center;
     min-width:0;
@@ -225,11 +217,11 @@ const { reveal = true } = Astro.props;
     border-bottom:1px solid var(--line);
   }
   .api code{
-    grid-column:2;
-    grid-row:1 / 3;
+    grid-column:1;
+    grid-row:auto;
     align-self:center;
     color:var(--mint-ink);
-    font-size:.8rem;
+    font-size:.875rem;
     overflow-wrap:anywhere;
   }
   .api span{
@@ -282,12 +274,11 @@ const { reveal = true } = Astro.props;
     }
     .topology-intro p{ justify-self:start; }
     .topology-grid{
-      grid-template-columns:minmax(160px, .8fr) minmax(150px, .7fr) minmax(300px, 1.4fr);
-      overflow-x:auto;
+      grid-template-columns:minmax(0, 1fr);
     }
   }
 
-  @media (max-width:680px){
+  @media (max-width:1000px){
     .topology-intro,
     .topology-boundary{ padding:var(--space-4); }
     .topology-grid{
@@ -334,6 +325,7 @@ const { reveal = true } = Astro.props;
       clip-path:polygon(0 0, 100% 0, 50% 100%);
     }
     .transport span{
+      transform:none;
       justify-self:start;
       margin-left:var(--space-6);
       text-align:left;
