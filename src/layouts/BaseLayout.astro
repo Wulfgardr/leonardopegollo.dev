@@ -6,6 +6,9 @@ import Footer from '~/components/Footer.astro';
 
 interface Props {
   title: string;
+  lang?: "it" | "en";
+  noindex?: boolean;
+  alternate?: { lang: string; path: string };
   description?: string;
   /** Se true non mostra footer (utile per landing molto pulite). */
   hideFooter?: boolean;
@@ -15,13 +18,16 @@ const {
   title,
   description = 'Sito personale di Leonardo Pegollo. Medico di distretto a Milano. Note su sanità territoriale, dati, software clinico locale e tecnologia usata con giudizio.',
   hideFooter = false,
+  lang = "it",
+  noindex = false,
+  alternate,
 } = Astro.props;
 
 const fullTitle = title.includes('leonardopegollo.dev') ? title : `${title} · leonardopegollo.dev`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 <!doctype html>
-<html lang="it">
+<html lang={lang}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
@@ -41,16 +47,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonicalURL} />
   <meta name="twitter:card" content="summary_large_image" />
+  {(noindex || import.meta.env.INCLUDE_DRAFTS === "true") && <meta name="robots" content="noindex, nofollow" />}
+  {alternate && <link rel="alternate" hreflang={alternate.lang} href={new URL(alternate.path, Astro.site).toString()} />}
+  {alternate && <link rel="alternate" hreflang={lang} href={canonicalURL} />}
   <ClientRouter />
 </head>
 <body>
-  <a href="#main" class="skip-link">Salta al contenuto</a>
+  <a href="#main" class="skip-link">{lang === 'en' ? 'Skip to content' : 'Salta al contenuto'}</a>
   <div class="shell">
-    <Nav />
+    <Nav lang={lang} />
 
     <main id="main" class="surface">
       <slot />
-      {!hideFooter && <Footer />}
+      {!hideFooter && <Footer lang={lang} />}
     </main>
   </div>
 

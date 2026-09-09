@@ -1,4 +1,6 @@
 ---
+const { lang = 'it' } = Astro.props;
+const en = lang === 'en';
 type NavSection = 'work' | 'notes' | 'bio';
 
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
@@ -22,9 +24,9 @@ const active = (section: NavSection) => currentSection === section ? 'page' : un
       <span class="brand-name">leonardopegollo<span>.dev</span></span>
     </a>
 
-    <nav class="links" aria-label="Navigazione principale">
-      <a class="nav-row" href="/" aria-current={active('work')}>Lavoro</a>
-      <a class="nav-row" href="/blog" aria-current={active('notes')}>Note</a>
+    <nav class="links" aria-label={en ? 'Main navigation' : 'Navigazione principale'}>
+      <a class="nav-row" href="/" aria-current={active('work')}>{en ? 'Work' : 'Lavoro'}</a>
+      <a class="nav-row" href="/blog" aria-current={active('notes')}>{en ? 'Notes' : 'Note'}</a>
       <a class="nav-row" href="/about" aria-current={active('bio')}>Bio</a>
     </nav>
   </div>

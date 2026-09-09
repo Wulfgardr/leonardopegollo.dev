@@ -2,7 +2,7 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 
 export async function GET(context) {
-  const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+  const posts = (await getCollection('blog')).filter((p) => !p.data.draft && p.data.lang === "it");
   return rss({
     title: 'leonardopegollo.dev · Blog',
     description: 'Note di lavoro su sanità pubblica, dati, software clinico locale.',

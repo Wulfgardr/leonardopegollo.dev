@@ -1,10 +1,11 @@
 ---
+const { lang = 'it' } = Astro.props;
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <span>© {year} Leonardo Pegollo</span>
-    <nav aria-label="Contatti e feed">
+    <nav aria-label={lang === 'en' ? 'Contact and feed' : 'Contatti e feed'}>
       <a href="mailto:hello@leonardopegollo.dev">Email</a>
       <a href="https://github.com/Wulfgardr" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a href="https://x.com/leonardopegollo" target="_blank" rel="noopener noreferrer">X</a>

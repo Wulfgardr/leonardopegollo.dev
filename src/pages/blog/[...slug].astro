@@ -3,7 +3,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog')).filter((p) => import.meta.env.DEV || !p.data.draft);
+  const posts = (await getCollection('blog')).filter((p) => import.meta.env.DEV || import.meta.env.INCLUDE_DRAFTS === "true" || !p.data.draft);
   return posts.map((p) => ({
     params: { slug: p.id },
     props: { post: p },
@@ -11,36 +11,45 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+const en = post.data.lang === "en";
+const translation = post.data.translation ? (await getCollection("blog")).find(p => p.id === post.data.translation) : undefined;
+const showTranslation = translation && (import.meta.env.DEV || import.meta.env.INCLUDE_DRAFTS === "true" || !translation.data.draft);
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+  d.toLocaleDateString(en ? 'en-GB' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} lang={post.data.lang} noindex={post.data.draft} alternate={showTranslation ? { lang: translation.data.lang, path: `/blog/${translation.id}` } : undefined}>
   <section style="padding-top:50px">
     <div class="wrap-narrow">
-      <p style="margin:0 0 24px"><a class="back" href="/blog">← Tutti i post</a></p>
+      <p style="margin:0 0 24px"><a class="back" href="/blog">← {en ? 'All notes' : 'Tutti i post'}</a></p>
 
       <article class="article">
         <header>
           <div class="meta">
-            {fmt(post.data.pubDate)}
-            {post.data.updatedDate && <span> · aggiornato {fmt(post.data.updatedDate)}</span>}
+            {post.data.draft ? (en ? "Draft · " : "Bozza · ") : ""}{fmt(post.data.pubDate)}
+            {post.data.updatedDate && <span> · {en ? 'updated' : 'aggiornato'} {fmt(post.data.updatedDate)}</span>}
             {post.data.tags.length > 0 && <span> · {post.data.tags.join(' · ')}</span>}
           </div>
           <h1 transition:name={`post-title-${post.id}`}>{post.data.title}</h1>
           {post.data.description && <p class="standfirst">{post.data.description}</p>}
         </header>
+        {showTranslation && <p class="language-switch"><a href={`/blog/${translation.id}`} hreflang={translation.data.lang} lang={translation.data.lang}>{en ? 'Leggi in italiano' : 'Read in English'} →</a></p>}
+        {post.data.translation && headings.length > 0 && <details class="article-index"><summary>{en ? 'In this note' : 'In questa nota'}</summary><ul>{headings.filter(h => h.depth === 2).map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul></details>}
         <Content />
       </article>
 
       <div class="divider"></div>
-      <p style="margin-top:8px"><a class="back" href="/blog">← Torna a tutti i post</a></p>
+      <p style="margin-top:8px"><a class="back" href="/blog">← {en ? 'Back to all notes' : 'Torna a tutti i post'}</a></p>
     </div>
   </section>
 </BaseLayout>
 
 <style>
+  .language-switch { margin: 24px 0; font-weight: 650; }
+  .article-index { margin: 24px 0 36px; padding: 16px 0; border-block: 1px solid var(--line); }
+  .article-index summary { cursor: pointer; }
+  .article-index a { display: inline-block; padding-block: 5px; }
   .back{
     color:var(--ink-2); text-decoration:none;
     font-family:var(--font-technical); font-size:13px;

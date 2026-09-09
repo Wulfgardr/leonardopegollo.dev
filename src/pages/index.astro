@@ -4,7 +4,7 @@ import TopologyDiagram from '~/components/mediflow/TopologyDiagram.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.draft)
+  .filter((post) => (import.meta.env.INCLUDE_DRAFTS === "true" || !post.data.draft) && post.data.lang === "it")
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
@@ -56,7 +56,7 @@ const fmt = (date: Date) =>
             Organizza cartelle, terapie, documenti, misure e attività da seguire,
             anche senza intelligenza artificiale. La 0.8.6, in preparazione,
             riordina cartella e documenti, guida la scelta dei modelli locali
-            e collega Mini ai servizi del nodo. Get MediFlow presenta il prodotto,
+            e prepara il percorso Web, macOS e Headless sul Mac. Get MediFlow presenta il prodotto,
             mostra come funziona e accompagna dalla prima lettura ai dettagli
             di codifiche, interoperabilità e Intelligence Fabric.
           </p>
@@ -66,6 +66,7 @@ const fmt = (date: Date) =>
 
       <div class="project-visual reveal">
         <TopologyDiagram reveal={false} />
+        <p class="muted">Schema generale del progetto. La 0.8.6 riguarda il Mac; Mini, Windows, Linux, iOS e iPadOS restano nella roadmap 1.0.</p>
       </div>
     </div>
   </section>
