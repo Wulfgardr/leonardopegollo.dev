@@ -4,6 +4,8 @@ description: "Riflessioni verosimilmente erronee sul falso senso di sicurezza pr
 pubDate: 2026-06-29
 tags: ["sanità pubblica", "ai", "metodologia"]
 draft: false
+lang: it
+translation: "2026-06-29-sike-or-fancy-public-health-we-have-a-problem"
 ---
 
 > **Nota metodologica.** Questo post nasce da un'osservazione molto parziale: alcune discussioni recenti su piattaforme diverse, qualche riferimento metodologico già noto e una preoccupazione personale sul modo in cui alcuni strumenti vengono raccontati in sanità pubblica. Non è una revisione sistematica, non è una posizione contrarian, non è una mappa esaustiva del campo. Sono quattro chiacchiere da sotto la doccia, né più né meno; magari con qualche fonte in più di una chiacchiera vera, ma con la stessa ambizione.

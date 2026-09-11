@@ -5,6 +5,8 @@ import SocialLinks from '~/components/SocialLinks.astro';
 <BaseLayout
   title="Chi sono"
   description="Leonardo Pegollo: medico di distretto a Milano, sanità territoriale, pazienti complessi, domiciliarità. E un applicativo clinico che vuole stare dalla parte di chi lavora."
+  alternates={[{ lang: 'en', path: '/en/about' }, { lang: 'x-default', path: '/about' }]}
+  switchPath="/en/about"
 >
   <section class="section-top">
     <div class="wrap-narrow">
@@ -90,6 +92,17 @@ import SocialLinks from '~/components/SocialLinks.astro';
       <p>
         Niente cadenza fissa. Niente clickbait. Quando ho qualcosa da dire che
         regge alla rilettura, lo scrivo.
+      </p>
+
+      <!-- Collaborazioni -->
+      <h2>Collaborazioni delimitate</h2>
+      <p>
+        Mi interessano collaborazioni delimitate e ruoli europei su AI in health e
+        public sector, soprattutto deployment ed evaluation: problemi concreti,
+        perimetri chiari, fonti tracciabili e criteri di verifica espliciti. Non
+        rivendico un mandato generale e non presento MediFlow come adottato o
+        validato; mi interessa contribuire dove il lavoro può essere definito,
+        provato nel suo perimetro e riconsegnato con i suoi limiti.
       </p>
 
       <!-- Strumenti -->

@@ -4,6 +4,8 @@ description: "Seconda ricostruzione osservazionale sul SISS lombardo: cosa cambi
 pubDate: 2026-08-11
 tags: ["mediflow", "sanità", "architettura", "siss"]
 draft: false
+lang: it
+translation: "2026-08-11-siss-netlog-prreg-part-2"
 ---
 
 > **Nota metodologica.** Questo post è la seconda parte della [mappatura del flusso prescrittivo SISS](/blog/2026-05-21-mappatura-siss/). Nasce dall'analisi di un Chrome NetLog raccolto durante una sessione reale sul **Prescrittivo Regionale (PRREG) Produzione**. Il log è stato letto solo in forma redatta: host, path, metodo, status, sequenza e tempi. Non sono riportati cookie, token, header, query string, payload, identificativi regionali, dati paziente o contenuti clinici. I nomi degli endpoint non sono una specifica pubblica e non vanno trattati come contratto d'integrazione. Sono tracce di comportamento osservato.

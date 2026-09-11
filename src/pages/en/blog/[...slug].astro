@@ -1,0 +1,17 @@
+---
+import BlogPost from '../../blog/[...slug].astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((post) =>
+    (import.meta.env.DEV || import.meta.env.INCLUDE_DRAFTS === 'true' || !post.data.draft) && post.data.lang === 'en'
+  );
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+<BlogPost post={post} routePrefix="/en/blog" canonicalPath={`/en/blog/${post.id}`} />

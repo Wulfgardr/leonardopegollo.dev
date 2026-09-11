@@ -1,17 +1,28 @@
 ---
-const { lang = 'it' } = Astro.props;
+interface Props {
+  lang?: 'it' | 'en';
+  switchPath?: string;
+}
+
+const { lang = 'it', switchPath } = Astro.props;
 const en = lang === 'en';
 type NavSection = 'work' | 'notes' | 'bio';
+const prefix = en ? '/en' : '';
+const homePath = prefix || '/';
+const blogPath = `${prefix}/blog` || '/blog';
+const aboutPath = `${prefix}/about` || '/about';
+const mediflowPath = `${prefix}/mediflow` || '/mediflow';
+const languagePath = switchPath ?? (en ? '/' : '/en');
 
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isWithin = (route: string) => path === route || path.startsWith(`${route}/`);
 
 const currentSection: NavSection | undefined =
-  path === '/' || isWithin('/mediflow')
+  path === homePath || isWithin(mediflowPath)
     ? 'work'
-    : isWithin('/blog')
+    : isWithin(blogPath)
       ? 'notes'
-      : isWithin('/about')
+      : isWithin(aboutPath)
         ? 'bio'
         : undefined;
 
@@ -19,15 +30,27 @@ const active = (section: NavSection) => currentSection === section ? 'page' : un
 ---
 <header class="site-header">
   <div class="nav-shell">
-    <a class="brand" href="/" aria-label="leonardopegollo.dev · home">
+    <a class="brand" href={homePath} aria-label={`leonardopegollo.dev · ${en ? 'home' : 'home'}`}>
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-name">leonardopegollo<span>.dev</span></span>
     </a>
 
     <nav class="links" aria-label={en ? 'Main navigation' : 'Navigazione principale'}>
-      <a class="nav-row" href="/" aria-current={active('work')}>{en ? 'Work' : 'Lavoro'}</a>
-      <a class="nav-row" href="/blog" aria-current={active('notes')}>{en ? 'Notes' : 'Note'}</a>
-      <a class="nav-row" href="/about" aria-current={active('bio')}>Bio</a>
+      <a class="nav-row" href={homePath} aria-current={active('work')}>{en ? 'Work' : 'Lavoro'}</a>
+      <a class="nav-row" href={blogPath} aria-current={active('notes')}>{en ? 'Notes' : 'Note'}</a>
+      <a class="nav-row" href={aboutPath} aria-current={active('bio')}>Bio</a>
+      <a class="language-switch" href={languagePath} hreflang={en ? 'it' : 'en'} lang={en ? 'it' : 'en'} aria-label={en ? 'Leggi in italiano' : 'Read in English'}>{en ? 'Italiano' : 'English'}</a>
     </nav>
   </div>
 </header>
+
+<style>
+  .language-switch{
+    color:var(--mint);
+    font:700 .76rem/1 var(--font-technical);
+    text-decoration:none;
+    white-space:nowrap;
+    transition:color var(--dur-1) var(--ease);
+  }
+  .language-switch:hover{ color:var(--mint-ink); }
+</style>

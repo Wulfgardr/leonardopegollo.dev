@@ -4,6 +4,8 @@ description: "Cos'è questo posto, cosa ci troverai, perché esiste."
 pubDate: 2026-05-04
 tags: ["meta", "annuncio"]
 draft: false
+lang: it
+translation: "2026-05-04-welcome-to-leonardopegollo"
 ---
 
 Questo è il primo post di un blog che doveva esistere già da un pezzo.

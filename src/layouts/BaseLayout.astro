@@ -9,6 +9,9 @@ interface Props {
   lang?: "it" | "en";
   noindex?: boolean;
   alternate?: { lang: string; path: string };
+  alternates?: { lang: string; path: string }[];
+  canonicalPath?: string;
+  switchPath?: string;
   description?: string;
   /** Se true non mostra footer (utile per landing molto pulite). */
   hideFooter?: boolean;
@@ -21,10 +24,22 @@ const {
   lang = "it",
   noindex = false,
   alternate,
+  alternates = [],
+  canonicalPath,
+  switchPath,
 } = Astro.props;
 
 const fullTitle = title.includes('leonardopegollo.dev') ? title : `${title} · leonardopegollo.dev`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const normalizePath = (path: string) => path === '/' ? '/' : path.replace(/\/+$/, '');
+const currentPath = normalizePath(canonicalPath ?? Astro.url.pathname);
+const canonicalURL = new URL(currentPath, Astro.site).toString();
+const hreflangLinks = [
+  { lang, path: currentPath },
+  ...alternates,
+  ...(alternate ? [alternate] : []),
+].map((item) => ({ ...item, path: normalizePath(item.path) }))
+  .filter((item, index, all) => all.findIndex((candidate) => candidate.lang === item.lang) === index);
+const languageSwitchPath = switchPath ?? (lang === 'en' ? '/' : '/en');
 ---
 <!doctype html>
 <html lang={lang}>
@@ -48,14 +63,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
   <meta property="og:url" content={canonicalURL} />
   <meta name="twitter:card" content="summary_large_image" />
   {(noindex || import.meta.env.INCLUDE_DRAFTS === "true") && <meta name="robots" content="noindex, nofollow" />}
-  {alternate && <link rel="alternate" hreflang={alternate.lang} href={new URL(alternate.path, Astro.site).toString()} />}
-  {alternate && <link rel="alternate" hreflang={lang} href={canonicalURL} />}
+  {hreflangLinks.map((link) => <link rel="alternate" hreflang={link.lang} href={new URL(link.path, Astro.site).toString()} />)}
   <ClientRouter />
 </head>
 <body>
   <a href="#main" class="skip-link">{lang === 'en' ? 'Skip to content' : 'Salta al contenuto'}</a>
   <div class="shell">
-    <Nav lang={lang} />
+    <Nav lang={lang} switchPath={languageSwitchPath} />
 
     <main id="main" class="surface">
       <slot />

@@ -2,6 +2,12 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 
+interface Props {
+  post: any;
+  routePrefix?: string;
+  canonicalPath?: string;
+}
+
 export async function getStaticPaths() {
   const posts = (await getCollection('blog')).filter((p) => import.meta.env.DEV || import.meta.env.INCLUDE_DRAFTS === "true" || !p.data.draft);
   return posts.map((p) => ({
@@ -10,19 +16,42 @@ export async function getStaticPaths() {
   }));
 }
 
-const { post } = Astro.props;
+const {
+  post,
+  routePrefix = '/blog',
+  canonicalPath = post.data.lang === 'en' ? `/en/blog/${post.id}` : `/blog/${post.id}`,
+} = Astro.props as Props;
 const { Content, headings } = await render(post);
 const en = post.data.lang === "en";
 const translation = post.data.translation ? (await getCollection("blog")).find(p => p.id === post.data.translation) : undefined;
 const showTranslation = translation && (import.meta.env.DEV || import.meta.env.INCLUDE_DRAFTS === "true" || !translation.data.draft);
+const translationPath = translation
+  ? translation.data.lang === 'en' ? `/en/blog/${translation.id}` : `/blog/${translation.id}`
+  : undefined;
+const backPath = en ? '/en/blog' : '/blog';
+const legacyEnglish = en && routePrefix === '/blog';
+const alternates = showTranslation && translationPath
+  ? [
+      { lang: translation.data.lang, path: translationPath },
+      { lang: 'x-default', path: en ? translationPath : canonicalPath },
+    ]
+  : undefined;
 
 const fmt = (d: Date) =>
   d.toLocaleDateString(en ? 'en-GB' : 'it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
-<BaseLayout title={post.data.title} description={post.data.description} lang={post.data.lang} noindex={post.data.draft} alternate={showTranslation ? { lang: translation.data.lang, path: `/blog/${translation.id}` } : undefined}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  lang={post.data.lang}
+  noindex={post.data.draft || legacyEnglish}
+  canonicalPath={canonicalPath}
+  alternates={alternates}
+  switchPath={translationPath}
+>
   <section style="padding-top:50px">
     <div class="wrap-narrow">
-      <p style="margin:0 0 24px"><a class="back" href="/blog">← {en ? 'All notes' : 'Tutti i post'}</a></p>
+      <p style="margin:0 0 24px"><a class="back" href={backPath}>← {en ? 'All notes' : 'Tutti i post'}</a></p>
 
       <article class="article">
         <header>
@@ -34,13 +63,13 @@ const fmt = (d: Date) =>
           <h1 transition:name={`post-title-${post.id}`}>{post.data.title}</h1>
           {post.data.description && <p class="standfirst">{post.data.description}</p>}
         </header>
-        {showTranslation && <p class="language-switch"><a href={`/blog/${translation.id}`} hreflang={translation.data.lang} lang={translation.data.lang}>{en ? 'Leggi in italiano' : 'Read in English'} →</a></p>}
+        {showTranslation && translationPath && <p class="language-switch"><a href={translationPath} hreflang={translation.data.lang} lang={translation.data.lang}>{en ? 'Leggi in italiano' : 'Read in English'} →</a></p>}
         {post.data.translation && headings.length > 0 && <details class="article-index"><summary>{en ? 'In this note' : 'In questa nota'}</summary><ul>{headings.filter(h => h.depth === 2).map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul></details>}
         <Content />
       </article>
 
       <div class="divider"></div>
-      <p style="margin-top:8px"><a class="back" href="/blog">← {en ? 'Back to all notes' : 'Torna a tutti i post'}</a></p>
+      <p style="margin-top:8px"><a class="back" href={backPath}>← {en ? 'Back to all notes' : 'Torna a tutti i post'}</a></p>
     </div>
   </section>
 </BaseLayout>
@@ -299,6 +328,10 @@ const fmt = (d: Date) =>
   const setupPrregFlow = (root: HTMLElement) => {
     const steps = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-prreg-step]'));
     const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-prreg-panel]'));
+    const english = document.documentElement.lang === 'en';
+    const labels = english
+      ? { start: 'Start', pause: 'Pause', step: 'Step' }
+      : { start: 'Avvia', pause: 'Pausa', step: 'Passaggio' };
     const status = root.querySelector<HTMLElement>('[data-prreg-status]');
     const play = root.querySelector<HTMLButtonElement>('[data-prreg-play]');
     const previous = root.querySelector<HTMLButtonElement>('[data-prreg-prev]');
@@ -313,7 +346,7 @@ const fmt = (d: Date) =>
       if (timer !== undefined) window.clearInterval(timer);
       timer = undefined;
       if (play) {
-        play.textContent = 'Avvia';
+        play.textContent = labels.start;
         play.setAttribute('aria-pressed', 'false');
       }
     };
@@ -326,7 +359,7 @@ const fmt = (d: Date) =>
         if (focus && selected) step.focus();
       });
       panels.forEach((panel, i) => { panel.hidden = i !== active; });
-      if (status) status.textContent = `Passaggio ${active + 1} di ${steps.length}`;
+      if (status) status.textContent = `${labels.step} ${active + 1} ${english ? 'of' : 'di'} ${steps.length}`;
     };
 
     steps.forEach((step, i) => {
@@ -343,7 +376,7 @@ const fmt = (d: Date) =>
     play?.addEventListener('click', () => {
       if (timer !== undefined) return stop();
       if (reduceMotion.matches) return;
-      play.textContent = 'Pausa';
+      play.textContent = labels.pause;
       play.setAttribute('aria-pressed', 'true');
       timer = window.setInterval(() => select(active + 1), 1800);
     }, listenerOptions);

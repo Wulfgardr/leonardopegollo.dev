@@ -4,44 +4,44 @@ import TopologyDiagram from '~/components/mediflow/TopologyDiagram.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog'))
-  .filter((post) => (import.meta.env.INCLUDE_DRAFTS === "true" || !post.data.draft) && post.data.lang === "it")
+  .filter((post) => (import.meta.env.INCLUDE_DRAFTS === 'true' || !post.data.draft) && post.data.lang === 'en')
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
 const fmt = (date: Date) =>
-  date.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
-
+  date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <BaseLayout
   title="leonardopegollo.dev"
-  description="Leonardo Pegollo: medico di distretto a Milano. Sanità territoriale, dati, software clinico local-first e tecnologia usata con giudizio."
-  alternates={[{ lang: 'en', path: '/en' }, { lang: 'x-default', path: '/' }]}
+  lang="en"
+  description="Leonardo Pegollo: a district doctor in Milan. Community healthcare, data, local-first clinical software and technology used with judgement."
+  alternates={[{ lang: 'it', path: '/' }, { lang: 'x-default', path: '/' }]}
 >
   <section class="hero">
     <div class="wrap hero-grid">
       <h1 class="reveal">
         Leonardo Pegollo{' '}
-        <span>medico, dati e lavoro clinico oggi.</span>
+        <span>doctor, data and clinical work today.</span>
       </h1>
 
       <div class="hero-copy reveal">
         <p class="lead">
-          Faccio il medico di distretto. Lavoro con pazienti complessi,
-          domiciliarità e sanità territoriale; quando un problema ritorna spesso,
-          provo a rimetterlo in ordine: dati, codice quando serve, un modo più
-          ripetibile di arrivare a una risposta. Da lì nasce{' '}
-          <a href="https://getmediflow.dev" class="link-ink">MediFlow</a>: una cartella clinica{' '}
-          <span class="sig">local-first</span>{' '}che tiene la cartella autorevole
-          sul computer di chi cura. Il lavoro sull’Intelligence Fabric
-          parte dalla stessa idea: non decidere in astratto che tutto debba essere
-          locale o cloud, ma scegliere ogni volta in base al lavoro, al dato e al rischio.
+          I work as a district doctor. I work with complex patients, home care and
+          community healthcare; when a problem keeps coming back, I try to put it
+          back in order: data, code when it helps, a more repeatable way to reach an
+          answer. That is where <a href="https://getmediflow.dev/en" class="link-ink">MediFlow</a>{' '}
+          comes from: a <span class="sig">local-first</span> medical record that keeps the
+          authoritative record on the computer of the person providing care. The work
+          on the Intelligence Fabric starts from the same idea: not deciding in the
+          abstract that everything must be local or cloud-based, but choosing each time
+          according to the work, the data and the risk.
         </p>
         <p class="lead muted">
-          Nel lavoro clinico di oggi gli strumenti contano: prevenzione, medicina
-          d'iniziativa, codice assistito dall'AI. Possono accorciare la distanza fra
-          dati, persone e decisioni, ma chiedono umiltà e revisione. Se servono
-          solo a produrre contenuto, hanno già perso il punto.
+          In today's clinical work, tools matter: prevention, proactive care and
+          AI-assisted code. They can shorten the distance between data, people and
+          decisions, but they ask for humility and review. If they only serve to
+          produce content, they have already missed the point.
         </p>
       </div>
     </div>
@@ -53,21 +53,22 @@ const fmt = (date: Date) =>
         <h2>MediFlow</h2>
         <div>
           <p>
-            MediFlow è il gestionale open source per i pazienti dell’ambulatorio.
-            Organizza cartelle, terapie, documenti, misure e attività da seguire,
-            anche senza intelligenza artificiale. La 0.8.6, in preparazione,
-            riordina cartella e documenti, guida la scelta dei modelli locali
-            e prepara il percorso Web, macOS e Headless sul Mac. Get MediFlow presenta il prodotto,
-            mostra come funziona e accompagna dalla prima lettura ai dettagli
-            di codifiche, interoperabilità e Intelligence Fabric.
+            MediFlow is the open-source practice-management system for outpatient
+            patients. It organises records, therapies, documents, measurements and
+            follow-up activities, with or without artificial intelligence. Version
+            0.8.6, in preparation, reorganises records and documents, guides the
+            choice of local models and prepares the Web, macOS and Headless path on
+            the Mac. Get MediFlow presents the product, shows how it works and leads
+            from the first reading to the details of coding, interoperability and the
+            Intelligence Fabric.
           </p>
-          <a class="text-link" href="https://getmediflow.dev#versione-086">Guarda l’anteprima della 0.8.6 →</a>
+          <a class="text-link" href="https://getmediflow.dev/en#versione-086">See the 0.8.6 preview →</a>
         </div>
       </div>
 
       <div class="project-visual reveal">
-        <TopologyDiagram reveal={false} />
-        <p class="muted">Schema generale del progetto. La 0.8.6 riguarda il Mac; Mini, Windows, Linux, iOS e iPadOS restano nella roadmap 1.0.</p>
+        <TopologyDiagram reveal={false} lang="en" />
+        <p class="muted">General project outline. Version 0.8.6 concerns the Mac; Mini, Windows, Linux, iOS and iPadOS remain on the 1.0 roadmap.</p>
       </div>
     </div>
   </section>
@@ -76,13 +77,13 @@ const fmt = (date: Date) =>
     <section class="notes-home">
       <div class="wrap">
         <div class="home-section-head">
-          <h2>Note</h2>
-          <a href="/blog">Tutte →</a>
+          <h2>Notes</h2>
+          <a href="/en/blog">All →</a>
         </div>
 
         <div class="post-list reveal">
           {posts.map((post) => (
-            <a class="post-link" href={`/blog/${post.id}`}>
+            <a class="post-link" href={`/en/blog/${post.id}`}>
               <div class="meta">{fmt(post.data.pubDate)}</div>
               <div>
                 <h3>{post.data.title}</h3>

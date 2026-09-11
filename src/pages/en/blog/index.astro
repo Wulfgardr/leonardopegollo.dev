@@ -3,39 +3,40 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog'))
-  .filter((p) => (import.meta.env.INCLUDE_DRAFTS === "true" || !p.data.draft) && p.data.lang === "it")
+  .filter((post) => (import.meta.env.INCLUDE_DRAFTS === 'true' || !post.data.draft) && post.data.lang === 'en')
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const fmt = (d: Date) =>
-  d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmt = (date: Date) =>
+  date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <BaseLayout
-  title="Blog"
-  description="Note di lavoro su sanità pubblica, dati, software clinico locale."
-  alternates={[{ lang: 'en', path: '/en/blog' }, { lang: 'x-default', path: '/blog' }]}
-  switchPath="/en/blog"
+  title="Notes"
+  lang="en"
+  description="Working notes on public health, data and local clinical software."
+  alternates={[{ lang: 'it', path: '/blog' }, { lang: 'x-default', path: '/blog' }]}
+  switchPath="/blog"
 >
   <section style="padding-top:90px">
     <div class="wrap">
       <div class="section-head">
-        <h1 class="gradient-title">Una cosa per volta.</h1>
-        <p class="lead">Niente cadenza fissa.</p>
+        <h1 class="gradient-title">One thing at a time.</h1>
+        <p class="lead">No fixed schedule.</p>
         <p class="muted rss-line">
           <span class="sym" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 4a16 16 0 0 1 16 16"/><path d="M4 11a9 9 0 0 1 9 9"/><circle cx="5.5" cy="18.5" r="1.5" fill="currentColor"/></svg>
           </span>
-          Iscriviti al <a href="/rss.xml" class="link-ink">feed RSS</a> per non perderne uno.
+          Subscribe to the <a href="/en/rss.xml" class="link-ink">RSS feed</a> so you do not miss one.
         </p>
       </div>
 
       <div class="post-list">
-        {posts.length === 0 && <p class="muted">Nessun post ancora pubblicato.</p>}
-        {posts.map((p) => (
-          <a class="post-link" href={`/blog/${p.id}`}>
-            <div class="meta">{fmt(p.data.pubDate)}</div>
+        {posts.length === 0 && <p class="muted">No published notes yet.</p>}
+        {posts.map((post) => (
+          <a class="post-link" href={`/en/blog/${post.id}`}>
+            <div class="meta">{fmt(post.data.pubDate)}</div>
             <div>
-                <h3 transition:name={`post-title-${p.id}`}>{p.data.title}</h3>
-              <p>{p.data.description}</p>
+              <h3 transition:name={`post-title-${post.id}`}>{post.data.title}</h3>
+              <p>{post.data.description}</p>
             </div>
             <div class="arrow" aria-hidden="true">→</div>
           </a>
@@ -51,5 +52,4 @@ const fmt = (d: Date) =>
     font-size:13.5px; margin-top:18px;
   }
   .rss-line .sym{ color:var(--amber); width:16px; height:16px; }
-  /* .link-ink è definito in global.css; la classe sul markup eredita da lì. */
 </style>

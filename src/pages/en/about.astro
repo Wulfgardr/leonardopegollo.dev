@@ -1,0 +1,138 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SocialLinks from '~/components/SocialLinks.astro';
+---
+<BaseLayout
+  title="About"
+  lang="en"
+  description="Leonardo Pegollo: a district doctor in Milan, community healthcare, complex patients and home care. And a clinical application that wants to stand with the people doing the work."
+  alternates={[{ lang: 'it', path: '/about' }, { lang: 'x-default', path: '/about' }]}
+  switchPath="/about"
+>
+  <section class="section-top">
+    <div class="wrap-narrow">
+
+      <h1 class="gradient-title">Leonardo Pegollo</h1>
+      <p class="lead">
+        A district doctor in Milan. Community healthcare, complex patients and home
+        care. In today's clinical work, data, prevention, proactive care and
+        assisted code meet in the same field: not as a separate identity, but as ways
+        to reduce friction and hold information, people and decisions together.
+      </p>
+
+      <div style="margin-top:22px">
+        <SocialLinks variant="pills" />
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>What I do for work</h2>
+      <p>
+        I work as a district doctor. I have always worked on <b>community healthcare</b>,
+        <b>complex patients</b> and <b>home care</b>: the part of the system where care does
+        not end with a prescription, but begins there. It is a profession made of
+        pathways, networks, transitions between hospital and community, and time
+        spent holding together pieces that elsewhere do not speak much to one another.
+      </p>
+      <p>
+        I recently completed a <b>postgraduate programme in health and social-care
+        management</b>. It left me with a particular way of looking at
+        processes: finding where a service breaks, understanding who really pays that
+        cost, and trying to redesign it before the cost becomes chronic.
+      </p>
+
+      <h2>The thing I enjoy most</h2>
+      <p>
+        I am interested in the point where clinical operations, data and small
+        applications can really speak to one another. Thinking about what to do, how
+        to do it, and <b>how to make it practical</b>. At first for me. Then, if it works
+        well, for anyone who wants a tool to manage their clinical work.
+      </p>
+      <p>
+        It is also the principle behind good <em>service redesign</em>: build small
+        prototypes, try them with the people who work with them every day, and correct
+        them without falling too much in love with the first idea. I do it with myself
+        too, and I can describe it from experience.
+      </p>
+
+      <h2>Why a website</h2>
+      <p>
+        Because stopping at an application built only "for yourself" would be a shame.
+        When you study, you find useful, sometimes wonderful reflections on how
+        medical applications are <b>conceived</b>, <b>developed</b>, <b>structured</b>,
+        <b>distributed</b> and sometimes <b>misused</b>. Privacy, app topology, data flows,
+        rules and connections to regional infrastructures: the less visible part of
+        digital tools in healthcare.
+      </p>
+      <p>
+        I would like to write about what it means to provide healthcare when the time
+        between a question, data and a prototype becomes much shorter. It is good news
+        only if it stays inside a method: humility about what we can do, review of the
+        results, and care not to turn every tool into content to produce.
+        Clinical data are not opinions. Topology choices are not matters of style.
+        Rules are not obstacles to the product: they are the product.
+      </p>
+
+      <h2>What you will find here</h2>
+      <p>
+        For now, the <a href="https://getmediflow.dev/en" class="link-ink">MediFlow presentation</a>.
+        From here on, the <a href="/en/blog" class="link-ink">blog</a> will collect working
+        notes on privacy, clinical-app topology, flow governance, participatory
+        prototyping, data quality, SISS/FSE integration, and a few freer pieces on how
+        community healthcare is studied, decided and sometimes got wrong.
+      </p>
+      <p>
+        No fixed schedule. No clickbait. When I have something to say that stands up
+        to rereading, I write it.
+      </p>
+
+      <h2>Bounded collaborations</h2>
+      <p>
+        I am interested in bounded collaborations and European roles around AI in
+        health and the public sector, especially deployment and evaluation:
+        concrete problems, clear perimeters, traceable sources and explicit checks.
+        I am not claiming a general mandate, or presenting MediFlow as adopted or
+        validated; I am interested in contributing where the work can be defined,
+        tested within its scope and handed back with its limits.
+      </p>
+
+      <h2>Tools I use</h2>
+      <p>
+        SQL, Python and R to read data and put things in order. TypeScript, Astro and
+        other web tools when they help. I write code myself and also use modern
+        assistants, but with one simple rule: the result must stand up to review and
+        serve a purpose. If it only produces volume, I am not interested.
+      </p>
+
+      <h2>How to write to me</h2>
+      <p>
+        Three channels, in decreasing order of formality: email, X, GitHub.
+      </p>
+      <div style="margin-top:14px">
+        <SocialLinks variant="pills" />
+      </div>
+      <p style="margin-top:18px">
+        Get to the point: two lines work as well as twenty, as long as I understand
+        what you are looking for. I reply within a few days when I am not caught up
+        in day-to-day clinical work.
+      </p>
+
+      <div class="divider"></div>
+      <p class="muted" style="font-size:13px">
+        I write this page in the first person and then dry it out a little. If you
+        find an inaccuracy in the professional details, write to me.
+      </p>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  section p:not(.lead):not(.muted){
+    font-family:var(--font-body);
+    font-size:1.02rem;
+    line-height:1.7;
+  }
+
+  h2{ margin-top:40px; }
+</style>

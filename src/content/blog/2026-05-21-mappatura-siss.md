@@ -4,6 +4,8 @@ description: "Una ricostruzione osservazionale del flusso prescrittivo lombardo:
 pubDate: 2026-05-21
 tags: ["mediflow", "sanità", "architettura"]
 draft: false
+lang: it
+translation: "2026-05-21-siss-integration-mediflow-architecture-tradeoffs"
 ---
 
 > **Nota metodologica.** Questo post è una ricostruzione osservazionale del comportamento del portale SISS lombardo a partire dal traffico applicativo del browser e dalla letteratura pubblica sui flussi della ricetta dematerializzata. Non è documentazione ufficiale né specifica fornita dal gestore regionale. I nomi di endpoint, la sequenza delle chiamate, l'allocazione dei ruoli di firma e identità sono ipotesi di lavoro coerenti con quanto osservato in produzione, ma soggette a errori e a cambiamenti non documentati. Va letto come *appunto di indagine*, non come riferimento normativo.

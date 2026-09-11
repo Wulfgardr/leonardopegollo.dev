@@ -1,9 +1,83 @@
 ---
 interface Props {
   reveal?: boolean;
+  lang?: 'it' | 'en';
 }
 
-const { reveal = true } = Astro.props;
+const { reveal = true, lang = 'it' } = Astro.props;
+const copy = lang === 'en'
+  ? {
+      title: 'Towards 0.8.6 · One node, more ways in.',
+      description: 'The local runtime can run on Mac, Windows or Linux. Associated apps and agents go through authorised services without opening the database.',
+      ariaLabel: 'Routes from Web, associated apps and Mini or MCP to the MediFlow node',
+      entry: 'Entry',
+      route: 'Route',
+      node: 'MediFlow node · data authority',
+      browser: 'Local browser',
+      browserDetail: 'Folders, agenda, documents and settings',
+      nativeApps: 'Associated Mac, iPhone and iPad apps',
+      nativeAppsDetail: 'Online access; encrypted cache limited to list and last profile',
+      explicitPairing: 'HTTPS · explicit pairing',
+      agents: 'Mini and MCP agents',
+      agentsDetail: 'Reads and proposals in the context authorised by Web',
+      supervisor: 'Local Supervisor · inherited IPC',
+      webApi: 'Web API',
+      webApiDetail: 'Web session · version checks',
+      clientApis: 'Associated-client APIs',
+      clientApisDetail: 'Pairing + native operator session + authorised capabilities',
+      aipServices: 'AIP application services',
+      authenticatedRpc: 'Authenticated RPC over IPC',
+      aipServicesDetail: 'Limits, revocation and audit · no authority supplied by caller',
+      resourcesLabel: 'Resources in the local node',
+      resourcesTitle: 'Inside the local node',
+      sqlite: 'Authoritative SQLite',
+      sqliteDetail: 'Sensitive clinical fields encrypted · versioned writes',
+      backup: 'Administrative backup',
+      backupDetail: 'Content verification and controlled restore',
+      optionalServices: 'Optional services',
+      optionalServicesDetail: 'Ollama · ATHENA/MLX on a compatible Mac',
+      who: 'WHO: code search and verification through a local service to configure',
+      access: 'Distinct access paths',
+      accessDetail: 'The paired device does not replace the operator login',
+      boundaryLabel: 'Operational boundary:',
+      boundary: 'the local network is optional; cloud and AI generation are disabled by default. No offline writes or multi-master synchronisation. Mini has been tested with the real Supervisor and Web server on Mac for reads and proposals without clinical saves. Tests on the other platforms and signed distribution remain separate. Version 0.8.6 is still in preparation.',
+    }
+  : {
+      title: 'Verso la 0.8.6 · Un nodo, più accessi.',
+      description: 'Il runtime locale può essere ospitato su Mac, Windows o Linux. App associate e agenti passano dai servizi autorizzati, senza aprire il database.',
+      ariaLabel: 'Percorsi Web, app associate e Mini o MCP verso il nodo MediFlow',
+      entry: 'Ingresso',
+      route: 'Percorso',
+      node: 'Nodo MediFlow · autorità sui dati',
+      browser: 'Browser locale',
+      browserDetail: 'Cartelle, agenda, documenti e impostazioni',
+      nativeApps: 'App Mac, iPhone e iPad associate',
+      nativeAppsDetail: 'Accesso online; cache cifrata limitata a lista e ultimo profilo',
+      explicitPairing: 'HTTPS · associazione esplicita',
+      agents: 'Mini e agenti MCP',
+      agentsDetail: 'Letture e proposte nel contesto autorizzato dal Web',
+      supervisor: 'Supervisor locale · IPC ereditato',
+      webApi: 'API Web',
+      webApiDetail: 'Sessione Web · controlli di versione',
+      clientApis: 'API dei client associati',
+      clientApisDetail: 'Pairing + sessione operatore nativa + capacità autorizzate',
+      aipServices: 'Servizi applicativi AIP',
+      authenticatedRpc: 'RPC autenticata su IPC',
+      aipServicesDetail: 'Limiti, revoca e audit · nessuna autorità fornita dal chiamante',
+      resourcesLabel: 'Risorse del nodo locale',
+      resourcesTitle: 'Dentro il nodo locale',
+      sqlite: 'SQLite autorevole',
+      sqliteDetail: 'Campi clinici sensibili cifrati · scritture versionate',
+      backup: 'Backup amministrativo',
+      backupDetail: 'Verifica del contenuto e ripristino controllato',
+      optionalServices: 'Servizi facoltativi',
+      optionalServicesDetail: 'Ollama · ATHENA/MLX su Mac compatibile',
+      who: 'WHO: ricerca e verifica dei codici con un servizio locale da configurare',
+      access: 'Accessi distinti',
+      accessDetail: 'Il dispositivo associato non sostituisce il login dell’operatore',
+      boundaryLabel: 'Confine operativo:',
+      boundary: 'la rete locale è facoltativa; cloud e generazione AI sono disattivati per default. Nessuna scrittura offline o sincronizzazione multi-master. Mini è stato provato con il Supervisor e il server Web reali su Mac, per letture e proposte senza salvataggi clinici. Le prove delle altre piattaforme e la distribuzione firmata restano separate. La 0.8.6 è ancora in preparazione.',
+    };
 ---
 
 <figure
@@ -12,76 +86,68 @@ const { reveal = true } = Astro.props;
   aria-describedby="topology-description topology-boundary"
 >
   <figcaption class="topology-intro">
-    <h3 id="topology-title">Verso la 0.8.6 · Un nodo, più accessi.</h3>
-    <p id="topology-description">
-      Il runtime locale può essere ospitato su Mac, Windows o Linux.
-      App associate e agenti passano dai servizi autorizzati, senza aprire il database.
-    </p>
+    <h3 id="topology-title">{copy.title}</h3>
+    <p id="topology-description">{copy.description}</p>
   </figcaption>
 
-  <div class="topology-grid" role="group" aria-label="Percorsi Web, app associate e Mini o MCP verso il nodo MediFlow">
-    <span class="axis axis-entry">Ingresso</span>
-    <span class="axis axis-route">Percorso</span>
-    <span class="axis axis-host">Nodo MediFlow · autorità sui dati</span>
+  <div class="topology-grid" role="group" aria-label={copy.ariaLabel}>
+    <span class="axis axis-entry">{copy.entry}</span>
+    <span class="axis axis-route">{copy.route}</span>
+    <span class="axis axis-host">{copy.node}</span>
 
     <article class="endpoint endpoint-web">
-      <strong>Browser locale</strong>
-      <span>Cartelle, agenda, documenti e impostazioni</span>
+      <strong>{copy.browser}</strong>
+      <span>{copy.browserDetail}</span>
     </article>
     <div class="transport transport-web"><span>HTTP loopback</span></div>
     <article class="endpoint endpoint-native">
-      <strong>App Mac, iPhone e iPad associate</strong>
-      <span>Accesso online; cache cifrata limitata a lista e ultimo profilo</span>
+      <strong>{copy.nativeApps}</strong>
+      <span>{copy.nativeAppsDetail}</span>
     </article>
-    <div class="transport transport-native"><span>HTTPS · associazione esplicita</span></div>
+    <div class="transport transport-native"><span>{copy.explicitPairing}</span></div>
     <article class="endpoint endpoint-paired">
-      <strong>Mini e agenti MCP</strong>
-      <span>Letture e proposte nel contesto autorizzato dal Web</span>
+      <strong>{copy.agents}</strong>
+      <span>{copy.agentsDetail}</span>
     </article>
-    <div class="transport transport-paired"><span>Supervisor locale · IPC ereditato</span></div>
+    <div class="transport transport-paired"><span>{copy.supervisor}</span></div>
 
     <div class="api api-web">
-      <strong>API Web</strong><code>/api/*</code>
-      <span>Sessione Web · controlli di versione</span>
+      <strong>{copy.webApi}</strong><code>/api/*</code>
+      <span>{copy.webApiDetail}</span>
     </div>
     <div class="api api-native">
-      <strong>API dei client associati</strong><code>/api/v1/network/*</code>
-      <span>Pairing + sessione operatore nativa + capacità autorizzate</span>
+      <strong>{copy.clientApis}</strong><code>/api/v1/network/*</code>
+      <span>{copy.clientApisDetail}</span>
     </div>
     <div class="api api-network">
-      <strong>Servizi applicativi AIP</strong><code>RPC autenticata su IPC</code>
-      <span>Limiti, revoca e audit · nessuna autorità fornita dal chiamante</span>
+      <strong>{copy.aipServices}</strong><code>{copy.authenticatedRpc}</code>
+      <span>{copy.aipServicesDetail}</span>
     </div>
   </div>
 
-  <section class="home-resources" aria-label="Risorse del nodo locale">
-    <h4>Dentro il nodo locale</h4>
+  <section class="home-resources" aria-label={copy.resourcesLabel}>
+    <h4>{copy.resourcesTitle}</h4>
     <article class="resource storage">
-      <strong>SQLite autorevole</strong>
-      <span>Campi clinici sensibili cifrati · scritture versionate</span>
+      <strong>{copy.sqlite}</strong>
+      <span>{copy.sqliteDetail}</span>
     </article>
     <article class="resource backup">
-      <strong>Backup amministrativo</strong>
-      <span>Verifica del contenuto e ripristino controllato</span>
+      <strong>{copy.backup}</strong>
+      <span>{copy.backupDetail}</span>
     </article>
     <article class="resource services">
-      <strong>Servizi facoltativi</strong>
-      <span>Ollama · ATHENA/MLX su Mac compatibile</span>
-      <small>WHO: ricerca e verifica dei codici con un servizio locale da configurare</small>
+      <strong>{copy.optionalServices}</strong>
+      <span>{copy.optionalServicesDetail}</span>
+      <small>{copy.who}</small>
     </article>
     <article class="resource security">
-      <strong>Accessi distinti</strong>
-      <span>Il dispositivo associato non sostituisce il login dell’operatore</span>
+      <strong>{copy.access}</strong>
+      <span>{copy.accessDetail}</span>
     </article>
   </section>
 
   <p class="topology-boundary" id="topology-boundary">
-    <strong>Confine operativo:</strong> la rete locale è facoltativa; cloud e
-    generazione AI sono disattivati per default. Nessuna scrittura offline o
-    sincronizzazione multi-master. Mini è stato provato con il Supervisor e il
-    server Web reali su Mac, per letture e proposte senza salvataggi clinici.
-    Le prove delle altre piattaforme e la distribuzione firmata restano separate.
-    La 0.8.6 è ancora in preparazione.
+    <strong>{copy.boundaryLabel}</strong> {copy.boundary}
   </p>
 </figure>
 
