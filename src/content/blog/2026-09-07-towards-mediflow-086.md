@@ -39,9 +39,9 @@ a backup before replacement. For WHO, a configured local service allows code sea
 and verification; it should not be confused with the curated catalogues already
 present in the apps.
 
-The connection to the ChatGPT account is still under review. A successful login and
-the availability of a model do not, on their own, demonstrate that a clinical
-function is being executed. I do not yet present OpenAI as operational in the product.
+The external OpenAI adapter is disabled by default. A successful login and the
+availability of a model do not, on their own, demonstrate that a clinical function
+is being executed: the generation path remains under verification and is not presented as operational in the product.
 
 ## Mini: a test towards 1.0
 
@@ -67,9 +67,9 @@ JSON requests. In Apple apps, drafts and session changes require their own check
 native tests remain distinct from Web tests. Source review is not product
 certification.
 
-Final checks of the integrated interface and the different platforms remain.
-Source, local builds and signed applications have separate deliverables: I do not
-turn them into a promise of complete parity.
+Final checks of the integrated interface and of the Mac, localhost and Headless
+path remain. Source, local builds and signed applications have separate deliverables:
+I do not turn them into a promise of complete parity.
 
 The [product screens and presentation](https://getmediflow.dev/en#versione-086) are on
 Get MediFlow. The diagram on the home page shows access to the authoritative node:

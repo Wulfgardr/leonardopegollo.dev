@@ -6,7 +6,12 @@
 
 # leonardopegollo.dev
 
-Sito personale. Home, scheda pubblica di MediFlow, blog. Statico, costruito con Astro, pubblicato su Cloudflare Pages.
+Sito personale. Home, redirect pubblico verso Get MediFlow e blog. Statico, costruito con Astro, pubblicato sul Worker Cloudflare `leonardopegollo-dev` con Static Assets.
+
+Pubblicazione corrente, verificata il 19 settembre 2026: `npm run build`, poi
+`npx wrangler deploy --config wrangler.jsonc --keep-vars`. Il Worker usa `dist/`;
+non esiste una pipeline Git di deploy. Le istruzioni Pages nelle sezioni di
+setup sotto sono storiche e non descrivono il canale attivo.
 
 Dominio: **leonardopegollo.dev** (registrato su Cloudflare Registrar, zona DNS già gestita da Cloudflare).
 
@@ -68,7 +73,7 @@ Le rotte pubbliche corrispondono ai file in `src/pages/`:
 | --- | --- | --- |
 | `/` | `src/pages/index.astro` | Home personale |
 | `/about` | `src/pages/about.astro` | Chi sono |
-| `/mediflow` | `src/pages/mediflow/index.astro` | Scheda pubblica di MediFlow |
+| `/mediflow` | `src/pages/mediflow/index.astro` | Redirect permanente alla presentazione su Get MediFlow |
 | `/blog` | `src/pages/blog/index.astro` | Lista dei post |
 | `/blog/<slug>` | `src/pages/blog/[...slug].astro` | Singolo post (generato dai markdown in `src/content/blog/`) |
 | `/rss.xml` | `src/pages/rss.xml.js` | Feed RSS del blog |
