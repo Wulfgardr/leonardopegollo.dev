@@ -46,7 +46,7 @@ is being executed: the generation path remains under verification and is not pre
 ## Mini: a test towards 1.0
 
 Mini remains on the 1.0 roadmap, together with Windows, Linux, iOS and iPadOS.
-The 0.8.6 perimeter is Mac: local Web, macOS app and Headless backend.
+20 September update: version 0.8.6 consolidates the local/Headless runtime and localhost UI on Mac; native apps remain follow-up work.
 The Mini prototype can start from the terminal together with the Supervisor. Access
 and authorisation happen on the Web; from that point Mini can see the operations
 allowed by MediFlow services, without opening the database directly.
@@ -67,7 +67,7 @@ JSON requests. In Apple apps, drafts and session changes require their own check
 native tests remain distinct from Web tests. Source review is not product
 certification.
 
-Final checks of the integrated interface and of the Mac, localhost and Headless
+Final checks of the integrated interface and of the localhost and Headless
 path remain. Source, local builds and signed applications have separate deliverables:
 I do not turn them into a promise of complete parity.
 
